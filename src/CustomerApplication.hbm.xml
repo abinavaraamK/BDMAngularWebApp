@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+<class name ="com.app.customer.vo.Customer" table="CUSTOMER" lazy="false">
+<id column="CUSTOMERID" name="customerid" type="java.lang.Integer">
+<generator class="assigned"/>
+</id>
+<property column="NAME" length="45" name="name" type="java.lang.String"/>
+<property column="EMAIL" length="45" name="email" type="java.lang.String"/>
+<property column="PHONE" length="45" name="phone" type="java.lang.String"/>
+<property column="ADDRESS" length="45" name="address" type="java.lang.String"/>
+<property column="ORDERS" length="45" name="orders" type="java.lang.String"/>
+<property column="ACTION" length="45" name="action" type="java.lang.String"/>
+<property column="CREATEDDATE" length="10" name="createddate" type="java.util.Date"/>
+<property column="CREATEDBY" length="45" name="createdby" type="java.lang.String"/>
+<property column="MODIFIEDDATE" length="10" name="modifieddate" type="java.util.Date"/>
+<property column="MODIFIEDBY" length="45" name="modifiedby" type="java.lang.String"/>
+</class>
+
+
+</hibernate-mapping>
