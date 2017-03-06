@@ -23,6 +23,7 @@
 	<target name="copyClassFiles"  depends="compile">
 		<copy todir="WebContent/WEB-INF/classes">  
 	        <fileset dir="build/classes" includes="**"/>  
+	        <fileset dir="src"  includes="**/*.xml" />
 	 	</copy> 
  	</target>
 
@@ -42,8 +43,5 @@
 	    <delete dir="build" />
 	    <delete dir="WebContent/WEB-INF/classes" />
 	    <delete dir="archive" />
-	    <!-- <delete includeemptydirs="true">
-   			 <fileset dir="WebContent/WEB-INF/classes" includes="**" defaultexcludes="false"/>
-  		</delete> -->
 	</target>
 </project>
