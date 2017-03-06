@@ -1,5 +1,5 @@
 <?xml version="1.0" ?> 
-<project name="BDMAngularWebApp" default="war">
+<project name="BDMAngularWebApp" default="archiveJob">
 	
 	<path id="compile.classpath">
 		<fileset dir ="WebContent/WEB-INF/lib">
@@ -10,6 +10,8 @@
 	<target name="makeFolder" depends="clean">
 		<mkdir dir="build/classes"/>
 		<mkdir dir="target"/>
+		<mkdir dir="WebContent/WEB-INF/classes" />
+		<mkdir dir="archive"/>
 	</target>
 	
 	<target name="compile" depends="makeFolder" >
@@ -31,11 +33,17 @@
 		</war>
 	</target>
 
+	<target name="archiveJob" depends="war">
+		<zip destfile="archive/BDMWebApp.zip" basedir="WebContent"/>
+	</target>
+
 	<target name="clean" >
 	    <delete dir="target" />
 	    <delete dir="build" />
-	    <delete includeemptydirs="true">
+	    <delete dir="WebContent/WEB-INF/classes" />
+	    <delete dir="archive" />
+	    <!-- <delete includeemptydirs="true">
    			 <fileset dir="WebContent/WEB-INF/classes" includes="**" defaultexcludes="false"/>
-  		</delete>
+  		</delete> -->
 	</target>
 </project>
