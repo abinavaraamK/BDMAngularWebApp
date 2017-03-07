@@ -1,0 +1,1 @@
+This Spring web app helps in generating a webapp where the table columns are displayed and can be edited in the generated webapp.
