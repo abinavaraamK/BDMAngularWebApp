@@ -35,7 +35,7 @@ $(document).ready(function() {
 					+ encodeURIComponent(tableName);
 			alert(data)
 			$.ajax({
-				url : "/BaseDataManagerWebApp/getTableData",
+				url : "/getTableData",
 				data : data,
 				type : "GET",
 			

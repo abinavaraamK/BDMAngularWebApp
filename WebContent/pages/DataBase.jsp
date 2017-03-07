@@ -53,7 +53,7 @@ $(document).ready(function() {
 					+ encodeURIComponent(configurationName);
 			alert(data)
 			$.ajax({
-				url : "/BaseDataManagerWebApp/path",
+				url : "/path",
 				data : data,
 				type : "GET",
 			
