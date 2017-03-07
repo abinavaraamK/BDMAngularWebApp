@@ -1,0 +1,16 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<html>
+<body>
+	
+		<table>
+		<tr><td>
+		<warFileList>
+</td>
+</tr>
+</table>
+
+		 
+	
+
+</body>
+<html>

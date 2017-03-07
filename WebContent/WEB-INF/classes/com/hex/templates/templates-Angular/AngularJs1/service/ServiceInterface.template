@@ -1,0 +1,22 @@
+package <Package>.service;
+
+import <Package>.vo.<ClassName>;
+import java.util.List;
+import java.util.ArrayList;
+import <Package>.util.HexApplicationException;
+import <Package>.dao.<ClassName>Dao;
+
+public interface I<ClassName> {
+	
+	public void insert(<ValueObject> object) throws HexApplicationException;
+
+	public void deleteAll(java.util.List<<ValueObject>> entries) throws HexApplicationException;
+
+	public void update(<ValueObject> object) throws HexApplicationException;
+
+	public Object getAll<ValueObject>() throws HexApplicationException;
+
+	public List search(String fieldValue, String columnName) throws HexApplicationException;
+
+	<SelectColumnsMethods>
+}

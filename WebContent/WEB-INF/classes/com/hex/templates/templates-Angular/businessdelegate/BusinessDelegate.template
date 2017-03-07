@@ -1,0 +1,49 @@
+package <Package>.delegate;
+
+import <Package>.vo.<ValueObject>;
+import <Package>.service.I<ClassName>;
+import <Package>.util.BootStrapper;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+import <Package>.util.HexApplicationException;
+import <Package>.service.RestService;
+
+public class <ClassName>BusinessDelegate {
+	
+	I<ClassName> <LowerClassName> = null;
+
+	public <ClassName>BusinessDelegate() {
+		//ioProcess = new <ProcessClassName> ();
+			<LowerClassName> = (RestService) new RestService();
+
+	}
+
+	public void insert(<ValueObject> object) throws HexApplicationException {
+		<LowerClassName>.insert(object);	
+	}
+
+	
+	public void deleteAll(java.util.List entries) throws HexApplicationException {
+		<LowerClassName>.deleteAll(entries);
+	}
+
+	public void update(<ValueObject> object) throws HexApplicationException {
+		<LowerClassName>.update(object);	
+	}
+
+	
+
+	public Object getAll<ClassName>() throws HexApplicationException {
+		return <LowerClassName>.getAll<ClassName>();	
+	}
+
+	
+	
+	public List search(String fieldValue, String columnName) throws HexApplicationException {
+		return <LowerClassName>.search(fieldValue, columnName);	
+	}
+
+<SelectColumnsMethods>
+
+}

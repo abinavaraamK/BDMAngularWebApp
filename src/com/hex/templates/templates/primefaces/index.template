@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:h="http://java.sun.com/jsf/html" 
+xmlns:f="http://java.sun.com/jsf/core" 
+xmlns:p="http://primefaces.prime.com.tr/ui"
+xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+	<head>
+		<title>
+			Home Page
+		</title>
+	<link type="text/css" rel="stylesheet" href="../css/style.css"/>
+	</head>
+	
+	<h:head>
+	
+	
+	</h:head>
+	<body>
+		
+		<div class="mainwrapper">
+	
+	 	  <ui:include src="leftMenu.xhtml" />
+
+			<div id="div1" class="rightcolumn">
+				<div class="breadcrumb">
+					<div class="breadcrumbtext">
+						Home
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+
+

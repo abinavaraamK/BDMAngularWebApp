@@ -1,0 +1,55 @@
+package <Package>.form;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionErrors;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+public class <ClassName> extends ActionForm {
+	
+<PrivateVariables>
+
+<SetGetMethods>
+
+	public void reset(ActionMapping mapping, HttpServletRequest request) {
+<VariablesReset>
+	}
+
+	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
+		//To do your code here
+		return errors;
+	}
+
+	
+	// For Search
+	private String fieldValue; 
+	private String columnName; 
+	private String columnValue; 
+	
+
+	public String getFieldValue() {
+		return fieldValue;
+	}
+
+	public void setFieldValue(String fieldValue) {
+		this.fieldValue = fieldValue;
+	}
+
+	public String getColumnName() {
+		return columnName;
+	}
+
+	public void setColumnName(String columnName) {
+		this.columnName = columnName;
+	}
+
+	public String getColumnValue() {
+		return columnValue;
+	}
+
+	public void setColumnValue(String columnValue) {
+		this.columnValue = columnValue;
+	}
+	
+}

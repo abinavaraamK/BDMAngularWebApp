@@ -1,0 +1,51 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
+ <%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
+<SCRIPT LANGUAGE="JavaScript">
+	function set(target) 
+	{
+		if( target =='list' )
+		{
+			document.forms["<BeanName>Form"].dispatch.value=target;
+			document.forms["<BeanName>Form"].submit();
+		}
+		else {
+			if ( validation() ) {
+				document.forms["<BeanName>Form"].dispatch.value=target;
+				document.forms["<BeanName>Form"].submit();
+			}
+		}
+	}
+	function validation()
+	{
+<MadatoryValidations>
+		return true;
+	}
+</SCRIPT>
+<html>
+<HeaderInformations>
+<body>
+	<h1 align = center><PageTitle></h1>
+<center>      
+	<s:form theme="simple">
+	<s:actionerror/>
+	<table width="75%" border=0 style="background-color:LightSkyBlue;font-family:Helvetica;font-size:13px;" cellpadding="3">
+<BeanTags>
+	</table>
+
+	<table>
+		<tr>
+		<td>
+				
+<s:submit name="save" value="save" action="<ButtonEvent>" />
+			
+<s:submit name="list" value="list" action="list" />
+				
+			</td>
+		</tr>
+	</table>
+	<s:hidden name="dispatch" value="error"/>
+	</s:form>
+</center>      
+
+</body>
+</html>

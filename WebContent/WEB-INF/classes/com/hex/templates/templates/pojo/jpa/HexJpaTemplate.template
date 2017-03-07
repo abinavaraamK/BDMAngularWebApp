@@ -1,0 +1,268 @@
+package <Package>.util;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Collection;
+import java.util.Vector;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.annotation.Resource;
+import javax.transaction.UserTransaction;
+import javax.persistence.Persistence;
+
+public class HexJpaTemplate {
+   @PersistenceUnit(unitName="default")
+    private EntityManagerFactory emf;
+    @Resource
+    private UserTransaction utx;
+	public HexJpaTemplate() {
+		System.out.println("HexJpaTemplate Constructor");
+	        emf = Persistence.createEntityManagerFactory("default", new java.util.HashMap());
+	}
+	
+	public EntityManagerFactory getEmf(){
+	
+	return emf;
+	
+	};
+	
+	public void save ( Object entity ) throws HexApplicationException{
+		assert emf != null;  //Make sure injection went through correctly.
+		EntityManager em = null;
+		try
+		{
+			//begin a transaction
+			//utx.begin();
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(entity);
+			em.getTransaction().commit();
+			//utx.commit();
+		}
+		catch (Exception  e)
+		{
+		throw new HexApplicationException("DB exception", e);
+			
+		}
+		finally {         
+			em.close();
+	        }
+	}
+
+
+	public void update ( Object entity ) {
+		assert emf != null;  //Make sure injection went through correctly.
+		EntityManager em = null;
+		try
+		{
+			//utx.begin();
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.merge(entity);
+			em.getTransaction().commit();
+			//utx.commit();		
+		}
+		catch (Exception exception)
+		{
+			exception.printStackTrace();
+		}
+		finally {         
+			 em.close();
+		}
+
+	}
+
+	public void delete ( Object entity ) {
+		System.out.println("Inside delete method in HexJpaTemplate");
+		assert emf != null;  //Make sure injection went through correctly.
+		EntityManager em = null;
+		try
+		{
+			//utx.begin();
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.remove(em.merge(entity)); 
+			em.getTransaction().commit();			
+		
+			//em.merge(entity);
+			//em.getTransaction().commit();
+			//Object result = em.find(entity.getClass(),(java.io.Serializable)1);			
+			//em.remove(result);
+			
+			//utx.commit();		
+		}
+		catch (Exception exception)
+		{
+			exception.printStackTrace();
+		}
+		finally {         
+			em.close();
+		}
+
+	}
+
+	public void deleteAll ( Collection collections ) {
+		System.out.println("Inside deleteALL method in HexJpaTemplate");
+		assert emf != null;  //Make sure injection went through correctly.
+		EntityManager em = null;
+		try
+		{
+			//utx.begin();
+			em = emf.createEntityManager();
+			
+			for(Iterator iterator = collections.iterator();iterator.hasNext(); )
+			{
+			em.getTransaction().begin();
+			em.remove(em.merge(iterator.next()));
+			em.getTransaction().commit();	
+			//utx.commit();
+			}	
+			
+		}
+		catch (Exception exception)
+		{
+			exception.printStackTrace();
+		}
+		finally {         
+			em.close();
+		}
+
+	}
+
+	public Object load ( Class clazz, Object serializableId ) {
+		assert emf != null;  //Make sure injection went through correctly.
+		EntityManager em = null;
+		try
+		{
+			em = emf.createEntityManager();
+			Object result = em.find( clazz, (java.io.Serializable) serializableId);
+			return result;
+		}
+		catch (Exception exception)
+		{
+			exception.printStackTrace();
+		}
+		finally {         
+			em.close();
+		}
+		return null;
+	}
+
+	public List find ( String jqlQuery ) {
+		assert emf != null;  //Make sure injection went through correctly.
+		EntityManager em = null;
+		try
+		{
+			em = emf.createEntityManager();
+			List result = em.createQuery( jqlQuery ).getResultList();
+			return result;
+		}
+		catch (Exception exception)
+		{
+			exception.printStackTrace();
+		}
+		finally {         
+			em.close();
+		}
+		return null;
+	}
+
+	public List find ( String jqlQuery, int startRecord, int pageSize ) {
+		assert emf != null;  //Make sure injection went through correctly.
+		EntityManager em = null;
+		try
+		{
+			em = emf.createEntityManager();
+			/*Query query = session.createQuery( hqlQuery );
+			query.setFirstResult(startRecord);
+			query.setMaxResults(endRecord);
+			List result = query.list();*/
+			//List result = em.createQuery( jqlQuery ).getResultList();
+			Query query = null;
+			query = em.createQuery ( jqlQuery )
+			    .setFirstResult ( startRecord )
+			    .setMaxResults ( pageSize );
+			return query.getResultList ();
+			//return result;
+		}
+		catch (Exception exception)
+		{
+			exception.printStackTrace();
+		}
+		finally {         
+			em.close();
+		}
+		return null;
+	}
+
+	public int count ( String objectName ) {
+		System.out.println("HexJpaTemplate count 1");
+		assert emf != null;  //Make sure injection went through correctly.
+		System.out.println("HexJpaTemplate count 2");
+		EntityManager em = null;
+		try
+		{
+			System.out.println("inside Count in HexJpaTemplate ");
+			em = emf.createEntityManager();
+			System.out.println("After getting em HexJpaTemplate ");
+			//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			Long count = ((Long) em.createQuery ( "SELECT count(entity) FROM " + objectName + " entity").getSingleResult() );
+			System.out.println("After executing the Query");
+			return count.intValue();
+		}
+		catch (Exception exception)
+		{
+			exception.printStackTrace();
+		}
+		finally {         
+			em.close();
+		}
+		return 0;
+	}
+
+	public java.util.List getRecords(String sqlQuery ) throws HexApplicationException {
+		assert emf != null;  //Make sure injection went through correctly.
+		EntityManager em = null;
+		try {
+			 ArrayList list = new ArrayList();
+			 em = emf.createEntityManager();
+			 Query query;
+			 query = em.createNativeQuery ( sqlQuery );
+			 Iterator results = query.getResultList ().iterator();
+			 while ( results.hasNext() ) {
+				    Object object = results.next();
+		                                   if(object instanceof Vector) {
+			                            	   Vector vector =  (Vector) results.next();
+			                                   Object[] row = new Object[vector.size()];
+			                                   for( int index=0; index<vector.size() ; index++)
+			                                   {
+			                                        row[index] = (String)vector.get(index).toString();
+			                                   }
+			                                   list.add ( row );
+		                                   }
+		                                   else {
+		                                	   list.add ( object );
+		                                   }		 
+			 }
+			 //Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			 /*Session session = HibernateUtil.getSessionFactory().openSession();
+			Iterator results = session.createSQLQuery(sqlQuery)
+		                        .addScalar(keyColumn, Hibernate.STRING)
+		                        .addScalar(valueColumn, Hibernate.STRING)
+		                        .list().iterator();
+			 while ( results.hasNext() ) {
+				Object[] row = (Object[]) results.next();
+				list.add ( row );
+		     }*/
+	             return list;
+		}catch(Exception exception) {
+			    throw new HexApplicationException( exception );
+		}
+		finally {         
+			em.close();
+	        }
+	}
+}

@@ -1,0 +1,82 @@
+package <Package>.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+/**
+ * The <b>BaseAction</b> is a Abstract class to set and get HttpServletRequest and HttpServletResponse objects. All the
+ * Action classes should classes should extends this BaseAction class.
+ * 
+ * @author Hexaware Technologies Ltd.,
+ * @version 1.0
+ */
+public abstract class BaseAction extends ActionSupport implements ServletRequestAware, ServletResponseAware
+{
+	protected HttpServletRequest request;
+	protected HttpServletResponse response;
+	private String gridValueLoaded;
+	private String gridData;
+
+	/**
+	 * The <b>handleException</b> is a Abstract method all the Action class needs to implement this method for
+	 * handling exception mechanism.
+	 * 
+	 * @param exception
+	 *            The ApplicationException or SystemException.
+	 */
+	public abstract void handleException(Exception exception);
+
+	public void setServletRequest(HttpServletRequest httpServletRequest)
+	{
+		request = httpServletRequest;
+	}
+
+	public void setServletResponse(HttpServletResponse httpServletResponse)
+	{
+		response = httpServletResponse;
+	}
+
+	/**
+	 * Gets the Current value of gridValueLoaded Property
+	 * 
+	 * @return gridValueLoaded
+	 */
+	public String getGridValueLoaded()
+	{
+		return gridValueLoaded;
+	}
+
+	/**
+	 * Sets the Current value of gridValueLoaded Property
+	 * 
+	 * @param gridValueLoaded
+	 */
+	public void setGridValueLoaded(String gridValueLoaded)
+	{
+		this.gridValueLoaded = gridValueLoaded;
+	}
+
+	public String getGridData()
+	{
+		return gridData;
+	}
+
+	public void setGridData(String gridData)
+	{
+		this.gridData = gridData;
+	}
+	
+	public boolean isValidUserSession()
+	{
+		if (request.getSession().getAttribute("USER_NAME") != null)
+		{
+			return true;
+		}
+		return false;
+	}
+}

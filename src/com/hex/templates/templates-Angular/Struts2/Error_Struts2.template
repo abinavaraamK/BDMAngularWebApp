@@ -1,0 +1,14 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<HTML>
+<HEAD>
+<TITLE>Error Page</TITLE>
+</HEAD>
+<BODY >
+
+
+<font color="red">
+<s:actionerror cssErrorStyle="" /></font>
+<s:submit name="btnBack" value="Back" onClick="javascript:history.back();"/>
+
+</BODY>
+</HTML>

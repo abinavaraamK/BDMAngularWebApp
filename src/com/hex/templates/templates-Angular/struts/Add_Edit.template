@@ -1,0 +1,50 @@
+<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	function set(target) 
+	{
+		if( target =='list' )
+		{
+			document.forms["<BeanName>Form"].dispatch.value=target;
+			document.forms["<BeanName>Form"].submit();
+		}
+		else {
+			if ( validation() ) {
+				document.forms["<BeanName>Form"].dispatch.value=target;
+				document.forms["<BeanName>Form"].submit();
+			}
+		}
+	}
+	function validation()
+	{
+<MadatoryValidations>
+		return true;
+	}
+//-->
+</SCRIPT>
+<html>
+<HeaderInformations>
+<body>
+	<h1 align = center><PageTitle></h1>
+	<center>
+	<html:form action="/<BeanName>">
+	<table width="40%" border=0 style="background-color:LightSkyBlue;font-family:Helvetica;font-size:13px;" cellpadding="3">
+<BeanTags>
+	</table>
+	<br>
+	<table>
+		<tr>
+			<td>
+				<input type="button" name=" save" value="<ButtonCaption>" onClick="set('<ButtonEvent>')" />
+			</td>
+			<td>
+				<input type="button" name=" list" value=" <bean:message key="<UBeanName>.BUTTON.LIST"/> " onClick="set('list')" />
+			</td>
+		</tr>
+	</table>
+	<html:hidden property="dispatch" value="error"/>
+	</html:form>
+	</center>
+</body>
+</html>

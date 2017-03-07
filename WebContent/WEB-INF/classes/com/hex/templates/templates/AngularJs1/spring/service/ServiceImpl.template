@@ -1,0 +1,63 @@
+package <Package>.service;
+
+import <Package>.vo.<ClassName>;
+import <Package>.dao.<ClassName>Dao;
+import <Package>.util.BootStrapper;
+import org.springframework.context.ApplicationContext;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+import <Package>.util.HexApplicationException;
+
+public class <ClassName>Impl implements I<ClassName> {
+	
+	private <ClassName>Dao <LowerClassName>Dao;
+	
+	public <ClassName>Impl() {
+
+		ApplicationContext applicationContext = BootStrapper.getService();	
+		<LowerClassName>Dao = (<ClassName>Dao) applicationContext.getBean("<ClassName>Dao");
+
+	}
+
+	public void insert(<ValueObject> object) throws HexApplicationException {
+	
+		System.out.println("inside insert in Service ");			
+		<LowerClassName>Dao.insert(object);
+		
+	}
+
+
+	public void deleteAll(java.util.List entries) throws HexApplicationException {
+	
+		System.out.println("inside deleteAll in Service ");		
+		<LowerClassName>Dao.deleteAll(entries);
+	
+	}
+
+	public void update(<ValueObject> object) throws HexApplicationException {
+	
+		System.out.println("inside update in Service ");	
+		<LowerClassName>Dao.update(object);
+	
+	}
+
+
+	public Object getAll<ValueObject>() throws HexApplicationException {
+	
+		System.out.println("inside getAll<ValueObject> in Service ");	
+		return <LowerClassName>Dao.getAll<ValueObject>();
+	
+	}
+
+
+	public List search(String fieldValue, String columnName) throws HexApplicationException {
+
+	System.out.println("Entering into service implementation : " + fieldValue + "***" +columnName );
+				
+		return <LowerClassName>Dao.search(fieldValue, columnName);
+	
+	}
+
+<SelectColumnsMethods>
+}

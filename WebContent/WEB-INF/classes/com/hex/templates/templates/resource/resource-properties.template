@@ -1,0 +1,6 @@
+<resource-properties>
+ERROR.DATANOTAVAILABLE=The value you have entered is not available in the Database.
+DUPLICATE_KEY_EXCEPTION=Insert or Update failed, Violation of an integrity constraint
+DATA_INTEGRITY_EXCEPTION=Insert or Update failed, Violation of an integrity constraint
+RECORD_NOT_FOUND_EXCEPTION=Expected data is not available in the Database
+GENERAL_DB_EXCEPTION=General Database error.

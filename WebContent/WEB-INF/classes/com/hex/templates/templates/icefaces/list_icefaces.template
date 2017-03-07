@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:ice="http://www.icesoft.com/icefaces/component">
+    <jsp:directive.page import="javax.faces.context.FacesContext"/>
+    <jsp:directive.page import="java.util.Iterator"/>
+    <f:view xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:jsp="http://java.sun.com/JSP/Page"
+            xmlns:ice="http://www.icesoft.com/icefaces/component">
+        <f:loadBundle var="msgs"   basename="ApplicationResources"/> 
+        <html>
+            <head>
+                <title><ice:outputText value="#{msgs['<resourceBundleTablePrefix>_PAGE_TITLE']}" /></title>
+                <style type="text/css">
+                    .Bluelabeltxt{
+                    background-color:#6699cc;
+                    align:center;
+                    }
+                    .Bluelabeltxt2{
+                    background-color:#D8F8FE;
+                    align:center;
+                    }
+                </style>
+                
+                <script language="javascript">
+         selectedCheckBoxes = new Array();
+    	        function confirmDelete(){
+    	         
+    	           if(selectedCheckBoxes.length==0){
+    	              alert('Please select rows to be deleted');
+    	              return false;
+    
+    	           }else if(selectedCheckBoxes.length==1){
+                         return confirm(' do you want to delete the selected row?');
+    	           }else{
+    		           return confirm(' do you want to delete the selected rows?');
+    	           }
+            }
+    
+             function chkBoxStateChanged(obj){
+              if(obj.checked){
+                    selectedCheckBoxes[selectedCheckBoxes.length] = obj;
+              }
+              if(!obj.checked){
+                    present = -1;
+              		for(i=0;i &lt; selectedCheckBoxes.length;i++){
+    			      if(obj.id =selectedCheckBoxes[i].id){
+    			          present = i;
+    			          break;
+    			      }
+            	   }
+            	   if(present>-1){
+                         selectedCheckBoxes.splice(present,1);
+            	   }
+              }
+           }
+
+	   function searchValidate() {
+                var fieldValue  = document.getElementById('<formid>:selectFieldValue'); 
+                var columnValue = document.getElementById('<formid>:selectColumnValue'); 
+                if(fieldValue.value == '') {
+                    alert("Please enter the value");
+                    return false;
+                } 
+                if(columnValue.value == 'null') {
+                    alert("Please select the column");
+                    return false;
+                } 
+                return true;
+            }
+            
+    </script>
+   
+            <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+            </head>
+            <body  valign="top" style="top-margin:0">
+           
+                <h1><center>  <ice:outputText value="#{msgs['<resourceBundleTablePrefix>_LIST_PAGE_TITLE']}" /></center></h1>
+                <br/>
+                <center>
+                    <ice:form xmlns:h="http://java.sun.com/jsf/html"
+                              xmlns:f="http://java.sun.com/jsf/core"
+                              xmlns:ice="http://www.icesoft.com/icefaces/component"
+                              id="<formid>">
+				
+				 <div align="left">
+				<ice:inputText id="selectFieldValue" value="#{<VOClassName>Bean.fieldValue}" />					
+				<ice:selectOneMenu id="selectColumnValue"
+							 value="#{<VOClassName>Bean.columnValue}"
+							 styleClass="txtbox">
+							<f:selectItems value="#{<VOClassName>Bean.columnNameList}" />
+				</ice:selectOneMenu>
+						
+				<ice:commandButton id="btnSearch"
+							onclick="if(!searchValidate()) return false;"
+							action="#{<VOClassName>Bean.search}"
+							value="Go"/>
+				<ice:commandButton id="btnClear"
+							action="#{<VOClassName>Bean.clear}"
+							value="Clear"/>
+			        </div>
+
+
+                                  <div align="right">
+                            <ice:selectOneMenu partialSubmit="true" valueChangeListener="#{<PageValueChangeListener>}" id="page" value="#{<currentPageValue>}" >
+                                <f:selectItems value="#{<selectedItemsList>}"  />
+                            </ice:selectOneMenu> 
+                        </div>
+			<!-- Modified By Divya -->
+                        <ice:dataTable  width="100%" value="#{<VOClassName>Bean.<voInstanceName>DataModel}" var="<dataTableVar>" border="1" id="<dataTableID>" rowClasses="Bluelabeltxt2">
+                            <dataTableContents>
+                            
+                            <ice:column >
+                                <f:facet name="header">
+                                    <ice:outputLabel value="#{msgs['<resourceBundleTablePrefix>_CAPTION_DELETE']}" />
+                                </f:facet>
+                                <ice:selectBooleanCheckbox   style="align:center" id="delete" value="#{<dataTableVar>.toBeDeleted}" onclick="chkBoxStateChanged(this);"/>
+                            </ice:column>  
+                        
+                        </ice:dataTable>
+                         
+                        <table width="100%">
+                            <tr>
+                                <td width="50%"><ice:commandButton id="btnAdd"  action="#{<VOClassName>Bean.add}" value="#{msgs['<resourceBundleTablePrefix>_BUTTON_ADD']}"  immediate="true"/></td>
+                                <td width="50%" align="right"><ice:commandButton id="btnDelete" action="#{<deleteAction>}" value="#{msgs['<resourceBundleTablePrefix>_BUTTON_DELETE']}" onclick="if(!confirmDelete()) return false;"/></td>
+                            </tr>
+                        </table>                        
+                    </ice:form>
+		    <br></br>
+                     <ice:messages style="color: red; font-size: 14px;"/>
+                </center>
+            </body>
+        </html>
+    </f:view>
+</jsp:root>
+
+

@@ -1,2 +1,0 @@
-# BDMAngularWebApp
-BDMGit
