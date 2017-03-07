@@ -1,5 +1,5 @@
 <?xml version="1.0" ?> 
-<project name="BDMAngularWebApp" default="archiveJob">
+<project name="BDMAngularWebApp" default="war">
 	
 	<path id="compile.classpath">
 		<fileset dir ="WebContent/WEB-INF/lib">
@@ -39,9 +39,9 @@
 		</war>
 	</target>
 
-	<target name="archiveJob" depends="war">
+	<!-- <target name="archiveJob" depends="war">
 		<zip destfile="archive/BaseDataManagerWebApp.zip" basedir="WebContent"/>
-	</target>
+	</target> -->
 
 	<target name="clean" >
 	    <delete dir="target" />
