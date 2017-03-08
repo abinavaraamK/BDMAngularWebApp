@@ -2,7 +2,7 @@
 <project name="BDMAngularWebApp" default="war">
 
 	<property environment="env"/>
-  	<property name="env.ARCHIVE_DIR" value="target"/>
+  	<property name="env.ARCHIVE_DIR" value="BDMWebAppArchive"/>
 	
 	<path id="compile.classpath">
 		<fileset dir ="WebContent/WEB-INF/lib">
@@ -12,7 +12,7 @@
 
 	<target name="makeFolder" depends="clean">
 		<mkdir dir="build/classes"/>
-		<mkdir dir="target"/>
+		<!-- <mkdir dir="target"/> -->
 		<mkdir dir="WebContent/WEB-INF/classes" />
 		<echo message="Copy files to ${env.ARCHIVE_DIR} for deployment"/>
 		<copy todir="${env.ARCHIVE_DIR}">
@@ -52,7 +52,7 @@
  	</target>
 
 	<target name="clean" >
-	    <delete dir="${env.ARCHIVE_DIR}" />
+	   <!--  <delete dir="${env.ARCHIVE_DIR}" /> -->
 	    <delete dir="build" />
 	    <delete dir="WebContent/WEB-INF/classes" />
 	</target>
