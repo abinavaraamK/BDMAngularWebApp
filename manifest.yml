@@ -1,5 +1,5 @@
 applications:
-- path: target/BaseDataManagerWebApp.war
+- path: BaseDataManagerWebApp.war
   memory: 256M
   instances: 1
   domain: mybluemix.net
