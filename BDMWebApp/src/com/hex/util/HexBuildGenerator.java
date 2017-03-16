@@ -180,11 +180,15 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
   
       Process p = runtime.exec("sudo chmod 777 *");
       p.waitFor();    
-      p = runtime.exec(file.toString()+" all "+hexBuildfile );
       InputStream errorStream = p.getErrorStream();
       InputStream inputStream = p.getInputStream();
       readOutput(inputStream);
       readOutput(errorStream);
+      p = runtime.exec(file.toString()+" all "+hexBuildfile );
+      InputStream errorStream1 = p.getErrorStream();
+      InputStream inputStream1 = p.getInputStream();
+      readOutput(inputStream1);
+      readOutput(errorStream1);
 
     }
     catch (IOException exec) {
@@ -193,7 +197,7 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
     // TODO Auto-generated catch block
     e.printStackTrace();
   }
-    
+
 
   }
   
