@@ -270,11 +270,11 @@ public class UIController {
 		/*File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "warFiles/yogesh.war");*/
-		System.out.println(INTERNAL_FILE+" System.out.println");
 		File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "warFiles/"+INTERNAL_FILE+".war");
-
+		System.out.println(file.getPath()+" System.out.println");
+		
 		if (!file.exists()) {
 			String errorMessage = "Sorry. The file you are looking for does not exist";
 			System.out.println(errorMessage);
