@@ -40,7 +40,8 @@ import com.hex.vo.TableVoList;
 @Controller
 public class UIController {
 
-	private static final String INTERNAL_FILE = "yogesh.war";
+	//private static final String INTERNAL_FILE = "yogesh.war";
+	String INTERNAL_FILE = "";
 
 	@RequestMapping(value = "/dbDetails", method = RequestMethod.GET)
 	@ResponseBody
@@ -105,7 +106,7 @@ public class UIController {
 		System.out.println("dest dir" + tableVoList.getDestDirectory());
 		System.out.println("theme" + tableVoList.getTheme());
 		
-		
+		INTERNAL_FILE =  tableVoList.getFileName();
 		String outDir = request.getSession().getServletContext().getRealPath("/")+ "warFiles";
 		tableVoList.setDestDirectory(outDir);
 		System.out.println("out directory" +outDir );
@@ -266,9 +267,13 @@ public class UIController {
 	public void downloadFile(HttpServletResponse response,
 			HttpServletRequest request) throws IOException {
 
+		/*File file = new File(request.getSession().getServletContext()
+				.getRealPath("/")
+				+ "warFiles/yogesh.war");*/
+		System.out.println(INTERNAL_FILE+" System.out.println");
 		File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
-				+ "warFiles/yogesh.war");
+				+ "warFiles/"+INTERNAL_FILE+".war");
 
 		if (!file.exists()) {
 			String errorMessage = "Sorry. The file you are looking for does not exist";

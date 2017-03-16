@@ -73,3 +73,18 @@ db{
 #package{
 	margin-bottom: 20px;
 }
+#downloadWar{
+    margin-left: 2%;
+    padding-top: 2%;
+}
+#spanWar{
+    color: aliceblue;
+    padding-left: 20%;
+    margin-left: 14.5%;
+    padding-top: 2%;
+}
+#status{
+    color: aliceblue;
+    text-decoration: underline;
+    margin-left: 47%;
+}
