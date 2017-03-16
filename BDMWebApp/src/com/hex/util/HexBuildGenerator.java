@@ -184,7 +184,7 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
       InputStream inputStream = p.getInputStream();
       readOutput(inputStream);
       readOutput(errorStream);
-      p = runtime.exec"sudo " +file.toString()+" all "+hexBuildfile );
+      p = runtime.exec("sudo " +file.toString()+" all "+hexBuildfile );
       InputStream errorStream1 = p.getErrorStream();
       InputStream inputStream1 = p.getInputStream();
       readOutput(inputStream1);
