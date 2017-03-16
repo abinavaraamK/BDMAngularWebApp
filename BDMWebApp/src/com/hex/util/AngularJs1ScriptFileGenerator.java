@@ -74,11 +74,14 @@ public class AngularJs1ScriptFileGenerator {
 	
 	
 	public void angularScripts(String outD) throws IOException{
-		
-
-		String file = UIController.class.getResource("com\\hex\\templates\\templates\\AngularJs1\\js").getFile();
+		final URL url = UIController.class.getResource("\\templates\\templates\\AngularJs1\\js");
+    	if (url != null) 
+        	File apps = new File(url.toURI());
+        else
+        	System.out.println("Else Block in Angular script");
+		//String file = UIController.class.getResource("\\templates\\templates\\AngularJs1\\js").getFile();
 				
-		FileUtils.copyDirectory(new File(file), new File(outD));
+		FileUtils.copyDirectory(apps, new File(outD));
 		
 		
 		
