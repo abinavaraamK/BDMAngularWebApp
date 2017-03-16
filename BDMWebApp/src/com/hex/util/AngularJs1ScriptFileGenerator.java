@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.net.URL;
+import java.net.URISyntaxException;
 import org.apache.commons.io.FileUtils;
 
 import com.hex.UIController;
