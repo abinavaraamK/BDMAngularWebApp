@@ -5,8 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.net.URL;
-import java.net.URISyntaxException;
+
 import org.apache.commons.io.FileUtils;
 
 import com.hex.UIController;
@@ -75,21 +74,10 @@ public class AngularJs1ScriptFileGenerator {
 	
 	
 	public void angularScripts(String outD) throws IOException{
-		final URL url = UIController.class.getResource("\\templates\\templates\\AngularJs1\\js");
-		File apps = null;
-    	if (url != null)
-			try {
-				apps = new File(url.toURI());
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			}
-		else
-        	System.out.println("Else Block in Angular script");
-		//String file = UIController.class.getResource("\\templates\\templates\\AngularJs1\\js").getFile();
+
+		/*String file = UIController.class.getResource("\\templates\\templates\\AngularJs1\\js").getFile();
 				
-		FileUtils.copyDirectory(apps, new File(outD));
-		
-		
+		FileUtils.copyDirectory(new File(file), new File(outD));*/
 		
 	}
 	
