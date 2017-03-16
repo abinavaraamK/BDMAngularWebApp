@@ -179,8 +179,8 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
     try {
   
       Process p = runtime.exec("sudo chmod 777 *");
-      Process p = runtime.exec(file.toString()+" all "+hexBuildfile );
-      p.waitFor();  	
+      p.waitFor();    
+      p = runtime.exec(file.toString()+" all "+hexBuildfile );
       InputStream errorStream = p.getErrorStream();
       InputStream inputStream = p.getInputStream();
       readOutput(inputStream);
