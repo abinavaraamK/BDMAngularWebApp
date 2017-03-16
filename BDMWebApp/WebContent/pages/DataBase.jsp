@@ -57,7 +57,7 @@ $(document).ready(function() {
 <body class="row" style="background: skyblue;">
 	<div class="col-md-offset-4 col-md-5" id="centerDiv">
 		<h3 class="col-md-offset-2 col-md-10">Data Base Configuration</h3>
-		<form:form action="/BaseDataManagerWebApp/tableDetails"  commandName="dbDetails" >
+		<form:form action="/tableDetails"  commandName="dbDetails" >
 
 			<div class="col-md-10 margin" id="configuration">
 				<p class="col-md-6">select the configuration</p>
