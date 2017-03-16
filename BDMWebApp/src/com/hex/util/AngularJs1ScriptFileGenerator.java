@@ -16,7 +16,7 @@ public class AngularJs1ScriptFileGenerator {
 	
 	public void generateScriptJs(String outDirectory, ArrayList tableList, String warFile) throws IOException{
 		
-		 System.out.println(" Inside generateScriptJs ");
+		 	System.out.println(" Inside generateScriptJs ");
 	        StringBuffer buffer = new StringBuffer();
 	        TableVO tableVO = (TableVO) tableList.get(0);
 			String beanName = tableVO.getTableName().toLowerCase();
@@ -76,8 +76,7 @@ public class AngularJs1ScriptFileGenerator {
 	public void angularScripts(String outD) throws IOException{
 		
 
-		
-		String file = UIController.class.getResource("\\templates\\templates\\AngularJs1\\js").getFile();
+		String file = UIController.class.getResource("com\\hex\\templates\\templates\\AngularJs1\\js").getFile();
 				
 		FileUtils.copyDirectory(new File(file), new File(outD));
 		
