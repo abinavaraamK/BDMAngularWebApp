@@ -1,0 +1,72 @@
+@CHARSET "ISO-8859-1";
+body{
+	font-family: cursive;
+    font-size: small;
+}
+span{
+	font-weight: bold;
+}
+#centerDiv{
+   margin-top: 210px;
+   background: aliceblue;
+}
+.borderMod{
+	box-sizing: border-box;
+    -webkit-border-radius: 7px;
+    background: bisque;
+}
+.margin{
+	margin-bottom: 7px;
+}
+.framework{
+	margin-top: 20px;	
+}
+.marginTop{
+	margin-top: 5px;	
+}
+
+#mainDiv{
+    margin-top: 40px;
+    border: 1px solid azure;
+    background: cornsilk;
+    margin-left: 4%;
+    box-sizing: border-box;
+    -webkit-border-radius: 25px;
+}
+#leftDiv{
+	border: 1px solid;
+    margin-top: 5px;
+    margin-left: -5px;
+}
+#rightDiv{
+	border: 1px solid;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+#middleDiv{
+	border: 1px solid;
+    margin-top: 5px;
+    margin-left: 40px;
+    height: 60px;
+}
+db{
+    margin-top: 5px;
+}
+#table{
+    padding-top: 5px;
+    margin-bottom: 5px;
+}
+#page{
+	margin-bottom: 5px;
+}
+.ulDb{
+	list-style-type: none;
+    padding-top: 3px;
+    border: 1px solid darkolivegreen;
+    margin-left: 12px;
+    overflow: auto;
+    height: 150px;
+}
+#package{
+	margin-bottom: 20px;
+}

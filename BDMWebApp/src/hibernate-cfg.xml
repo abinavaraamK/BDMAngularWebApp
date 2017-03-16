@@ -9,9 +9,9 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/BaseDataManager</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">password123</property>
+        <property name="connection.url">jdbc:mysql://sl-us-dal-9-portal.5.dblayer.com:20514/compose</property>
+        <property name="connection.username">admin</property>
+        <property name="connection.password">NYMQZUCFGDSICGZD</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>

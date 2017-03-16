@@ -21,27 +21,6 @@
 <script src="${bdmApp}"></script>
 <script>
 
-function test(configurationName){
-var selectBox = document.getElementById("dbdetails");
-    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    alert(selectedValue);
-	
-}
-
-function submitForm()
-{
-    document.registerForm.submit();
-}
-
-function changeFormValueAndSubmit(buttonName) {
-	   var formData = $('form').serialize();
-	   jQuery.post('/path', formData, function(d) {
-	   
-	   });
-
-	   
-	}
-
 
 $(document).ready(function() {
 	 $("#configurationName").on("change", function() {
@@ -53,7 +32,7 @@ $(document).ready(function() {
 					+ encodeURIComponent(configurationName);
 			alert(data)
 			$.ajax({
-				url : "/path",
+				url : "/dbDetails",
 				data : data,
 				type : "GET",
 			
@@ -78,7 +57,7 @@ $(document).ready(function() {
 <body class="row" style="background: skyblue;">
 	<div class="col-md-offset-4 col-md-5" id="centerDiv">
 		<h3 class="col-md-offset-2 col-md-10">Data Base Configuration</h3>
-		<form:form action="/tableDetails"  commandName="dbDetails" >
+		<form:form action="/BaseDataManagerWebApp/tableDetails"  commandName="dbDetails" >
 
 			<div class="col-md-10 margin" id="configuration">
 				<p class="col-md-6">select the configuration</p>

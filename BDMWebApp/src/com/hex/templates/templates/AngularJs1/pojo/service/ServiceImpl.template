@@ -10,7 +10,7 @@ public class <ClassName>Impl implements I<ClassName> {
 	
 	<ClassName>Dao <LowerClassName>Dao = null;
 	
-	public ProductImpl() {
+	public <ClassName>Impl() {
 
 		<LowerClassName>Dao = new <ClassName>DaoImpl();
 

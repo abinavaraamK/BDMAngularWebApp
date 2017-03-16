@@ -1,16 +1,28 @@
 package com.hex;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +40,9 @@ import com.hex.vo.TableVoList;
 @Controller
 public class UIController {
 
-	@RequestMapping(value = "/path", method = RequestMethod.GET)
+	private static final String INTERNAL_FILE = "yogesh.war";
+
+	@RequestMapping(value = "/dbDetails", method = RequestMethod.GET)
 	@ResponseBody
 	public DbDetails post(
 			@RequestParam("configurationName") String configurationName) {
@@ -77,7 +91,7 @@ public class UIController {
 
 	@RequestMapping(value = "/generate", method = { RequestMethod.GET,
 			RequestMethod.POST })
-	public ModelAndView generate(@ModelAttribute TableVoList tableVoList)
+	public ModelAndView generate(@ModelAttribute TableVoList tableVoList, HttpServletRequest request)
 			throws Exception {
 
 		System.out.println("table name" + tableVoList.getTableName());
@@ -90,10 +104,15 @@ public class UIController {
 		System.out.println("pkgname" + tableVoList.getPackageName());
 		System.out.println("dest dir" + tableVoList.getDestDirectory());
 		System.out.println("theme" + tableVoList.getTheme());
-
+		
+		
+		String outDir = request.getSession().getServletContext().getRealPath("/")+ "warFiles";
+		tableVoList.setDestDirectory(outDir);
+		System.out.println("out directory" +outDir );
 		for (TableVO tableVO : tableVoList.getListTableVO()) {
 			System.out.println(tableVO.getTableName());
-			System.out.println(tableVO.getColumnName().replace("/",""));
+			System.out.println(tableVO.getLabelName());
+			System.out.println(tableVO.getColumnName().replace("/", ""));
 			System.out.println(tableVO.getDataType());
 			System.out.println(tableVO.getDataLength());
 		}
@@ -108,8 +127,11 @@ public class UIController {
 		} catch (Exception exp) {
 			throw exp;
 		}
+		ModelAndView modelAndView = new ModelAndView("Download");
+		modelAndView.addObject("fileName", tableVoList.getFileName());
+		modelAndView.addObject("");
 
-		return null;
+		return modelAndView;
 
 	}
 
@@ -205,11 +227,12 @@ public class UIController {
 		dbDetails4.setPassword("password123");
 		dbDetails4.setPortNo("");
 		dbDetails4.setSchemaName("");
-		
+
 		DbDetails dbDetails5 = new DbDetails();
 		dbDetails5.setConfigurationName("MySql-Bluemix");
 		dbDetails5.setDriverName("com.mysql.jdbc.Driver");
-		dbDetails5.setUrl("jdbc:mysql://sl-us-dal-9-portal.5.dblayer.com:20514/compose");
+		dbDetails5
+				.setUrl("jdbc:mysql://sl-us-dal-9-portal.5.dblayer.com:20514/compose");
 		dbDetails5.setUserName("admin");
 		dbDetails5.setPassword("NYMQZUCFGDSICGZD");
 		dbDetails5.setPortNo("");
@@ -220,7 +243,7 @@ public class UIController {
 		dbMap.put("Scott - Oracle", dbDetails2);
 		dbMap.put("Hex-Static", dbDetails3);
 		dbMap.put("MySql-Db", dbDetails4);
-		dbMap.put("MySql-Bluemix",dbDetails5);
+		dbMap.put("MySql-Bluemix", dbDetails5);
 
 		return dbMap;
 
@@ -234,10 +257,64 @@ public class UIController {
 
 		tableVoList = tableDAO.getAllTables();
 
-	return tableVoList;
+		return tableVoList;
 
 	}
 
-	
+	@RequestMapping(value = "/downloadWar", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public void downloadFile(HttpServletResponse response,
+			HttpServletRequest request) throws IOException {
+
+		File file = new File(request.getSession().getServletContext()
+				.getRealPath("/")
+				+ "warFiles/yogesh.war");
+
+		if (!file.exists()) {
+			String errorMessage = "Sorry. The file you are looking for does not exist";
+			System.out.println(errorMessage);
+			OutputStream outputStream = response.getOutputStream();
+			outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+			outputStream.close();
+			return;
+		}
+
+		String mimeType = URLConnection
+				.guessContentTypeFromName(file.getName());
+		System.out.println("Mimetype :" + file.getAbsolutePath());
+		if (mimeType == null) {
+			System.out.println("mimetype is not detectable, will take default");
+			mimeType = "application/octet-stream";
+		}
+
+		System.out.println("mimetype : " + mimeType);
+
+		response.setContentType(mimeType);
+
+		/*
+		 * "Content-Disposition : inline" will show viewable types [like
+		 * images/text/pdf/anything viewable by browser] right on browser while
+		 * others(zip e.g) will be directly downloaded [may provide save as
+		 * popup, based on your browser setting.]
+		 */
+		response.setHeader("Content-Disposition",
+				String.format("inline; filename=\"" + file.getName() + "\""));
+
+		/*
+		 * "Content-Disposition : attachment" will be directly download, may
+		 * provide save as popup, based on your browser setting
+		 */
+		// response.setHeader("Content-Disposition",
+		// String.format("attachment; filename=\"%s\"", file.getName()));
+
+		response.setContentLength((int) file.length());
+
+		InputStream inputStream = new BufferedInputStream(new FileInputStream(
+				file));
+
+		// Copy bytes from source to destination(outputstream in this example),
+		// closes both streams.
+		FileCopyUtils.copy(inputStream, response.getOutputStream());
+	}
 
 }

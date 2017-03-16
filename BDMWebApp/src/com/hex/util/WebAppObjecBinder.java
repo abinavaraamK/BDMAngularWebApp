@@ -78,9 +78,9 @@ public class WebAppObjecBinder {
 
 			/* Bug #19 dated:18/03/2008 updated By:Sanjit Mandal */
 			tableVO1.setColumnName(tableVO.getColumnName().replace("/", ""));
-			tableVO1.setLabelName(tableVO.getColumnName());
+			tableVO1.setLabelName(tableVO.getLabelName().replace("/", ""));
 			tableVO1.setSelect(true);
-
+			System.out.println("Lable Name :" + tableVO1.getLabelName());
 			/* added by jay Bug#23 Dated 20 March */
 
 			int a = tableVO.getNullable();

@@ -22,11 +22,31 @@
 
 
 $(document).ready(function() {
-	 $("#tableName").on("change", function() {
+
+
+	 $("#save").on("click", function() {
+			
+			var index = $('#index').val();
+		
+			$('input[name^="listTableVO['+index+'].labelName"]').val($('#label').val());
+			$('input[name^="listTableVO['+index+'].dataLength"]').val($('#length').val());
+			$('input[name^="listTableVO['+index+'].dataType"]').val($('#dataType').val());
+			$('input[name^="listTableVO['+index+'].mandatory"]').val($('#readonly').val());
+			$('input[name^="listTableVO['+index+'].readonly"]').val($('#readonly').val());
+			
+			
+			$("#"+index).empty();
+				$("#"+index).append($('<li>').text($('#label').val()).val(index));
+			
+			return false;
+		});
+		
+		
+		 $("#tableName").on("change", function() {
 			
 			$('#columnNames').empty();
 			$('#displayNames').empty();
-	
+			$('#values').empty();
 			
 						
 			var tableName = $('#tableName').val();	
@@ -40,55 +60,35 @@ $(document).ready(function() {
 				type : "GET",
 			
 			success : function(response) {
-				console.log(response)
 				 $.each(response, function(index, value) {
 				
-			
-			
-			
-				
-				
-				
 				$('#values')
+				.append($('<input type="hidden" id="labelName" name="listTableVO['+index+'].labelName" value='+value.columnName+'/>'))
 				.append($('<input type="hidden" id="columnName" name="listTableVO['+index+'].columnName" value='+value.columnName+'/>'))
 				.append($('	<input type="hidden" id="lengthhidden" name="listTableVO['+index+'].dataLength" value='+value.dataLength+' />'))
 				.append($('<input type="hidden" id="readonlyhidden" name="listTableVO['+index+'].readonly" value='+value.readonly+' />'))
 				.append($('<input type="hidden" id="visiblehidden" name="listTableVO['+index+'].visible" value='+value.visible+' />'))
 				.append($('<input type="hidden" id="mandatoryhidden" name="listTableVO['+index+'].mandatory" value='+value.mandatory+' />'))
-				.append($('<input type="hidden" id="readonlyhidden" name="listTableVO['+index+'].dataType" value='+value.dataType+' />'))
-				.append($('<input type="hidden" id="visiblehidden" name="listTableVO['+index+'].tableName" value='+value.tableName+' />'))
-				.append($('<input type="hidden" id="mandatoryhidden" name="listTableVO['+index+'].targetTable" value='+value.tableName+' />'))
-				.append($('<input type="hidden" id="visiblehidden" name="listTableVO['+index+'].validationType" value='+value.validationType+' />'))
-				.append($('<input type="hidden" id="mandatoryhidden" name="listTableVO['+index+'].dateFormat" value='+value.dateFormat+' />'))
+				.append($('<input type="hidden" id="dataTypehidden" name="listTableVO['+index+'].dataType" value='+value.dataType+' />'))
+				.append($('<input type="hidden" id="tableNamehidden" name="listTableVO['+index+'].tableName" value='+value.tableName+' />'))
+				.append($('<input type="hidden" id="targetTablehidden" name="listTableVO['+index+'].targetTable" value='+value.tableName+' />'))
+				.append($('<input type="hidden" id="validationTypehidden" name="listTableVO['+index+'].validationType" value='+value.validationType+' />'))
+				.append($('<input type="hidden" id="dataPrecisionhidden" name="listTableVO['+index+'].dateFormat" value='+value.dateFormat+' />'))
 				.append($('<input type="hidden" id="visiblehidden" name="listTableVO['+index+'].dataPrecision" value='+value.dataPrecision+' />'))
-				.append($('<input type="hidden" id="mandatoryhidden" name="listTableVO['+index+'].dataScale" value='+value.dataScale+' />'))
-				.append($('<input type="hidden" id="mandatoryhidden" name="listTableVO['+index+'].nullable" value='+value.nullable+' />'));
+				.append($('<input type="hidden" id="dataScalehidden" name="listTableVO['+index+'].dataScale" value='+value.dataScale+' />'))
+				.append($('<input type="hidden" id="nullablehidden" name="listTableVO['+index+'].nullable" value='+value.nullable+' />'));
+				
 				
 				$('#columnNames').append($('<li>').text(value.columnName).val(index));
-				$('#displayNames').append($('<li>').text(value.columnName).val(index).click(function(){
-						$('#labelTag').empty();
-						$('#lengthTag').empty();
-						$('#dataTypeTag').empty();
-						$('#readonlyTag').empty();
-						$('#mandatoryTag').empty();
-				 						
-						var indexValue = $(this).attr('value'); 
-						$('#labelTag').append($('<input id="labelName" class="col-md-5" name="listTableVO['+indexValue+'].columnName" class="col-md-5" type="text" >'));
-						$('#lengthTag').append($('<input id="length" class="col-md-5" name="listTableVO['+indexValue+'].dataLength" class="col-md-5" type="text" >'));
-						$('#dataTypeTag').append($('<input id="dataType" class="col-md-5" name="listTableVO['+indexValue+'].dataType" class="col-md-5" type="text" >'));
-						$('#readonlyTag').append($('<input type="checkbox" id="readonly" class="col-md-5" name="listTableVO['+indexValue+'].readonly" class="col-md-5" type="text" >'));
-						$('#mandatoryTag').append($('<input type="checkbox" id="mandatory" class="col-md-5" name="listTableVO['+indexValue+'].mandatory" class="col-md-5" type="text" >'));
-						
-						
-						
-						
-						$('#length').val(value.dataLength); 	
-						$('#labelName').val(value.columnName);
-						$('#dataType').val(value.dataType);
-						$('#readonly').prop("checked", true);
-						$('#visible').prop("checked", value.visible);
-						$('#mandatory').prop("checked", value.mandatory);
-						
+				
+				$('#displayNames').append($('<div id='+index+'>').append($('<li>').text(value.columnName).val(index)).click(function(){
+						$('#length').val($('input[name^="listTableVO['+index+'].dataLength"]').val()); 	
+						$('#label').val($('input[name^="listTableVO['+index+'].labelName"]').val());
+						$('#dataType').val($('input[name^="listTableVO['+index+'].dataType"]').val());
+						$('#readonly').prop($('input[name^="listTableVO['+index+'].readonly"]').val());
+						$('#visible').prop($('input[name^="listTableVO['+index+'].visible"]').val());
+						$('#mandatory').prop($('input[name^="listTableVO['+index+'].mandatory"]').val());
+						$('#index').val(index);
 						
 						
 						
@@ -97,7 +97,6 @@ $(document).ready(function() {
     });
 				
 				var json = ${'response'};
-				console.log(json)
 				$('#PageLabel').val(json[0].tableName);
 			
 				},
@@ -138,6 +137,7 @@ $(document).ready(function() {
 			<div id="values">
 		 		
 		 	</div>
+			
 		 	<div class="col-md-5" style="cursor:pointer">
 		 		<span class="col-md-10">Display Names</span>
 		 		<ul id="displayNames" class="ulDb">
@@ -190,9 +190,11 @@ $(document).ready(function() {
 			<input id="mandatory" path="" label="mandatory" type="checkbox" class="col-md-6"/>
 					</div>
 	  			
-	  		</div>	  		  		  		
-	  		<div class="col-md-offset-4 col-md-10" style="margin-bottom: 5px;">
-	  			<button type="button" class="col-md-5">Save</button>
+	  		</div>	
+			<input type="hidden" id="selectedAttribute"/> 
+			<input type="hidden" id="index"/> 
+			<div class="col-md-offset-4 col-md-10" style="margin-bottom: 5px;">
+	  			<button type="button" class="col-md-5" id="save">Save</button>
 	  		</div>
 		
  		</div>

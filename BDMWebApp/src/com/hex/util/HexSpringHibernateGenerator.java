@@ -427,7 +427,7 @@ public class HexSpringHibernateGenerator {
     }
 
     private String getPrimaryKeyFields(ArrayList tableList) {
-        //System.out.println("Inside getPrimaryKeyFields ");
+       System.out.println("Inside getPrimaryKeyFields ");
 
         int listSize = tableList.size();
         TableVO tableVO = null;
@@ -436,7 +436,7 @@ public class HexSpringHibernateGenerator {
         if (listSize == 1) {
             for (int count = 0; count < tableList.size(); count++) {
                 tableVO = (TableVO) tableList.get(count);
-                buffer.append("<id column=\"");
+               buffer.append("<id column=\"");
                 buffer.append(tableVO.getColumnName().toUpperCase() + "\" ");
                 buffer.append("name=\"");
                 buffer.append(tableVO.getColumnName().toLowerCase() + "\" ");
@@ -449,7 +449,6 @@ public class HexSpringHibernateGenerator {
             buffer.append("<composite-id>\n");
             for (int count = 0; count < tableList.size(); count++) {
                 tableVO = (TableVO) tableList.get(count);
-
                 buffer.append("<key-property column=\"");
                 buffer.append(tableVO.getColumnName().toUpperCase() + "\" ");
                 buffer.append("length=\"");
