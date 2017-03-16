@@ -75,9 +75,14 @@ public class AngularJs1ScriptFileGenerator {
 	
 	public void angularScripts(String outD) throws IOException{
 		final URL url = UIController.class.getResource("\\templates\\templates\\AngularJs1\\js");
-    	if (url != null) 
-        	File apps = new File(url.toURI());
-        else
+		File apps = null;
+    	if (url != null)
+			try {
+				apps = new File(url.toURI());
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+		else
         	System.out.println("Else Block in Angular script");
 		//String file = UIController.class.getResource("\\templates\\templates\\AngularJs1\\js").getFile();
 				
