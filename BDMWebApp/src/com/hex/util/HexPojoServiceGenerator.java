@@ -80,7 +80,7 @@ public class HexPojoServiceGenerator {
 	        StringBuffer result = new StringBuffer();
 	        try {
 	            /*DataInputStream dis = new DataInputStream(new FileInputStream(
-	                    "D:\\BaseDataManager\\templates\\AngularJs1\\pojo\\rest\\RestService.template"));
+	                    "D:\\BaseDataManager/templates/AngularJs1/pojo\\rest\\RestService.template"));
 	            */DataInputStream dis = new DataInputStream(new FileInputStream(
 	            "templates\\AngularJs1\\pojo\\rest\\RestService.template"));
 	   
@@ -111,7 +111,7 @@ public class HexPojoServiceGenerator {
 	        StringBuffer result = new StringBuffer();
 	        try {
 	          /*  DataInputStream dis = new DataInputStream(new FileInputStream(
-	                    "D:\\BaseDataManager\\templates\\AngularJs1\\pojo\\service\\RestService.template"));
+	                    "D:\\BaseDataManager/templates/AngularJs1/pojo\\service\\RestService.template"));
 	           */ DataInputStream dis = new DataInputStream(new FileInputStream(
                 "templates\\AngularJs1\\pojo\\service\\ServiceImpl.template"));
        
@@ -142,7 +142,7 @@ public class HexPojoServiceGenerator {
 	        StringBuffer result = new StringBuffer();
 	        try {
 	    /*    	 DataInputStream dis = new DataInputStream(new FileInputStream(
-                 "D:\\BaseDataManager\\templates\\AngularJs1\\pojo\\service\\ServiceInterface.template"));
+                 "D:\\BaseDataManager/templates/AngularJs1/pojo\\service\\ServiceInterface.template"));
         */
 	            DataInputStream dis = new DataInputStream(new FileInputStream(
 	                    "templates\\AngularJs1\\pojo\\service\\ServiceInterface.template"));

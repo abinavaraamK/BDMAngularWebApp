@@ -26,10 +26,10 @@ public class AngularJs1ScriptFileGenerator {
 			
 	        try {
 	        	/*DataInputStream dis = new DataInputStream(new FileInputStream(
-                "E:\\Internaltools\\BDM\\BaseDataManager\\Run Time\\templates\\AngularJs1\\ScripsJs.template"));*/
+                "E:\\Internaltools\\BDM\\BaseDataManager\\Run Time/templates/AngularJs1/ScripsJs.template"));*/
 	        	DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
-						"\\templates\\AngularJs1\\ScripsJs.template"));
-	        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\ScripsJs.template");
+						"/templates/AngularJs1/ScripsJs.template"));
+	        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates/templates/AngularJs1/ScripsJs.template");
 				 
 				DataInputStream dis = new DataInputStream(inputStream);  */ 
 	           
@@ -79,9 +79,9 @@ public class AngularJs1ScriptFileGenerator {
 		
 
 		
-		//String file = UIController.class.getResource("\\templates\\templates\\AngularJs1\\js").getFile();
+		//String file = UIController.class.getResource("\\templates/templates/AngularJs1/js").getFile();
 				
-		FileUtils.copyDirectory(new File(templatesLocation+"\\templates\\AngularJs1\\js"), new File(outD));
+		FileUtils.copyDirectory(new File(templatesLocation+"/templates/AngularJs1/js"), new File(outD));
 		
 		
 		

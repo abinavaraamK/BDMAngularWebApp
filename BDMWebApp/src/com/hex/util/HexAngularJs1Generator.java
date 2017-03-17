@@ -79,11 +79,11 @@ public class HexAngularJs1Generator {
 		try {
 		
 			DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
-					"\\templates\\AngularJs1\\web.template"));
-			/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\web.template");
+					"/templates/AngularJs1/web.template"));
+			/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates/templates/AngularJs1/web.template");
 			DataInputStream dis = new DataInputStream(inputStream);*/
 	/*		DataInputStream dis = new DataInputStream(new FileInputStream(
-			"E:\\Internaltools\\BDM\\BaseDataManager\\Run Time\\templates\\AngularJs1\\web.template"));*/
+			"E:\\Internaltools\\BDM\\BaseDataManager\\Run Time/templates/AngularJs1/web.template"));*/
 			
 			while (dis.available() > 0) {
 				String line = dis.readLine();

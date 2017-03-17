@@ -63,8 +63,8 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
     StringBuffer result = new StringBuffer();
     try {
     	DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
-                "\\templates\\build\\HexFrameBuild.template"));
-    	File file = new File(templatesLocation+"\\Buildlib\\xwork-2.1.2.jar");
+                "/templates/build/HexFrameBuild.template"));
+    	File file = new File(templatesLocation+"/Buildlib/xwork-2.1.2.jar");
     	  /* InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\build\\HexFrameBuild.template");
   		 
    		DataInputStream dis = new DataInputStream(inputStream);   */

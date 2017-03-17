@@ -49,11 +49,11 @@ public class HexSpringServiceGenerator {
         StringBuffer buffer = new StringBuffer();
         try {
        
-        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\spring\\BootStrapper.template");
+        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates/templates/spring/BootStrapper.template");
 			DataInputStream dis = new DataInputStream(inputStream);*/
         	
         	  DataInputStream dis = new DataInputStream(new FileInputStream(
-        			  templatesLocation+"\\templates\\spring\\BootStrapper.template"));
+        			  templatesLocation+"/templates/spring/BootStrapper.template"));
 
             while (dis.available() > 0) {
                 String line = dis.readLine();
@@ -118,8 +118,8 @@ public class HexSpringServiceGenerator {
         StringBuffer result = new StringBuffer();
         try {
             DataInputStream dis = new DataInputStream(new FileInputStream(
-                    templatesLocation+"\\templates\\AngularJs1\\spring\\rest\\RestService.template"));
-            /*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\spring\\rest\\RestService.template");
+                    templatesLocation+"/templates/AngularJs1/spring/rest/RestService.template"));
+            /*InputStream inputStream= UIController.class.getResourceAsStream("\\templates/templates/AngularJs1/spring/rest/RestService.template");
         	DataInputStream dis = new DataInputStream(inputStream);*/
         	   
    
@@ -149,9 +149,9 @@ public class HexSpringServiceGenerator {
             String psSelectColumnsMethods, String templatesLocation) {
         StringBuffer result = new StringBuffer();
         try {
-            DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+"\\templates\\AngularJs1\\spring\\service\\ServiceImpl.template"));
+            DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+"/templates/AngularJs1/spring/service/ServiceImpl.template"));
             
-        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\spring\\service\\ServiceImpl.template");
+        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates/templates/AngularJs1/spring/service/ServiceImpl.template");
         	
         	DataInputStream dis = new DataInputStream(inputStream);*/
    
@@ -181,9 +181,9 @@ public class HexSpringServiceGenerator {
             String psSelectColumnsMethods, String templatesLocation) {
         StringBuffer result = new StringBuffer();
         try {
-            DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+"\\templates\\AngularJs1\\spring\\service\\ServiceInterface.template"));
+            DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+"/templates/AngularJs1/spring/service/ServiceInterface.template"));
             
-/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\spring\\service\\ServiceInterface.template");
+/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates/templates/AngularJs1/spring/service/ServiceInterface.template");
         	
         	DataInputStream dis = new DataInputStream(inputStream);*/
  
@@ -283,7 +283,7 @@ public class HexSpringServiceGenerator {
         StringBuffer result = new StringBuffer();
         object = HexUtil.initCap(object);
         try {
-            DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+"\\templates\\vo\\VO.template"));
+            DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+"/templates/vo/VO.template"));
 	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\vo\\VO.template");
         	
         	
@@ -389,7 +389,7 @@ public class HexSpringServiceGenerator {
         StringBuffer buffer = new StringBuffer();
         try {
             DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
-                    "\\templates\\exception\\HexApplicationException.template"));
+                    "/templates/exception/HexApplicationException.template"));
             
         	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\exception\\HexApplicationException.template");
         	DataInputStream dis = new DataInputStream(inputStream);*/
@@ -428,7 +428,7 @@ public class HexSpringServiceGenerator {
         StringBuffer result = new StringBuffer();
         try {
             DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
-                    "\\templates\\businessdelegate\\BusinessDelegate.template"));
+                    "/templates/businessdelegate/BusinessDelegate.template"));
            /*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\businessdelegate\\BusinessDelegate.template");
        	
        	DataInputStream dis = new DataInputStream(inputStream);*/

@@ -54,7 +54,7 @@ public class HexSpringGenerator {
         StringBuffer buffer = new StringBuffer();
         try {
            
-            InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\spring\\BootStrapper.template");
+            InputStream inputStream= UIController.class.getResourceAsStream("\\templates/templates/spring/BootStrapper.template");
 			 DataInputStream dis = new DataInputStream(inputStream);
             while (dis.available() > 0) {
                 String line = dis.readLine();
