@@ -81,7 +81,7 @@ public class AngularJs1HtmlGenerator {
 		
 		try {
 			DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
-                    "\\templates\\AngularJs1\\ListPage.template"));
+                    "/templates/AngularJs1/ListPage.template"));
 			/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\ListPage.template");
 			 
 			DataInputStream dis = new DataInputStream(inputStream);*/
