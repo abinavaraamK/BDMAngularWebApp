@@ -84,10 +84,10 @@ public class HexSpringHibernateGenerator {
         }
 
         try {
-        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates/template/hibernate/DAO.template");
+        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates/templates/hibernate/DAO.template");
 			 DataInputStream dis = new DataInputStream(inputStream);*/
 			 DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
-	                    "/template/hibernate/DAO.template"));
+	                    "/templates/hibernate/DAO.template"));
 			 
             while (dis.available() > 0) {
                 String line = dis.readLine();
@@ -195,10 +195,10 @@ public class HexSpringHibernateGenerator {
         }
 
         try {
-        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates/template/hibernate/DAO_HibernateInterface.template");
+        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates/templates/hibernate/DAO_HibernateInterface.template");
 			 DataInputStream dis = new DataInputStream(inputStream);*/
 			 DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
-	                    "/template/hibernate/DAO_HibernateInterface.template"));
+	                    "/templates/hibernate/DAO_HibernateInterface.template"));
             while (dis.available() > 0) {
                 String line = dis.readLine();
                 line = HexUtil.replaceTags(line, "<ClassName>", className);
@@ -285,10 +285,10 @@ public class HexSpringHibernateGenerator {
                 beanSession.append("    </bean>\n");
             }
 
-           // InputStream inputStream= UIController.class.getResourceAsStream("\\templates/template/hibernate/applicationContext.template");
+           // InputStream inputStream= UIController.class.getResourceAsStream("\\templates/templates/hibernate/applicationContext.template");
 			
             dis = new DataInputStream(new FileInputStream(templatesLocation+
-                    "/template/hibernate/applicationContext.template"));
+                    "/templates/hibernate/applicationContext.template"));
           //  dis = new DataInputStream(inputStream);
             while (dis.available() > 0) {
                 String line = dis.readLine();
@@ -406,12 +406,12 @@ public class HexSpringHibernateGenerator {
                 columnProperties.append("</class>\n");
             }
 
-           // InputStream inputStream= UIController.class.getResourceAsStream("\\templates/template/hibernate/table_hbm.template");
+           // InputStream inputStream= UIController.class.getResourceAsStream("\\templates/templates/hibernate/table_hbm.template");
 			
 
            // dis = new DataInputStream(inputStream);
             dis = new DataInputStream(new FileInputStream(templatesLocation+
-                    "/template/hibernate/table_hbm.template"));
+                    "/templates/hibernate/table_hbm.template"));
             while (dis.available() > 0) {
                 String line = dis.readLine();
                 //line = HexUtil.replaceTags(line, "<ClassName>", className);
