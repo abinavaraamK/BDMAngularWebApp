@@ -192,7 +192,10 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
     }
     catch (IOException exec) {
       exec.printStackTrace();
-    }
+    }catch (InterruptedException e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();
+  }
 
   }
   
