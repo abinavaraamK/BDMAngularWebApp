@@ -1,6 +1,7 @@
 package com.hex.util;
 
 import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class HexAngularJs1Generator {
 		return ps;
 	}
 
-	public void generatePresentationTierFiles(ArrayList list) throws Exception {
+	public void generatePresentationTierFiles(ArrayList list, String templatesLocation) throws Exception {
 
 		String outDirectory = "";
 		String table = "";
@@ -41,7 +42,7 @@ public class HexAngularJs1Generator {
 			String lsPackageDir = (String) poMap.get("PACKAGE_DIR");
 			warFile = (String) poMap.get("WAR_FILE");
 			String lsPageSource[] = angularJs1HtmlGenerator.getListPageSource(
-					tableList, lsPageTitle);
+					tableList, lsPageTitle,templatesLocation);
 			String jspDirectory = outDirectory ;
 			HexUtil.makeDirectory(jspDirectory);
 			String outputFile;
@@ -56,8 +57,8 @@ public class HexAngularJs1Generator {
 		}
 		System.out.println("Out directory in Angular *****************"
 				+ outDirectory);
-		angularJs1ScriptFileGenerator.generateScriptJs(outDirectory, tableList,warFile);
-		generateWebXML(table, outDirectory,lsPackage);
+		angularJs1ScriptFileGenerator.generateScriptJs(outDirectory, tableList,warFile,templatesLocation);
+		generateWebXML(table, outDirectory,lsPackage,templatesLocation);
 	}
 
 	public static void main(String[] args) {
@@ -69,7 +70,7 @@ public class HexAngularJs1Generator {
 	}
 	
 	public void generateWebXML(String tableName,
-			String outDirectory, String lsPackage) {
+			String outDirectory, String lsPackage,String templatesLocation) {
 
 		System.out.println(" Inside generateWebXML ");
 
@@ -77,10 +78,10 @@ public class HexAngularJs1Generator {
 		StringBuffer buffer = new StringBuffer();
 		try {
 		
-			/*DataInputStream dis = new DataInputStream(new FileInputStream(
-					"D:\\BaseDataManager\\templates\\AngularJs1\\web.template"));*/
-			InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\web.template");
-			DataInputStream dis = new DataInputStream(inputStream);
+			DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
+					"\\templates\\AngularJs1\\web.template"));
+			/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\web.template");
+			DataInputStream dis = new DataInputStream(inputStream);*/
 	/*		DataInputStream dis = new DataInputStream(new FileInputStream(
 			"E:\\Internaltools\\BDM\\BaseDataManager\\Run Time\\templates\\AngularJs1\\web.template"));*/
 			

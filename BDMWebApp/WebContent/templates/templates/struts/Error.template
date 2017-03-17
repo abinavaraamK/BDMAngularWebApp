@@ -1,0 +1,70 @@
+<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<HTML>
+<HEAD>
+<TITLE>Error Page</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<FONT COLOR="#FF0000">
+<%
+	/*Bug# 11,27 dated :25 Mar Updated by bhushan*/
+        Exception exp1 =(Exception)request.getAttribute("Exception1");
+        Exception exp2=(Exception)request.getAttribute("Exception2");
+        Exception exp3=(Exception)request.getAttribute("Exception3");
+        Exception exp4=(Exception)request.getAttribute("Exception4");
+	if(exp1!= null) {
+            String sb=exp1.toString();
+            String str1="com.hex.util.HexApplicationException: JDBC exception on Hibernate data access; nested exception is org.hibernate.exception.GenericJDBCException: Could not execute JDBC batch update";
+            String str2="com.hex.util.HexApplicationException: Could not execute JDBC batch update; nested exception is org.hibernate.exception.ConstraintViolationException: Could not execute JDBC batch update";
+
+            if(sb.equals(str1)){
+                   String str5=(String)request.getAttribute("expmsg1") ;
+                   int indx=str5.indexOf("at row");
+                   str5=str5.substring(0, indx);
+%>
+                <br> <b1> Data is too long to handle.............. <b1></br>
+                <br>  <b2> <%=str5%> <b2> </br>
+<%
+            }
+            if(sb.equals(str2)){
+                String str6=(String)request.getAttribute("expmsg1") ;
+%>
+                <b1>Duplicate Entry................... <b1><br>
+                <b3><%=str6%></b3><br>
+<%
+	    }
+     }
+     if(exp2!=null){
+%>
+        <b2>Error/Exception Occured!!!</b2>
+<%
+     }
+    if(exp3!=null){
+        String ex = exp3.getMessage().toString();
+        ex = ex.substring(4);
+        String exmsg = "Please enter a number instead of the "+ ex;
+%>
+
+        <b2>Number Format Exception...............</b2><br>
+        <b2> <%=exmsg %></b2>
+<%
+    } 
+    if(exp4!=null){
+        String sb1=exp4.toString(); 
+        String str3="com.hex.util.HexApplicationException: JDBC exception on Hibernate data access; nested exception is org.hibernate.exception.SQLGrammarException: could not execute query";
+        if(sb1.equals(str3)){
+ %>
+            <b2>Database/Table  not found...............</b2>
+ <%
+        }
+    }
+    /* End: Bug# 11,27 dated :25 Mar Updated by bhushan*/
+%>    
+    <html:messages id="msg" message="true">
+	<bean:write name="msg" />
+    </html:messages> 
+</FONT>
+<br><br>
+<input type="button" value="Back" name="btnBack" onClick="javascript:history.back();">
+</BODY>
+</HTML>

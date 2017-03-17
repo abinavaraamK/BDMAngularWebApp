@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="DataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value><Driver></value>
+		</property>
+		<property name="url">
+			<value><url></value>
+		</property>
+		<property name="username">
+			<value><username></value>
+		</property>
+		<property name="password">
+			<value><password></value>
+		</property>
+	</bean>
+	<bean id="mySessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="mappingResources">
+			<list>
+				<value>/<hbm-name>.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect"><Dialect></prop>
+			</props>
+		</property>
+		<property name="dataSource">
+			<ref bean="DataSource"/>
+		</property>
+	</bean>
+
+	<bean-session-mappings>
+
+</beans>

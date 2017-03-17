@@ -4,6 +4,7 @@ package com.hex.util;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,9 +27,9 @@ public class HexBuildGenerator {
   }
   
       
-   public void generateBuildProperties(String lsPresentation,String lsBusiness,String lsPersistence,String outDirectory,String warFile) {
+   public void generateBuildProperties(String lsPresentation,String lsBusiness,String lsPersistence,String outDirectory,String warFile,String templatesLocation) {
 System.out.println("HexBuildGenerator ***********without deploy**************");
- String content = getBuildProperties(outDirectory ,lsPresentation,lsBusiness,lsPersistence,warFile);
+ String content = getBuildProperties(outDirectory ,lsPresentation,lsBusiness,lsPersistence,warFile,templatesLocation);
  //String fileName = "HexFrameBuild.properties";
    String fileName = HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.properties").getFile();
  System.out.println(">>>>>>>"+HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.properties").getFile());
@@ -38,9 +39,9 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
 
   }
 
-   public void generateBuildProperties(String lsPresentation,String lsBusiness,String lsPersistence,String outDirectory,String warFile,String deploy) {
+   public void generateBuildProperties(String lsPresentation,String lsBusiness,String lsPersistence,String outDirectory,String warFile,String deploy,String templatesLocation) {
 	   System.out.println("HexBuildGenerator ***********with deploy**************");
-	    String content = getBuildProperties(outDirectory ,lsPresentation,lsBusiness,lsPersistence,warFile);
+	    String content = getBuildProperties(outDirectory ,lsPresentation,lsBusiness,lsPersistence,warFile,templatesLocation);
 	    String fileName = "HexFrameBuild.properties";
 	    
 	    HexUtil.writeFile(content, fileName);
@@ -51,7 +52,7 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
 
 	  }
    
-  private String getBuildProperties(String outputPath, String psPresentation,String lsBusiness,String lsPersistence,String warFile) {
+  private String getBuildProperties(String outputPath, String psPresentation,String lsBusiness,String lsPersistence,String warFile,String templatesLocation) {
 
     System.out.println("Inside generateBuildProperties " + outputPath);
     System.out.println("Inside generateBuildProperties " + psPresentation);
@@ -61,11 +62,14 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
 
     StringBuffer result = new StringBuffer();
     try {
-    	   InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\build\\HexFrameBuild.template");
+    	DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
+                "\\templates\\build\\HexFrameBuild.template"));
+    	File file = new File(templatesLocation+"\\Buildlib\\xwork-2.1.2.jar");
+    	  /* InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\build\\HexFrameBuild.template");
   		 
-   		DataInputStream dis = new DataInputStream(inputStream);   
+   		DataInputStream dis = new DataInputStream(inputStream);   */
    	
-   		File file = new File(UIController.class.getClassLoader().getResource("\\com\\hex\\templates\\Buildlib\\xwork-2.1.2.jar").getFile());
+   		//File file = new File(UIController.class.getClassLoader().getResource("\\templates\\Buildlib\\xwork-2.1.2.jar").getFile());
    		String BuildLib= file.getParent();
    		System.out.println("$$$$$$$$$$$$$$$$$$$"+file.getParent());
    	
@@ -177,27 +181,17 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
     File hexBuildfile = new File(HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.xml").getFile());
     
     try {
-  
-      Process p = runtime.exec("sudo chmod -R 777 "+HexBuildGenerator.class.getResource("").getFile().toString());
-      p.waitFor();    
+
+    	Process p = runtime.exec(file.toString()+" all "+hexBuildfile );
       InputStream errorStream = p.getErrorStream();
       InputStream inputStream = p.getInputStream();
       readOutput(inputStream);
       readOutput(errorStream);
-      p = runtime.exec("sudo " +file.toString()+" all "+hexBuildfile );
-      InputStream errorStream1 = p.getErrorStream();
-      InputStream inputStream1 = p.getInputStream();
-      readOutput(inputStream1);
-      readOutput(errorStream1);
 
     }
     catch (IOException exec) {
       exec.printStackTrace();
-    } catch (InterruptedException e) {
-    // TODO Auto-generated catch block
-    e.printStackTrace();
-  }
-
+    }
 
   }
   

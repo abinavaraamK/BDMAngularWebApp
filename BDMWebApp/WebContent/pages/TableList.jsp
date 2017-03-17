@@ -50,10 +50,10 @@ $(document).ready(function() {
 			
 						
 			var tableName = $('#tableName').val();	
-			//alert(tableName)
+			alert(tableName)
 			var data = 'tableName='
 					+ encodeURIComponent(tableName);
-			//alert(data)
+			alert(data)
 			$.ajax({
 				url : "/getTableData",
 				data : data,

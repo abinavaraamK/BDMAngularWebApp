@@ -2,6 +2,7 @@ package com.hex.util;
 
 import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -14,9 +15,9 @@ import com.hex.vo.TableVO;
 public class AngularJs1ScriptFileGenerator {
 
 	
-	public void generateScriptJs(String outDirectory, ArrayList tableList, String warFile) throws IOException{
+	public void generateScriptJs(String outDirectory, ArrayList tableList, String warFile, String templatesLocation) throws IOException{
 		
-		 	System.out.println(" Inside generateScriptJs ");
+		 System.out.println(" Inside generateScriptJs ");
 	        StringBuffer buffer = new StringBuffer();
 	        TableVO tableVO = (TableVO) tableList.get(0);
 			String beanName = tableVO.getTableName().toLowerCase();
@@ -26,10 +27,11 @@ public class AngularJs1ScriptFileGenerator {
 	        try {
 	        	/*DataInputStream dis = new DataInputStream(new FileInputStream(
                 "E:\\Internaltools\\BDM\\BaseDataManager\\Run Time\\templates\\AngularJs1\\ScripsJs.template"));*/
-	       
-	        	InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\ScripsJs.template");
+	        	DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
+						"\\templates\\AngularJs1\\ScripsJs.template"));
+	        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\ScripsJs.template");
 				 
-				DataInputStream dis = new DataInputStream(inputStream);   
+				DataInputStream dis = new DataInputStream(inputStream);  */ 
 	           
 	            for (int i = 0; i < tableList.size(); i++) {
         			tableVO = (TableVO) tableList.get(i);
@@ -68,16 +70,20 @@ public class AngularJs1ScriptFileGenerator {
 	        HexUtil.writeFile(buffer.toString(),
 	                outD + "\\script.js");
 	        
-	        new AngularJs1ScriptFileGenerator().angularScripts(outD);
+	        new AngularJs1ScriptFileGenerator().angularScripts(outD,templatesLocation);
 		
 	}
 	
 	
-	public void angularScripts(String outD) throws IOException{
+	public void angularScripts(String outD, String templatesLocation) throws IOException{
+		
 
-		/*String file = UIController.class.getResource("\\templates\\templates\\AngularJs1\\js").getFile();
+		
+		//String file = UIController.class.getResource("\\templates\\templates\\AngularJs1\\js").getFile();
 				
-		FileUtils.copyDirectory(new File(file), new File(outD));*/
+		FileUtils.copyDirectory(new File(templatesLocation+"\\templates\\AngularJs1\\js"), new File(outD));
+		
+		
 		
 	}
 	

@@ -29,7 +29,7 @@ public class HexSpringHibernateGenerator {
     public HexSpringHibernateGenerator() {
     }
 
-    public void generateHibernateFiles(ArrayList list) {
+    public void generateHibernateFiles(ArrayList list, String templatesLocation) {
         System.out.println("**********Enter into generateHibernateFiles method*********");
         //String outDirectory="D:/Out";
         String outDirectory = "";
@@ -42,13 +42,13 @@ public class HexSpringHibernateGenerator {
             ArrayList tableList = (ArrayList) poMap.get("LIST");
             outDirectory = (String) poMap.get("DIRECTORY");
             warFile = (String) poMap.get("WAR_FILE");
-            generateDAO(tableList, outDirectory);        
+            generateDAO(tableList, outDirectory,templatesLocation);        
         }
-        generateContextXML(list,outDirectory,warFile);
-        generateMappingXML(list,outDirectory,warFile);
+        generateContextXML(list,outDirectory,warFile,templatesLocation);
+        generateMappingXML(list,outDirectory,warFile,templatesLocation);
     }
 
-    private void generateDAO(ArrayList tableList, String outDirectory) {
+    private void generateDAO(ArrayList tableList, String outDirectory, String templatesLocation) {
         TableVO tableVO = null;
         String tableName = "";
 
@@ -56,7 +56,7 @@ public class HexSpringHibernateGenerator {
         tableVO = (TableVO) tableList.get(0);
         tableName = HexUtil.initCap(tableVO.getTableName());
         String daoContent = getDataAccessObject(tableName, tableName,
-                lsSelectColumnsMethods);
+                lsSelectColumnsMethods,templatesLocation);
 
         outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\dao";
         System.out.println("outDirectory in dao spring"+outDirectory);
@@ -65,13 +65,13 @@ public class HexSpringHibernateGenerator {
         HexUtil.writeFile(daoContent, outputFile);
 
         lsSelectColumnsMethods = getSelectColumnsDAOInterfaceMethod(tableList);
-        daoContent = getDataAccessInterfaceObject(tableName, tableName, lsSelectColumnsMethods);
+        daoContent = getDataAccessInterfaceObject(tableName, tableName, lsSelectColumnsMethods,templatesLocation);
         outputFile = outDirectory + "\\" + tableName + "Dao.java";
         HexUtil.writeFile(daoContent, outputFile);
     }
 
     private String getDataAccessObject(String className, String valueObject,
-            String psSelectColumnsMethods) {
+            String psSelectColumnsMethods,String templatesLocation) {
         TableVO tableVO = null;
         StringBuffer result = new StringBuffer();
         TableDAO tableDAO = TableDAO.getInstance();
@@ -84,8 +84,11 @@ public class HexSpringHibernateGenerator {
         }
 
         try {
-        	InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\hibernate\\DAO.template");
-			 DataInputStream dis = new DataInputStream(inputStream);
+        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\hibernate\\DAO.template");
+			 DataInputStream dis = new DataInputStream(inputStream);*/
+			 DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
+	                    "\\templates\\hibernate\\DAO.template"));
+			 
             while (dis.available() > 0) {
                 String line = dis.readLine();
                 line = HexUtil.replaceTags(line, "<packageName>", HexUtil.initSmall(className));
@@ -179,7 +182,7 @@ public class HexSpringHibernateGenerator {
     }
 
     private String getDataAccessInterfaceObject(String className, String valueObject,
-            String psSelectColumnsMethods) {
+            String psSelectColumnsMethods,String templatesLocation) {
         TableVO tableVO = null;
         StringBuffer result = new StringBuffer();
         TableDAO tableDAO = TableDAO.getInstance();
@@ -192,8 +195,10 @@ public class HexSpringHibernateGenerator {
         }
 
         try {
-        	InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\hibernate\\DAO_HibernateInterface.template");
-			 DataInputStream dis = new DataInputStream(inputStream);
+        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\hibernate\\DAO_HibernateInterface.template");
+			 DataInputStream dis = new DataInputStream(inputStream);*/
+			 DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
+	                    "\\templates\\hibernate\\DAO_HibernateInterface.template"));
             while (dis.available() > 0) {
                 String line = dis.readLine();
                 line = HexUtil.replaceTags(line, "<ClassName>", className);
@@ -230,7 +235,7 @@ public class HexSpringHibernateGenerator {
         return buffer.toString();
     }
 
-    private void generateContextXML(ArrayList tableList,String outDirectory,String warFile) {
+    private void generateContextXML(ArrayList tableList,String outDirectory,String warFile,String templatesLocation) {
 
         TableVO tableVO = null;
         TableDAO tableDAO = TableDAO.getInstance();
@@ -241,7 +246,7 @@ public class HexSpringHibernateGenerator {
         //tableVO = (TableVO) tableList.get(0);
         // className = HexUtil.initCap(tableVO.getTableName());
         //String xmlContent = getAppContextXML(className, dbVO);
-        String xmlContent = getAppContextXML(tableList, dbVO,warFile);
+        String xmlContent = getAppContextXML(tableList, dbVO,warFile,templatesLocation);
 
         outDirectory = outDirectory + "\\WEB-INF\\classes\\";
         HexUtil.makeDirectory(outDirectory);
@@ -250,7 +255,7 @@ public class HexSpringHibernateGenerator {
         HexUtil.writeFile(xmlContent, outputFile);
     }
 
-    public String getAppContextXML(ArrayList list, DataBaseVO dbVO,String warFile) {
+    public String getAppContextXML(ArrayList list, DataBaseVO dbVO,String warFile,String templatesLocation) {
 
         TableVO tableVO = null;
         String psObjectName = "";
@@ -280,10 +285,11 @@ public class HexSpringHibernateGenerator {
                 beanSession.append("    </bean>\n");
             }
 
-            InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\hibernate\\applicationContext.template");
+           // InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\hibernate\\applicationContext.template");
 			
-
-            dis = new DataInputStream(inputStream);
+            dis = new DataInputStream(new FileInputStream(templatesLocation+
+                    "\\templates\\hibernate\\applicationContext.template"));
+          //  dis = new DataInputStream(inputStream);
             while (dis.available() > 0) {
                 String line = dis.readLine();
                 line = HexUtil.replaceTags(line, "<DataSource>", psObjectName);
@@ -349,7 +355,7 @@ public class HexSpringHibernateGenerator {
 
     }
 
-    private void generateMappingXML(ArrayList tableList,String outDirectory,String warFile) {
+    private void generateMappingXML(ArrayList tableList,String outDirectory,String warFile,String templatesLocation) {
 
         System.out.println("Enter into HBM file generation");
         String className = "";
@@ -361,7 +367,7 @@ public class HexSpringHibernateGenerator {
         // className = HexUtil.initCap(tableVO.getTableName());
         //String xmlContent = getMappingXML(className, dbVO, tableList);
 
-        String xmlContent = getMappingXML(dbVO, tableList);
+        String xmlContent = getMappingXML(dbVO, tableList,templatesLocation);
 
         outDirectory = outDirectory + "\\WEB-INF\\classes\\";
         HexUtil.makeDirectory(outDirectory);
@@ -370,7 +376,7 @@ public class HexSpringHibernateGenerator {
     }
 
     //public String getMappingXML(String className, DataBaseVO dbVO,          ArrayList tableList) {
-    public String getMappingXML(DataBaseVO dbVO, ArrayList tableList) {
+    public String getMappingXML(DataBaseVO dbVO, ArrayList tableList, String templatesLocation) {
         StringBuffer result = new StringBuffer();
         TableDAO tableDAO = TableDAO.getInstance();
         String className = "";
@@ -400,10 +406,12 @@ public class HexSpringHibernateGenerator {
                 columnProperties.append("</class>\n");
             }
 
-            InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\hibernate\\table_hbm.template");
+           // InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\hibernate\\table_hbm.template");
 			
 
-            dis = new DataInputStream(inputStream);
+           // dis = new DataInputStream(inputStream);
+            dis = new DataInputStream(new FileInputStream(templatesLocation+
+                    "\\templates\\hibernate\\table_hbm.template"));
             while (dis.available() > 0) {
                 String line = dis.readLine();
                 //line = HexUtil.replaceTags(line, "<ClassName>", className);

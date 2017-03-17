@@ -8,7 +8,7 @@ public class CodeGenerator {
     public CodeGenerator() {
     }
 
-    public void generateOutput(ArrayList list) throws Exception {
+    public void generateOutput(ArrayList list, String templatesLocation) throws Exception {
         
        
             HashMap tableValues = (HashMap) list.get(0);
@@ -43,7 +43,7 @@ public class CodeGenerator {
             }
             if("AngularJs 1.x".equalsIgnoreCase(lsPresentation)) {
             	HexAngularJs1Generator angularjs1Gen = new HexAngularJs1Generator();
-            	angularjs1Gen.generatePresentationTierFiles(list);
+            	angularjs1Gen.generatePresentationTierFiles(list,templatesLocation);
             }
             if("Angular 2".equalsIgnoreCase(lsPresentation)) {
             	HexAngular2Generator angular2Gen = new HexAngular2Generator();
@@ -54,7 +54,7 @@ public class CodeGenerator {
             	
             	if("AngularJs 1.x".equalsIgnoreCase(lsPresentation)) {
             		HexSpringServiceGenerator springServiceGen = new HexSpringServiceGenerator();
-            		springServiceGen.generateServiceFiles(list);
+            		springServiceGen.generateServiceFiles(list,templatesLocation);
                 }
             	else
             	{
@@ -81,7 +81,7 @@ public class CodeGenerator {
                     loGenerator.generateIBatisFiles(list);
                 }else if ("Hibernate".equalsIgnoreCase(lsPersistence)) {
                     HexSpringHibernateGenerator loGenerator = new HexSpringHibernateGenerator();
-                    loGenerator.generateHibernateFiles(list);                    
+                    loGenerator.generateHibernateFiles(list,templatesLocation);                    
                 }
                 else if (lsPersistence.startsWith("JPA")) {
                     HexSpringJpaGenerator loGenerator = new HexSpringJpaGenerator();
@@ -102,10 +102,10 @@ public class CodeGenerator {
         String outDirectory = (String) tableValues.get("DIRECTORY");
         String warFile = (String) tableValues.get("WAR_FILE");
         String table = (String) tableValues.get("TABLE");            
-        buildGen.generateBuildProperties(lsPresentation,lsBusiness,lsPersistence,outDirectory,warFile);
+        buildGen.generateBuildProperties(lsPresentation,lsBusiness,lsPersistence,outDirectory,warFile,templatesLocation);
         list.clear();
         }
-public void generateDeploy(ArrayList list, String deploy) throws Exception {
+public void generateDeploy(ArrayList list, String deploy, String templatesLocation) throws Exception {
         
        
             HashMap tableValues = (HashMap) list.get(0);
@@ -137,7 +137,7 @@ public void generateDeploy(ArrayList list, String deploy) throws Exception {
             }
             if("AngularJs 1.x".equalsIgnoreCase(lsPresentation)) {
             	HexAngularJs1Generator angularjs1Gen = new HexAngularJs1Generator();
-            	angularjs1Gen.generatePresentationTierFiles(list);
+            	angularjs1Gen.generatePresentationTierFiles(list,templatesLocation);
             }
             if("Angular 2".equalsIgnoreCase(lsPresentation)) {
             	HexAngular2Generator angular2Gen = new HexAngular2Generator();
@@ -146,7 +146,7 @@ public void generateDeploy(ArrayList list, String deploy) throws Exception {
             if ("Spring".equalsIgnoreCase(lsBusiness)) {
             	if("AngularJs 1.x".equalsIgnoreCase(lsPresentation)) {
             		HexSpringServiceGenerator springServiceGen = new HexSpringServiceGenerator();
-            		springServiceGen.generateServiceFiles(list);
+            		springServiceGen.generateServiceFiles(list,templatesLocation);
                 }
             	else
             	{
@@ -171,7 +171,7 @@ public void generateDeploy(ArrayList list, String deploy) throws Exception {
                     loGenerator.generateIBatisFiles(list);
                 }else if ("Hibernate".equalsIgnoreCase(lsPersistence)) {
                     HexSpringHibernateGenerator loGenerator = new HexSpringHibernateGenerator();
-                    loGenerator.generateHibernateFiles(list);                    
+                    loGenerator.generateHibernateFiles(list,templatesLocation);                    
                 }else if (lsPersistence.startsWith("JPA")) {
                     HexSpringJpaGenerator loGenerator = new HexSpringJpaGenerator();
                     loGenerator.generateJpaFiles(list);
@@ -191,7 +191,7 @@ public void generateDeploy(ArrayList list, String deploy) throws Exception {
         String warFile = (String) tableValues.get("WAR_FILE");
         String table = (String) tableValues.get("TABLE");   
         
-        buildGen.generateBuildProperties(lsPresentation,lsBusiness,lsPersistence,outDirectory,warFile,deploy);
+        buildGen.generateBuildProperties(lsPresentation,lsBusiness,lsPersistence,outDirectory,warFile,deploy,templatesLocation);
         list.clear();
 
         }

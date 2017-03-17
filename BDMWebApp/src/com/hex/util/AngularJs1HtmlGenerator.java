@@ -11,7 +11,7 @@ import com.hex.vo.TableVO;
 
 public class AngularJs1HtmlGenerator {
 
-	public String[] getListPageSource(ArrayList tableList, String lsPageTitle) {
+	public String[] getListPageSource(ArrayList tableList, String lsPageTitle, String templatesLocation) {
 		// TODO Auto-generated method stub
 		TableVO tableVO = (TableVO) tableList.get(0);
 		String beanName = tableVO.getTableName().toLowerCase();
@@ -80,9 +80,11 @@ public class AngularJs1HtmlGenerator {
 
 		
 		try {
-			InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\ListPage.template");
+			DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
+                    "\\templates\\AngularJs1\\ListPage.template"));
+			/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\ListPage.template");
 			 
-			DataInputStream dis = new DataInputStream(inputStream);
+			DataInputStream dis = new DataInputStream(inputStream);*/
 			while (dis.available() > 0) {
 				String s = dis.readLine();
 				/*
@@ -116,9 +118,11 @@ public class AngularJs1HtmlGenerator {
 			exp.printStackTrace();
 		}
 		try {
-			InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\Add_Edit.template");
+			DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
+                    "\\templates\\AngularJs1\\Add_Edit.template"));
+			/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\Add_Edit.template");
 			 
-			DataInputStream dis = new DataInputStream(inputStream);
+			DataInputStream dis = new DataInputStream(inputStream);*/
 			while (dis.available() > 0) {
 				String s = dis.readLine();
 			
@@ -138,9 +142,11 @@ public class AngularJs1HtmlGenerator {
 			exp.printStackTrace();
 		}
 		try {
-			InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\index.template");
+			DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
+                    "\\templates\\AngularJs1\\index.template"));
+		/*	InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\index.template");
 			 
-			DataInputStream dis = new DataInputStream(inputStream);
+			DataInputStream dis = new DataInputStream(inputStream);*/
 			while (dis.available() > 0) {
 				String s = dis.readLine();
 			

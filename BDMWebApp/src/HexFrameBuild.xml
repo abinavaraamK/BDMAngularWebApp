@@ -54,7 +54,7 @@
     <target name="move-tld" >	
     	<echo message="Moving TLD"/>
 			<copy todir="${PROJECT.TLD.DEST}">
-				<fileset dir="./com/hex/templates/tld"/>
+				<fileset dir="../../templates/tld"/>
 			</copy>
 	
 	</target>	
@@ -62,19 +62,19 @@
     <target name="move-js">	
     	<echo message="Moving JavaScript"/>
 		<copy todir="${PROJECT.BASE.DIR}/js">
-				<fileset dir="./com/hex/templates/js"/>
+				<fileset dir="../../templates/js"/>
 		</copy>
 	</target>
     <target name="move-css">	
     	<echo message="Moving StyleSheets"/>
 		<copy todir="${PROJECT.BASE.DIR}/css">
-				<fileset dir="./com/hex/templates/css"/>
+				<fileset dir="../../templates/css"/>
 		</copy>
 	</target>
     <target name="move-images">	
     	<echo message="Moving Images"/>
 		<copy todir="${PROJECT.BASE.DIR}/images">
-				<fileset dir="./com/hex/templates/images"/>
+				<fileset dir="../../templates/images"/>
 		</copy>
 	</target>
 		
@@ -82,16 +82,16 @@
 		<echo message="Moving LIB"/>
 		<mkdir dir="${PROJECT.BUILD}/lib"/>	
 		<copy todir="${PROJECT.LIB.DEST}">
-				<fileset dir="com/hex/templates/${PROJECT.LIB.PACKAGEforBussiness}/"/>
+				<fileset dir="../../templates/${PROJECT.LIB.PACKAGEforBussiness}/"/>
 		</copy>
 		<copy todir="${PROJECT.LIB.DEST}">
-				<fileset dir="com/hex/templates/${PROJECT.LIB.PACKAGEFORPRESENTATION}"/>
+				<fileset dir="../../templates/${PROJECT.LIB.PACKAGEFORPRESENTATION}"/>
 		</copy>
 		<copy todir="${PROJECT.LIB.DEST}">
-				<fileset dir="com/hex/templates/${PROJECT.LIB.PACKAGEforPersistence}"/>
+				<fileset dir="../../templates/${PROJECT.LIB.PACKAGEforPersistence}"/>
 		</copy>
 		<copy todir="${PROJECT.LIB.DEST}">
-				<fileset dir="com/hex/templates/${PROJECT.LIB.PACKAGE}"/>
+				<fileset dir="../../templates/${PROJECT.LIB.PACKAGE}"/>
 		</copy>
 	</target>	
 	

@@ -1,0 +1,308 @@
+var <BeanName>App = angular.module("<BeanName>App", ['ngRoute']);
+
+<BeanName>App.config(function($routeProvider) {
+	$routeProvider
+		.when('/<BeanNameC>List', {
+			templateUrl: '<BeanNameC>List.html',
+			controller: 'AddListController'
+		})
+		.when('/<BeanNameC>Add', {
+			templateUrl: '<BeanNameC>Add.html',
+			controller: 'addController'
+		})
+		.otherwise({
+			redirectTo: '<BeanNameC>List.html'
+		});
+});
+
+<BeanName>App.service('shareData',function(){
+	
+	this. showAddButton = true;
+	
+	/*this.set<BeanNameC> = function(<BeanName>){
+		this.<BeanName> = <BeanName> ;
+	};
+	
+	this.get<BeanNameC> = function(){
+		return this.<BeanName>;
+	};
+   
+	this.set<BeanNameC>s = function(<BeanName>s){
+		this.<BeanName>s = <BeanName>s;
+	};
+   
+  	this.get<BeanNameC>s = function(){
+		return this.<BeanName>s;
+  	};*/
+  	
+  	/*this.setListPage = function(val){
+		this.listPage = val;
+	};
+	 
+	this.getListPage = function(){
+		return this.listPage;
+	};*/
+	
+	this.setShowAddButton = function(val){
+		this.showAddButton = val;
+	};
+	
+	this.getShowAddButton = function(){
+		return this.showAddButton;
+	};
+	
+	/*this.showListPage = function(){
+		this.setListPage(true);
+	};*/
+  	
+});
+
+<BeanName>App.controller('AddListController', ['$rootScope', '$location','$scope','list<BeanNameC>s', 'delete<BeanNameC>s', 'search<BeanNameC>s','shareData', function($rootScope,$location,$scope, list<BeanNameC>s, delete<BeanNameC>s, search<BeanNameC>s,shareData) {
+	  $scope.searchtxt = '';
+	  $scope.searchField = '--Select the Field--';
+	  $scope.availableOptions = [<ColumnNames>"--Select the Field--"];
+	
+	   
+	  $rootScope.set<BeanNameC> = function(<BeanName>){
+			$rootScope.<BeanName> = <BeanName>;
+	   }
+	   $rootScope.get<BeanNameC> = function(){
+			return $rootScope.<BeanName>;
+	   }
+	    $rootScope.set<BeanNameC>s = function(<BeanName>s){
+			$rootScope.<BeanName>s = <BeanName>s;
+			
+	   }
+	   $rootScope.get<BeanNameC>s = function(){
+			return $rootScope.<BeanName>s;
+	   }
+	   
+	   $rootScope.setListPage = function(val){
+			$rootScope.listPage = val;
+	   }
+	   
+	  /* $rootScope.setShowAddButton = function(val){
+			$rootScope.showAddButton = val;
+	   }*/
+	   
+	   $rootScope.showListPage = function(){
+			$rootScope.setListPage(true);
+	   }
+	  
+	   $scope.search = function(){
+			console.log("Search Value : " + $scope.searchtxt);
+			console.log("Search Field : " + $scope.searchField);
+			var searchSuccess = function(response){
+				$scope.set<BeanNameC>s(response.data);
+				$scope.figureOut<BeanNameC>s();
+			}
+			var searchFailure = function(response){
+				alert(response.data);
+			}
+			search<BeanNameC>s.call($scope.searchtxt, $scope.searchField, searchSuccess, searchFailure);
+	   }
+	    $scope.clear = function(){
+			 $scope.searchtxt = '';
+			$scope.searchField = '--Select the Field--';
+			list<BeanNameC>s.call(successList, failureList);
+	   }
+	   
+	   
+	  $scope.showAddPage = function(){
+		console.log("Adding new <BeanNameC>");
+		$scope.set<BeanNameC>({});
+		$scope.setListPage(false);
+		shareData.setShowAddButton(true);
+		$location.path( '/<BeanNameC>Add' );
+	  }
+	  
+	  $scope.delete<BeanNameC>s = function(){
+		console.log("Deleting <BeanNameC>(s)");
+		var <BeanNameC>sToBeDeleted = [];
+		var <BeanName>s = $scope.get<BeanNameC>s();
+		for(var i=0; i < <BeanName>s.length; i++)
+		{
+			if(<BeanName>s[i].delete){
+				delete <BeanName>s[i]['delete'];
+				<BeanNameC>sToBeDeleted.push(<BeanName>s[i]);
+			}
+		}
+		console.log(<BeanNameC>sToBeDeleted);
+		var success = function(response){
+			alert(response.data);
+			list<BeanNameC>s.call(successList, failureList);
+		}
+		var failure = function(response){
+			alert("Error" + response.data);
+		}
+		delete<BeanNameC>s.call(<BeanNameC>sToBeDeleted, success, failure);
+	  }
+	  
+	  
+	  $scope.edit = function(edit<BeanNameC>,$rootScope) {
+			console.log("Edit <BeanNameC> : " + edit<BeanNameC>.customerid );
+			$scope.set<BeanNameC>(edit<BeanNameC>);
+			$scope.setListPage(false);
+			shareData.setShowAddButton(false);	
+			$location.path("/<BeanNameC>Add");
+		}
+		
+		/*
+		* Pagination
+		*/
+	  $scope.itemsPerPage = 10;
+	  $scope.currentPage = 1;
+	  
+	  $scope.figureOut<BeanNameC>s = function() {
+		var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+		var end = begin + $scope.itemsPerPage;
+		$scope.filtered<BeanNameC>s = $scope.get<BeanNameC>s().slice(begin, end);
+	  };
+	   
+	  $scope.pageChanged = function() {
+		$scope.figureOut<BeanNameC>s();
+	  };
+	  
+	  /*
+	  *Shows list of customers.
+	  */
+	  var successList = function successCallback(response) {
+				$scope.set<BeanNameC>s(response.data);
+				$scope.setListPage(true);
+				$scope.figureOut<BeanNameC>s();
+		};
+		var failureList = function errorCallback(response) {
+				alert("Error : " + response.data);
+		};
+		list<BeanNameC>s.call(successList, failureList);
+	  
+	}]);
+	
+
+<BeanName>App.controller('addController', ['$scope', '$rootScope','add<BeanNameC>','$location', 'update<BeanNameC>','shareData', function($scope,$rootScope, add<BeanNameC>,$location, update<BeanNameC>,shareData) {
+		/* $rootScope.showAddButton = true;*/
+		
+		console.log($scope.showAddButton );
+		
+		console.log(shareData.getShowAddButton());
+		
+		$scope.showAddButton = shareData.getShowAddButton();
+		
+		console.log($scope.showAddButton );
+		
+		$scope.list = function(){
+			console.log("navigating to List Page");
+			$scope.setListPage(true);
+			$location.path( '/<BeanNameC>List' );
+		}
+		var addSuccess = function successCallback(response) {
+				alert("Success : " + response.data);
+				console.log($scope.get<BeanNameC>());
+				$scope.get<BeanNameC>s().push($scope.get<BeanNameC>());
+				$location.path( '/<BeanNameC>List' );
+				
+				
+		};
+		var addFailure = function errorCallback(response) {
+				alert("Error : " + response.data);
+		};
+		
+		$scope.add = function(){
+			console.log("Adding new customer to DB : " + $scope.get<BeanNameC>().customerid);
+			add<BeanNameC>.call($scope.get<BeanNameC>(),addSuccess,addFailure);			
+		}
+		
+		var updateSuccess = function successCallback(response) {
+				alert("Success : " + response.data);
+				$scope.set<BeanNameC>({});
+				$scope.setListPage(true);
+		};
+		var updateFailure = function errorCallback(response) {
+				alert("Error : " + response.data);
+		};
+		
+		$scope.update = function(){
+			console.log("Updating customer to DB : " + $scope.get<BeanNameC>().customerid);
+			delete $scope.get<BeanNameC>()['delete'];
+			update<BeanName>.call($scope.get<BeanName>(),updateSuccess,updateFailure);
+			$location.path('/<BeanNameC>List');
+		}
+	
+	}]);
+
+/*
+	*	<BeanNameC> Value service.
+	*	This holds the value of customer object;
+	*/
+	<BeanName>App.value("serverIp", "http://localhost:8080/");
+	
+	/*
+	*	Add new customer service call.
+	*	This service is used to add the new customer.
+	*/
+	<BeanName>App.service('add<BeanNameC>', function($http,serverIp){
+		this.call = function(<BeanName>, successCallBack, failureCallBack){
+			$http({
+				method: 'POST',
+				url: serverIp + 'AngularApp/rest/ws/save',
+				data: <BeanName>,
+			}).then(successCallBack, failureCallBack);
+		};
+	});
+	
+	/*
+	*	Search <BeanNameC> service call.
+	*	This service is used to Search the customer with given searchData and searchField.
+	*/
+	<BeanName>App.service('search<BeanNameC>s', function($http,serverIp){
+		this.call = function(searchData, searchField, successCallBack, failureCallBack){
+			$http({
+				method: 'GET',
+				url: serverIp + 'AngularApp/rest/ws/search?searchValue=' + searchData + '&searchColumn=' + searchField,
+			}).then(successCallBack, failureCallBack);
+		};
+	});
+	
+	/*
+	*	Delete <BeanNameC> service call.
+	*	This service is used to delete the customer.
+	*/
+	<BeanName>.service('delete<BeanNameC>s', function($http,serverIp){
+		this.call = function(customers, successCallBack, failureCallBack){
+			$http({
+				method: 'POST',
+				url: serverIp + 'AngularApp/rest/ws/delete',
+				data: <BeanName>s,
+			}).then(successCallBack, failureCallBack);
+		};
+	});
+	
+	/*
+	*	Update <BeanNameC> service call.
+	*	This service is used to Update the customer.
+	*/
+	<BeanName>App.service('update<BeanNameC>', function($http, serverIp){
+		this.call = function(<BeanName>, successCallBack, failureCallBack){
+			$http({
+				method: 'POST',
+				url: serverIp + 'AngularApp/rest/ws/update',
+				data: <BeanName>,
+			}).then(successCallBack, failureCallBack);
+		};
+	});
+	
+	/*
+	*	List <BeanNameC>s service call.
+	*	This service is used to list all the customers.
+	*/
+	<BeanName>App.service('list<BeanNameC>s', function($http, serverIp){
+		this.call = function(successCallBack, failureCallBack){
+			$http({
+				method: 'GET',
+				url: serverIp + 'AngularApp/rest/ws/list',
+			}).then(successCallBack, failureCallBack);
+		};
+	});
+
+
+	

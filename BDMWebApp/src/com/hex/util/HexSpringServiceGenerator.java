@@ -1,6 +1,7 @@
 package com.hex.util;
 
 import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ public class HexSpringServiceGenerator {
     protected String lsPackage = "";
     protected String lsPackageDir = "";
 
-    public void generateServiceFiles(ArrayList list) {
+    public void generateServiceFiles(ArrayList list, String templatesLocation) {
 
         System.out.println("**********Enter into generateServiceFiles method*********");
         //String outDirectory = "D:/Out";
@@ -32,25 +33,27 @@ public class HexSpringServiceGenerator {
 
             System.out.println(lsPackage+"  "+lsPackageDir+" "+outDirectory);
             
-            generateVO(tableList, outDirectory);
-            generateService(tableList, outDirectory);
-            generateRestService(tableList, outDirectory);
+            generateVO(tableList, outDirectory,templatesLocation);
+            generateService(tableList, outDirectory,templatesLocation);
+            generateRestService(tableList, outDirectory,templatesLocation);
             //generateBusinessDeletegate(tableList, outDirectory);            
         }
-        generateBootStrapper(outDirectory);
-        generateException(outDirectory);
+        generateBootStrapper(outDirectory,templatesLocation);
+        generateException(outDirectory,templatesLocation);
     }
 
 
-	private void generateBootStrapper(String outDirectory) {
+	private void generateBootStrapper(String outDirectory, String templatesLocation) {
 		 System.out.println("**********Enter into generateBootStrapper method*********");
 
         StringBuffer buffer = new StringBuffer();
         try {
-          /*  DataInputStream dis = new DataInputStream(new FileInputStream(
-                    "D:\\BaseDataManager\\templates\\spring\\BootStrapper.template"));*/
-        	InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\spring\\BootStrapper.template");
-			DataInputStream dis = new DataInputStream(inputStream);
+       
+        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\spring\\BootStrapper.template");
+			DataInputStream dis = new DataInputStream(inputStream);*/
+        	
+        	  DataInputStream dis = new DataInputStream(new FileInputStream(
+        			  templatesLocation+"\\templates\\spring\\BootStrapper.template"));
 
             while (dis.available() > 0) {
                 String line = dis.readLine();
@@ -68,7 +71,7 @@ public class HexSpringServiceGenerator {
         HexUtil.writeFile(buffer.toString(), outputFile);
     }
 
-	 private void generateRestService(ArrayList tableList, String outDirectory) {
+	 private void generateRestService(ArrayList tableList, String outDirectory, String templatesLocation) {
 		  System.out.println("**********Enter into generateRestService method*********");
 		 TableVO tableVO = null;
 	        String className = "";
@@ -77,7 +80,7 @@ public class HexSpringServiceGenerator {
 	        className = HexUtil.initCap(tableVO.getTableName());
 	        String lsSelectColumnsMethods = getSelectColumnsPOMethod(tableList, className);
 	        
-	        String poContent = getServiceContent(className, className, lsSelectColumnsMethods);
+	        String poContent = getServiceContent(className, className, lsSelectColumnsMethods,templatesLocation);
 	        
 	        outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\rest";
 	        HexUtil.makeDirectory(outDirectory);
@@ -86,7 +89,7 @@ public class HexSpringServiceGenerator {
 	        HexUtil.writeFile(poContent, outputFile);
 		}
 	
-    private  void generateService(ArrayList tableList, String outDirectory) {
+    private  void generateService(ArrayList tableList, String outDirectory, String templatesLocation) {
     	  System.out.println("**********Enter into generateService method*********");
         TableVO tableVO = null;
         String className = "";
@@ -95,29 +98,29 @@ public class HexSpringServiceGenerator {
         className = HexUtil.initCap(tableVO.getTableName());
         String lsSelectColumnsMethods = getSelectColumnsPOMethod(tableList, className);
         
-        String poContent = getServiceContent(className, className, lsSelectColumnsMethods);
+        String poContent = getServiceContent(className, className, lsSelectColumnsMethods,templatesLocation);
         
         outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\service";
         HexUtil.makeDirectory(outDirectory);
   
-        poContent = getServiceImplContent(className, className, lsSelectColumnsMethods);
+        poContent = getServiceImplContent(className, className, lsSelectColumnsMethods,templatesLocation);
         String outputFile = outDirectory + "\\"+className+"Impl" + ".java";
         HexUtil.writeFile(poContent, outputFile);
         
         lsSelectColumnsMethods = getSelectColumnsInterfaceMethod(tableList, className);
-        poContent = getInterfaceContent(className, className, lsSelectColumnsMethods);
+        poContent = getInterfaceContent(className, className, lsSelectColumnsMethods,templatesLocation);
         outputFile = outDirectory + "\\I" + className + ".java"; 
         HexUtil.writeFile(poContent, outputFile);
     }
 
     private String getServiceContent(String className, String valueObject,
-            String psSelectColumnsMethods) {
+            String psSelectColumnsMethods, String templatesLocation) {
         StringBuffer result = new StringBuffer();
         try {
-            /*DataInputStream dis = new DataInputStream(new FileInputStream(
-                    "D:\\BaseDataManager\\templates\\AngularJs1\\service\\RestService.template"));
-            */InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\spring\\rest\\RestService.template");
-        	DataInputStream dis = new DataInputStream(inputStream);
+            DataInputStream dis = new DataInputStream(new FileInputStream(
+                    templatesLocation+"\\templates\\AngularJs1\\spring\\rest\\RestService.template"));
+            /*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\spring\\rest\\RestService.template");
+        	DataInputStream dis = new DataInputStream(inputStream);*/
         	   
    
             while (dis.available() > 0) {
@@ -143,14 +146,14 @@ public class HexSpringServiceGenerator {
     }
     
     private String getServiceImplContent(String className, String valueObject,
-            String psSelectColumnsMethods) {
+            String psSelectColumnsMethods, String templatesLocation) {
         StringBuffer result = new StringBuffer();
         try {
-            /*DataInputStream dis = new DataInputStream(new FileInputStream(
-                    "D:\\BaseDataManager\\templates\\AngularJs1\\service\\RestService.template"));
-            */InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\spring\\service\\ServiceImpl.template");
+            DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+"\\templates\\AngularJs1\\spring\\service\\ServiceImpl.template"));
+            
+        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\spring\\service\\ServiceImpl.template");
         	
-        	DataInputStream dis = new DataInputStream(inputStream);
+        	DataInputStream dis = new DataInputStream(inputStream);*/
    
             while (dis.available() > 0) {
                 String line = dis.readLine();
@@ -175,15 +178,14 @@ public class HexSpringServiceGenerator {
     }
 
     private String getInterfaceContent(String className, String valueObject,
-            String psSelectColumnsMethods) {
+            String psSelectColumnsMethods, String templatesLocation) {
         StringBuffer result = new StringBuffer();
         try {
-            /*DataInputStream dis = new DataInputStream(new FileInputStream(
-                    "D:\\BaseDataManager\\templates\\AngularJs1\\service\\ServiceInterface.template"));
-            */
-InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\spring\\service\\ServiceInterface.template");
+            DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+"\\templates\\AngularJs1\\spring\\service\\ServiceInterface.template"));
+            
+/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\AngularJs1\\spring\\service\\ServiceInterface.template");
         	
-        	DataInputStream dis = new DataInputStream(inputStream);
+        	DataInputStream dis = new DataInputStream(inputStream);*/
  
             
             while (dis.available() > 0) {
@@ -208,7 +210,7 @@ InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\te
         return result.toString();
     }
 
-    private void generateVO(ArrayList tableList, String outDirectory) {
+    private void generateVO(ArrayList tableList, String outDirectory, String templatesLocation) {
 
     	  System.out.println("**********Enter into generateVO method*********");
         TableVO tableVO = null;
@@ -267,7 +269,7 @@ InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\te
         }
         className = HexUtil.initCap(tableVO.getTableName());
         String valueObject = getValueObject(lsVariables, lsMethods,
-                className);
+                className,templatesLocation);
         outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\vo";
 
         HexUtil.makeDirectory(outDirectory);
@@ -277,17 +279,16 @@ InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\te
     }
 
     private String getValueObject(String psVariables, String psMethods,
-            String object) {
+            String object, String templatesLocation) {
         StringBuffer result = new StringBuffer();
         object = HexUtil.initCap(object);
         try {
-            /*DataInputStream dis = new DataInputStream(new FileInputStream(
-                    "D:\\BaseDataManager\\templates\\vo\\VO.template"));*/
-	InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\vo\\VO.template");
+            DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+"\\templates\\vo\\VO.template"));
+	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\vo\\VO.template");
         	
         	
         	
-        	DataInputStream dis = new DataInputStream(inputStream);
+        	DataInputStream dis = new DataInputStream(inputStream);*/
             while (dis.available() > 0) {
                 String line = dis.readLine();
                 line = HexUtil.replaceTags(line, "<ClassName>", object);
@@ -381,17 +382,17 @@ InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\te
 
     }
 
-    private void generateException(String outDirectory) {
+    private void generateException(String outDirectory, String templatesLocation) {
     	 System.out.println("**********Enter into generateException method*********");
 
         //System.out.println(" Inside generateBootStrapper ");
         StringBuffer buffer = new StringBuffer();
         try {
-           /* DataInputStream dis = new DataInputStream(new FileInputStream(
-                    "D:\\BaseDataManager\\templates\\exception\\HexApplicationException.template"));
-           */ 
-        	InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\exception\\HexApplicationException.template");
-        	DataInputStream dis = new DataInputStream(inputStream);
+            DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
+                    "\\templates\\exception\\HexApplicationException.template"));
+            
+        	/*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\exception\\HexApplicationException.template");
+        	DataInputStream dis = new DataInputStream(inputStream);*/
   
             while (dis.available() > 0) {
                 String line = dis.readLine();
@@ -423,14 +424,14 @@ InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\te
     }*/
 
     private String getDelegateObject(String className, String valueObject,
-            String psSelectColumnsMethods) {
+            String psSelectColumnsMethods,String templatesLocation) {
         StringBuffer result = new StringBuffer();
         try {
-            /*DataInputStream dis = new DataInputStream(new FileInputStream(
-                    "D:\\BaseDataManager\\templates\\businessdelegate\\BusinessDelegate.template"));
-           */InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\businessdelegate\\BusinessDelegate.template");
+            DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
+                    "\\templates\\businessdelegate\\BusinessDelegate.template"));
+           /*InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\businessdelegate\\BusinessDelegate.template");
        	
-       	DataInputStream dis = new DataInputStream(inputStream);
+       	DataInputStream dis = new DataInputStream(inputStream);*/
   
             while (dis.available() > 0) {
                 String line = dis.readLine();

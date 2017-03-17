@@ -24,10 +24,13 @@
 
 $(document).ready(function() {
 	 $("#configurationName").on("change", function() {
+			
+			
 						
 			var configurationName = $('#configurationName').val();	
 			var data = 'configurationName='
 					+ encodeURIComponent(configurationName);
+			alert(data)
 			$.ajax({
 				url : "/dbDetails",
 				data : data,

@@ -1,0 +1,193 @@
+<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function set(target,key,poForm) 
+{
+
+	if(target == 'search'){
+		var field   = document.getElementById('fieldValue'); 
+		var column  = document.getElementById('columnName');		
+		if(field.value == '') {
+	            alert("Please enter the value");
+	            return false;
+      } 
+      if(column.value == '') {
+            alert("Please select the column");
+            return false;
+       } 
+       }
+
+	var isSubmit = true;
+	var count = 0;
+	if ( target == 'delete') 
+	{
+		if( !confirm("Are sure do you want to delete - '" + key + "' ?") )
+			isSubmit = false;
+	}
+	if ( target == 'deleteAll') 
+	{
+		for(var index=0;index<poForm.length;index++)
+		{
+			var control = poForm.elements[index];
+			if( control.name.indexOf("chk_") == 0 && control.checked ) 
+			{
+				count = count+1;
+			}
+		}
+		if(count>=1)
+		{
+				isSubmit = confirm('do you want to delete the selected rows?');
+		}
+		else 
+		{
+				 alert('Please select rows to be deleted');
+				 isSubmit = false;
+		}
+	}
+	if(isSubmit)
+	{
+		document.forms["<BeanName>Form"].key.value=key;
+		document.forms["<BeanName>Form"].dispatch.value=target;
+		document.forms["<BeanName>Form"].submit();
+	}
+}
+function deleteSelectAllClicked(poForm)
+{
+	for(var index=0;index<poForm.length;index++)
+	{
+		var control = poForm.elements[index];
+		if( control.name.indexOf("chk_") == 0 ) {
+			control.checked = poForm.deleteSelectAll.checked;
+		}
+	}
+}
+function deleteClicked(poControl, poForm)
+{
+	if ( !poControl.checked )
+		poForm.deleteSelectAll.checked = false;
+	else {
+		for(var index=0;index<poForm.length;index++)
+		{
+			var control = poForm.elements[index];
+			if( control.name.indexOf("chk_") == 0 && !control.checked  ) {
+				poForm.deleteSelectAll.checked = false;
+				return;
+			}
+		}
+		poForm.deleteSelectAll.checked = true;
+	}
+}
+-->
+</SCRIPT>
+<html>
+<TITLE><bean:message key="<UBeanName>.PAGE_TITLE"/></TITLE>
+<h1 align = center><bean:message key="<UBeanName>.PAGE_TITLE"/></h1>
+<body>
+<html:form action="/<BeanName>">
+<%
+	String lsCurrent_page = (String)request.getAttribute("current_page");
+	int current_page = (lsCurrent_page==null?1:(new Integer(lsCurrent_page)).intValue());
+%>
+<table width="100%">
+	<tr>
+		<td align="left"><html:text property="fieldValue" /> 
+			
+			<html:select property="columnName">
+				<html:options collection="columnNameFields" property="columnValue"
+					labelProperty="columnName" />
+			</html:select>
+
+			<input type="button" name="search"
+				value="<bean:message key="<UBeanName>.BUTTON.GO"/>"
+				onClick="set('search','')" />
+
+			<input type="button" name="clear"
+				value="<bean:message key="<UBeanName>.BUTTON.CLEAR"/>"
+				onClick="set('list','')" />
+		</td>
+		<logic:present name="results">
+
+		<td align="right">
+			<select name="page_num" onchange="set('list','')">
+				<logic:present name="no_of_pages">
+				<%
+					int no_of_pages = (new Integer((String)request.getAttribute("no_of_pages"))).intValue();
+					for(int index=1;index<=no_of_pages;index++) {
+						String lsSel = (index==current_page?"selected":"");
+				%>
+					<option <%=lsSel%> value="<%=index%>"><%=index%></option>
+				<%
+					}
+				%>
+				</logic:present>
+			</select>
+		</td>
+	</tr>
+</table>
+<table border=0 width="100%" cellspacing="2" cellpadding="2">
+	<tr align="left" style="background-color:#6699cc;font-family:Helvetica;font-size:13px;">
+<TableHeader>
+		<!-- <th>&nbsp;</th>
+		<th>&nbsp;</th> -->
+		<th align="center">
+				<logic:notPresent name="results">
+                     <input type="checkbox" title="Delete All" disabled name="deleteSelectAll" onClick="deleteSelectAllClicked(this.form);"/>
+                </logic:notPresent>   
+                <logic:present name="results">
+                    <input type="checkbox" title="Delete All" name="deleteSelectAll" onClick="deleteSelectAllClicked(this.form);"  />
+                </logic:present>			
+		</th>
+	</tr>	
+	<%
+		int lnColor = 1;
+		String lsOddColor = "#D8F8FE";
+		String lsEvenColor = "LightSkyBlue";	
+	%>
+	
+	<logic:iterate id="<BeanName>" name="results">
+	<%
+		String lsColor = (lnColor%2==0?lsEvenColor:lsOddColor);
+		lnColor++;
+	%>
+		<tr align="left" style="background-color:<%=lsColor%>;font-family:Helvetica;font-size:13px;">
+<BeanValues>
+			<!-- <td align="center">
+				<a href="#" onClick="set('edit','<bean:write name="<BeanName>" property="<PrimaryKey>"/>')">Edit</a>
+			</td>
+			<td align="center">
+				<a href="#" onClick="set('delete','<bean:write name="<BeanName>" property="<PrimaryKey>"/>')">Delete</a>
+			</td> -->
+			<td align="center">
+				<input type="checkbox" title="Delete" name="chk_<bean:write name="<BeanName>" property="<PrimaryKey>"/>" onClick="deleteClicked(this, this.form);">
+				<input type="hidden" name='delete_<bean:write name="<BeanName>" property="<PrimaryKey>"/>' value='<bean:write name="<BeanName>" property="<PrimaryKey>"/>'>
+			</td>
+		</tr>
+	</logic:iterate>
+	
+</table>
+<br>
+<table width="100%">
+<tr>
+<td width="100%" align="center"><input type="button" name=" create" value="<bean:message key="<UBeanName>.BUTTON.ADD"/>" onClick="set('addnew','')" /></td>
+<td width="100%" align="right"><input type="button" name="delete" value="<bean:message key="<UBeanName>.BUTTON.DELETE"/>" onClick="set('deleteAll','',this.form)" /></td>
+</tr>
+</table>
+</logic:present>
+<html:hidden property="key" value=""/> 
+<html:hidden property="dispatch" value="error"/> 
+<h5 align="right"><a href = "jsp/home.jsp">Home</a></h5>
+</html:form>
+
+<table>
+<br>
+		<td><font color="red"> <html:messages id="msg"
+			message="true">
+		<bean:write name="msg" />
+		</html:messages> </font></td>
+</table>
+
+</body>
+</html>

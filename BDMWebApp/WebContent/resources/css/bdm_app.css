@@ -2,7 +2,6 @@
 body{
 	font-family: cursive;
     font-size: small;
-    background: #193748 !important;
 }
 span{
 	font-weight: bold;
@@ -10,13 +9,11 @@ span{
 #centerDiv{
    margin-top: 210px;
    background: aliceblue;
-   box-sizing: border-box;
-   -webkit-border-radius: 25px;
 }
 .borderMod{
 	box-sizing: border-box;
     -webkit-border-radius: 7px;
-    background: aliceblue;
+    background: bisque;
 }
 .margin{
 	margin-bottom: 7px;
@@ -31,7 +28,7 @@ span{
 #mainDiv{
     margin-top: 40px;
     border: 1px solid azure;
-    background: aliceblue;
+    background: cornsilk;
     margin-left: 4%;
     box-sizing: border-box;
     -webkit-border-radius: 25px;
@@ -72,19 +69,4 @@ db{
 }
 #package{
 	margin-bottom: 20px;
-}
-#downloadWar{
-    margin-left: 2%;
-    padding-top: 2%;
-}
-#spanWar{
-    color: aliceblue;
-    padding-left: 20%;
-    margin-left: 14.5%;
-    padding-top: 2%;
-}
-#status{
-    color: aliceblue;
-    text-decoration: underline;
-    margin-left: 47%;
 }
