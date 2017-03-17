@@ -181,9 +181,10 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
     File hexBuildfile = new File(HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.xml").getFile());
     
     try {
+      
       Process p = runtime.exec("sudo chmod 777 -R "+ HexBuildGenerator.class.getClassLoader().getResource(""));
       p.waitFor();
-    	p = runtime.exec("sudo "+file.toString()+" all "+hexBuildfile );
+    	p = runtime.exec("ssh -t remotehost sudo "+file.toString()+" all "+hexBuildfile );
       InputStream errorStream = p.getErrorStream();
       InputStream inputStream = p.getInputStream();
       readOutput(inputStream);
@@ -194,7 +195,7 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
       exec.printStackTrace();
     }catch (InterruptedException e) {
     // TODO Auto-generated catch block
-    e.printStackTrace();
+      e.printStackTrace();
   }
 
   }
