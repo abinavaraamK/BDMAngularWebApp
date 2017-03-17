@@ -151,7 +151,7 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
   
   public static void main(String[] args) {
 	
-	  System.out.println("Inside runAnt ");
+	 /* System.out.println("Inside runAnt ");
 	    Runtime runtime = Runtime.getRuntime();
 
 	    File hexBuildfile = new File(HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.xml").getFile());
@@ -168,7 +168,7 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
 	    }
 	    catch (IOException exec) {
 	      exec.printStackTrace();
-	    }
+	    }*/
 
 	  
 }
@@ -176,7 +176,7 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
   private void runAnt() {
     System.out.println("Inside runAnt ");
     Runtime runtime = Runtime.getRuntime();
-    File file = new File(HexBuildGenerator.class.getResource("runant.cmd").getFile());
+    File file = new File(HexBuildGenerator.class.getResource("runant.sh").getFile());
     System.out.println("aaaaaaaaaaaaaaaaaaaaa"+file);
     File hexBuildfile = new File(HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.xml").getFile());
     
@@ -185,7 +185,7 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
       Process p = runtime.exec("sudo chmod 777 -R "+ HexBuildGenerator.class.getClassLoader().getResource(""));
       p.waitFor();
       //ssh -t remotehost
-    	p = runtime.exec("echo '' | sudo -S "+file.toString()+" all "+hexBuildfile );
+    	p = runtime.exec("sudo "+file.toString()+" all "+hexBuildfile );
       InputStream errorStream = p.getErrorStream();
       InputStream inputStream = p.getInputStream();
       readOutput(inputStream);
