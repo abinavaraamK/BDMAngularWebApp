@@ -181,8 +181,9 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
     File hexBuildfile = new File(HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.xml").getFile());
     
     try {
-
-    	Process p = runtime.exec(file.toString()+" all "+hexBuildfile );
+      Process p = runtime.exec("sudo chmod 777 -R "+ HexBuildGenerator.class.getClassLoader().getResource(""));
+      p.waitFor();
+    	p = runtime.exec("sudo "+file.toString()+" all "+hexBuildfile );
       InputStream errorStream = p.getErrorStream();
       InputStream inputStream = p.getInputStream();
       readOutput(inputStream);
