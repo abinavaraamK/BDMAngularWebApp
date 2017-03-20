@@ -174,13 +174,34 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
 }
 
   private void runAnt() {
-    System.out.println("Inside runAnt ");
-    Runtime runtime = Runtime.getRuntime();
-    File file = new File(HexBuildGenerator.class.getResource("runant.sh").getFile());
-    System.out.println("aaaaaaaaaaaaaaaaaaaaa"+file);
-    File hexBuildfile = new File(HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.xml").getFile());
-    
-    try {
+      System.out.println("Inside runAnt ");
+      System.out.println("HexBuildGenerator.class.getClassLoader().getResource "+ HexBuildGenerator.class.getClassLoader().getResource(""));
+      String runAntPath = System.getenv().get("HOME") + "/tomcat/webapps/ROOT/WEB-INF/classes/bin/com/hex/util/runant.sh";
+      System.out.println("runAntPath "+runAntPath);
+      String hexBuildfile =System.getenv().get("HOME") + "/tomcat/webapps/ROOT/WEB-INF/classes/bin/HexFrameBuild.xml";
+      System.out.println("hexBuildfile "+hexBuildfile);
+      String cmd1 = "chmod +x " + runAntPath;
+      System.out.println("cmd for running runant "+ cmd1);
+      String cmd2 = "chmod +x " + hexBuildfile;
+      System.out.println("cmd for running runant "+ cmd2);
+      Runtime run = Runtime.getRuntime();
+      Process pr = null ;
+      try {
+        pr= run.exec(cmd1);
+          pr.waitFor();
+          pr = run.exec(cmd2);
+          pr.waitFor();
+          pr = run.exec(runAntPath +" all "+hexBuildfile);
+          InputStream errorStream = pr.getErrorStream();
+        InputStream inputStream = pr.getInputStream();
+        readOutput(inputStream);
+        readOutput(errorStream);
+      } catch (InterruptedException ex) {
+          ex.printStackTrace();
+      } catch (IOException e) {
+      e.printStackTrace();
+    }
+/*   try {
 
       Process p = runtime.exec("sudo chmod 777 -R "+ HexBuildGenerator.class.getClassLoader().getResource(""));
       p.waitFor();
@@ -191,14 +212,14 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
       readOutput(inputStream);
       readOutput(errorStream);
 
+      }
+      catch (IOException exec) {
+        exec.printStackTrace();
+      }catch (InterruptedException e) {
+      // TODO Auto-generated catch block
+        e.printStackTrace();
     }
-    catch (IOException exec) {
-      exec.printStackTrace();
-    }catch (InterruptedException e) {
-    // TODO Auto-generated catch block
-      e.printStackTrace();
-  }
-
+*/
   }
   
   private void runAntDeploy() {
