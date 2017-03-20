@@ -176,9 +176,9 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
   private void runAnt() {
       System.out.println("Inside runAnt ");
       System.out.println("HexBuildGenerator.class.getClassLoader().getResource "+ HexBuildGenerator.class.getClassLoader().getResource(""));
-      String runAntPath = System.getenv().get("HOME") + "/tomcat/webapps/ROOT/WEB-INF/classes/bin/com/hex/util/runant.sh";
+      String runAntPath = System.getenv().get("HOME") + "/tomcat/webapps/ROOT/WEB-INF/classes/com/hex/util/runant.sh";
       System.out.println("runAntPath "+runAntPath);
-      String hexBuildfile =System.getenv().get("HOME") + "/tomcat/webapps/ROOT/WEB-INF/classes/bin/HexFrameBuild.xml";
+      String hexBuildfile =System.getenv().get("HOME") + "/tomcat/webapps/ROOT/WEB-INF/classes/HexFrameBuild.xml";
       System.out.println("hexBuildfile "+hexBuildfile);
       String cmd1 = "chmod +x " + runAntPath;
       System.out.println("cmd for running runant "+ cmd1);
