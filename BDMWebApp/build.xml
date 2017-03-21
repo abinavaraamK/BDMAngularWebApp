@@ -34,7 +34,7 @@
 	        <fileset dir="build/classes" includes="**"/>  
 	        <fileset dir="src"  includes="**/*.xml" />
 			<fileset dir="src"  includes="**/*.properties" />
-			<fileset dir="src"  includes="**/*.cmd" /> 	
+			<fileset dir="src"  includes="**/*.sh" /> 	
 	 	</copy> 
  	</target>
 

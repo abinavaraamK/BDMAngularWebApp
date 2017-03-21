@@ -1,0 +1,26 @@
+<Connections>
+	<Connection name="HEXTRM3 - Oracle">
+		<driverName>oracle.jdbc.driver.OracleDriver</driverName>
+		<url>jdbc:oracle:thin:@172.25.108.59:1521:orcl</url>
+		<userName>hextrm3</userName>
+		<password>hextrm3</password>
+	</Connection>
+	<Connection name="Scott - Oracle">
+		<driverName>oracle.jdbc.driver.OracleDriver</driverName>
+		<url>jdbc:oracle:thin:@172.25.108.59:1521:orcl</url>
+		<userName>scott</userName>
+		<password>tiger</password>
+	</Connection>
+	<Connection name="Hex-Static">
+		<driverName>oracle.jdbc.driver.OracleDriver</driverName>
+		<url>jdbc:oracle:thin:@172.25.108.59:1521:orcl</url>
+		<userName>hexdev</userName>
+		<password>hexdev</password>
+	</Connection>
+	<Connection name="Hex-Static">
+		<driverName>com.mysql.jdbc.Driver</driverName>
+		<url>jdbc:mysql://localhost</url>
+		<userName>root</userName>
+		<password>password123</password>
+	</Connection>
+</Connections>
