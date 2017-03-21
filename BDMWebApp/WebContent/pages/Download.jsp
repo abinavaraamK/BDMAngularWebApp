@@ -8,7 +8,7 @@
 <meta charset="ISO-8859-1">
 <title>Result Page</title>
 <spring:url value="resources/css/bootstrap.min.css" var="bootstrapCss" />
-<spring:url value="resources/css/bdm_appp.css" var="coreCss" />
+<spring:url value="resources/css/bdm_app.css" var="coreCss" />
 <spring:url value="resources/js/jquery-2.1.0.min.js" var="Jquery"/>
 <spring:url value="resources/js/bootstrap.min.js" var="bootstrapJs" />
 <spring:url value="resources/js/bdm_app.js" var="bdmApp" />
