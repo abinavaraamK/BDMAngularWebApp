@@ -2,6 +2,7 @@
 body{
 	font-family: cursive;
     font-size: small;
+    background: #193748 !important;
 }
 span{
 	font-weight: bold;
@@ -9,11 +10,13 @@ span{
 #centerDiv{
    margin-top: 210px;
    background: aliceblue;
+   box-sizing: border-box;
+   -webkit-border-radius: 25px;
 }
 .borderMod{
 	box-sizing: border-box;
     -webkit-border-radius: 7px;
-    background: bisque;
+    background: aliceblue;
 }
 .margin{
 	margin-bottom: 7px;
@@ -28,7 +31,7 @@ span{
 #mainDiv{
     margin-top: 40px;
     border: 1px solid azure;
-    background: cornsilk;
+    background: aliceblue;
     margin-left: 4%;
     box-sizing: border-box;
     -webkit-border-radius: 25px;

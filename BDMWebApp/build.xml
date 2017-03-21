@@ -24,9 +24,9 @@
 		<javac destdir="build/classes" debug="true" srcdir="src">
 			<classpath refid="compile.classpath"/>
 		</javac>
-		<copy todir="WebContent/WEB-INF/classes/com/hex/templates" >
+		<!--<copy todir="WebContent/WEB-INF/classes/com/hex/templates" >
 			<fileset dir="src/com/hex/templates" />
-		</copy>
+		</copy>-->
 	</target>
 
 	<target name="copyClassFiles"  depends="compile">

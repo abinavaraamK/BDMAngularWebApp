@@ -28,6 +28,7 @@ public class HexFrameDAO {
   }
 
   public HexFrameDAO() {
+	  
   }
 
 

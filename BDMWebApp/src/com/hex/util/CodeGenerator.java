@@ -8,7 +8,7 @@ public class CodeGenerator {
     public CodeGenerator() {
     }
 
-    public void generateOutput(ArrayList list, String templatesLocation) throws Exception {
+    public void generateOutput(ArrayList list, String templatesLocation, String baseLocation) throws Exception {
         
        
             HashMap tableValues = (HashMap) list.get(0);
@@ -102,7 +102,7 @@ public class CodeGenerator {
         String outDirectory = (String) tableValues.get("DIRECTORY");
         String warFile = (String) tableValues.get("WAR_FILE");
         String table = (String) tableValues.get("TABLE");            
-        buildGen.generateBuildProperties(lsPresentation,lsBusiness,lsPersistence,outDirectory,warFile,templatesLocation);
+        buildGen.generateBuildProperties(lsPresentation,lsBusiness,lsPersistence,outDirectory,warFile,templatesLocation,baseLocation);
         list.clear();
         }
 public void generateDeploy(ArrayList list, String deploy, String templatesLocation) throws Exception {

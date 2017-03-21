@@ -40,7 +40,7 @@ import com.hex.vo.TableVoList;
 @Controller
 public class UIController {
 
-	String INTERNAL_FILE = "";
+	private static final String INTERNAL_FILE = "yogesh.war";
 
 	@RequestMapping(value = "/dbDetails", method = RequestMethod.GET)
 	@ResponseBody
@@ -105,9 +105,10 @@ public class UIController {
 		System.out.println("dest dir" + tableVoList.getDestDirectory());
 		System.out.println("theme" + tableVoList.getTheme());
 		
-		INTERNAL_FILE = tableVoList.getFileName();
+		
 		String outDir = request.getSession().getServletContext().getRealPath("/")+ "warFiles";
 		String templatesLocation = request.getSession().getServletContext().getRealPath("/")+ "templates";
+		String baseLocation = request.getSession().getServletContext().getRealPath("/");
 		tableVoList.setDestDirectory(outDir);
 		System.out.println("out directory" +outDir );
 		for (TableVO tableVO : tableVoList.getListTableVO()) {
@@ -124,7 +125,7 @@ public class UIController {
 		list = appObjecBinder.generateOutput(tableVoList);
 		CodeGenerator codeGenerator = new com.hex.util.CodeGenerator();
 		try {
-			codeGenerator.generateOutput(list,templatesLocation);
+			codeGenerator.generateOutput(list,templatesLocation,baseLocation);
 		} catch (Exception exp) {
 			throw exp;
 		}
@@ -269,7 +270,7 @@ public class UIController {
 
 		File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
-				+ "warFiles/"+INTERNAL_FILE+".war");
+				+ "warFiles/yogesh.war");
 
 		if (!file.exists()) {
 			String errorMessage = "Sorry. The file you are looking for does not exist";

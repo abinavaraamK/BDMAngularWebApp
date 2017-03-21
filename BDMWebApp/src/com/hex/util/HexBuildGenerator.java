@@ -27,7 +27,7 @@ public class HexBuildGenerator {
   }
   
       
-   public void generateBuildProperties(String lsPresentation,String lsBusiness,String lsPersistence,String outDirectory,String warFile,String templatesLocation) {
+   public void generateBuildProperties(String lsPresentation,String lsBusiness,String lsPersistence,String outDirectory,String warFile,String templatesLocation,String baseLocation) {
 System.out.println("HexBuildGenerator ***********without deploy**************");
  String content = getBuildProperties(outDirectory ,lsPresentation,lsBusiness,lsPersistence,warFile,templatesLocation);
  //String fileName = "HexFrameBuild.properties";
@@ -35,22 +35,10 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
  System.out.println(">>>>>>>"+HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.properties").getFile());
 
    HexUtil.writeFile(content, fileName);
-    runAnt();
+    runAnt(baseLocation);
 
   }
 
-   public void generateBuildProperties(String lsPresentation,String lsBusiness,String lsPersistence,String outDirectory,String warFile,String deploy,String templatesLocation) {
-	   System.out.println("HexBuildGenerator ***********with deploy**************");
-	    String content = getBuildProperties(outDirectory ,lsPresentation,lsBusiness,lsPersistence,warFile,templatesLocation);
-	    String fileName = "HexFrameBuild.properties";
-	    
-	    HexUtil.writeFile(content, fileName);
-	    
-	    
-	    
-	    runAntDeploy();
-
-	  }
    
   private String getBuildProperties(String outputPath, String psPresentation,String lsBusiness,String lsPersistence,String warFile,String templatesLocation) {
 
@@ -63,8 +51,8 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
     StringBuffer result = new StringBuffer();
     try {
     	DataInputStream dis = new DataInputStream(new FileInputStream(templatesLocation+
-                "/templates/build/HexFrameBuild.template"));
-    	File file = new File(templatesLocation+"/Buildlib/xwork-2.1.2.jar");
+                "\\templates\\build\\HexFrameBuild.template"));
+    	File file = new File(templatesLocation+"\\Buildlib\\xwork-2.1.2.jar");
     	  /* InputStream inputStream= UIController.class.getResourceAsStream("\\templates\\templates\\build\\HexFrameBuild.template");
   		 
    		DataInputStream dis = new DataInputStream(inputStream);   */
@@ -150,78 +138,65 @@ System.out.println("HexBuildGenerator ***********without deploy**************");
   }
   
   public static void main(String[] args) {
-	
-	 /* System.out.println("Inside runAnt ");
-	    Runtime runtime = Runtime.getRuntime();
-
-	    File hexBuildfile = new File(HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.xml").getFile());
-	    try {
-	    	System.out.println(hexBuildfile.getParent());
-	    
-	      Process p = runtime.exec(HexBuildGenerator.class.getResource("runant.cmd").getFile().toString()+" all "+hexBuildfile);
-	      
-	      InputStream errorStream = p.getErrorStream();
-	      InputStream inputStream = p.getInputStream();
-	      new HexBuildGenerator().readOutput(inputStream);
-	      new HexBuildGenerator(). readOutput(errorStream);
-
-	    }
-	    catch (IOException exec) {
-	      exec.printStackTrace();
-	    }*/
-
 	  
-}
+  }
 
-  private void runAnt() {
-      System.out.println("Inside runAnt ");
-      System.out.println("HexBuildGenerator.class.getClassLoader().getResource "+ HexBuildGenerator.class.getClassLoader().getResource(""));
-      String runAntPath = System.getenv().get("HOME") + "/tomcat/webapps/ROOT/WEB-INF/classes/com/hex/util/runant.sh";
-      System.out.println("runAntPath "+runAntPath);
-      String hexBuildfile =System.getenv().get("HOME") + "/tomcat/webapps/ROOT/WEB-INF/classes/HexFrameBuild.xml";
-      System.out.println("hexBuildfile "+hexBuildfile);
-      String cmd1 = "chmod +x " + runAntPath;
-      System.out.println("cmd for running runant "+ cmd1);
-      String cmd2 = "chmod +x " + hexBuildfile;
-      System.out.println("cmd for running runant "+ cmd2);
-      Runtime run = Runtime.getRuntime();
-      Process pr = null ;
-      try {
-        pr= run.exec(cmd1);
-          pr.waitFor();
-          pr = run.exec(cmd2);
-          pr.waitFor();
-          pr = run.exec(runAntPath +" all "+hexBuildfile);
-          InputStream errorStream = pr.getErrorStream();
-        InputStream inputStream = pr.getInputStream();
-        readOutput(inputStream);
-        readOutput(errorStream);
-      } catch (InterruptedException ex) {
-          ex.printStackTrace();
-      } catch (IOException e) {
+  private void runAnt(String baseLocation) {
+
+    System.out.println("Inside runAnt ");
+    System.out.println("HexBuildGenerator.class.getClassLoader().getResource " + HexBuildGenerator.class.getClassLoader().getResource(""));
+    System.out.println("baseLocation "+baseLocation);
+    String runAntPath = (baseLocation +"WEB-INF/classes/com/hex/util/runant.sh");
+    System.out.println("runAntPath " + runAntPath);
+    String hexBuildfile = (baseLocation+"WEB-INF/classes/HexFrameBuild.xml");
+    System.out.println("hexBuildfile " + hexBuildfile);
+    String cmd1 = "chmod +x " + runAntPath;
+    System.out.println("cmd for running runant " + cmd1);
+    String cmd2 = "chmod +x " + hexBuildfile;
+    System.out.println("cmd for running runant " + cmd2);
+    Runtime run = Runtime.getRuntime();
+    Process pr = null;
+    try {
+      pr = run.exec(cmd1);
+      pr.waitFor();
+      pr = run.exec(cmd2);
+      pr.waitFor();
+      pr = run.exec(runAntPath + " all " + hexBuildfile);
+      InputStream errorStream = pr.getErrorStream();
+      InputStream inputStream = pr.getInputStream();
+      readOutput(inputStream);
+      readOutput(errorStream);
+    } catch (InterruptedException ex) {
+      ex.printStackTrace();
+    } catch (IOException e) {
       e.printStackTrace();
     }
-/*   try {
+  }
 
-      Process p = runtime.exec("sudo chmod 777 -R "+ HexBuildGenerator.class.getClassLoader().getResource(""));
-      p.waitFor();
-      //ssh -t remotehost
-    	p = runtime.exec("sudo "+file.toString()+" all "+hexBuildfile );
+
+/*
+    System.out.println("Inside runAnt ");
+    Runtime runtime = Runtime.getRuntime();
+    File file = new File(HexBuildGenerator.class.getResource("runant.cmd").getFile());
+    System.out.println("aaaaaaaaaaaaaaaaaaaaa"+file);
+    File hexBuildfile = new File(HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.xml").getFile());
+    
+    try {
+
+    	Process p = runtime.exec(file.toString()+" all "+hexBuildfile );
       InputStream errorStream = p.getErrorStream();
       InputStream inputStream = p.getInputStream();
       readOutput(inputStream);
       readOutput(errorStream);
 
-      }
-      catch (IOException exec) {
-        exec.printStackTrace();
-      }catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-        e.printStackTrace();
     }
-*/
+    catch (IOException exec) {
+      exec.printStackTrace();
+    }
+
   }
-  
+*/
+
   private void runAntDeploy() {
 	    System.out.println("Inside runAntDeploy ");
 	    Runtime runtime = Runtime.getRuntime();

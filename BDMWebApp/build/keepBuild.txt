@@ -1,1 +1,1 @@
-Keeps the Build  folder 
+Keeps the target folder 
