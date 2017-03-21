@@ -55,7 +55,7 @@ $(document).ready(function() {
 					+ encodeURIComponent(tableName);
 			alert(data)
 			$.ajax({
-				url : "/BaseDataManagerWebApp/getTableData",
+				url : "/getTableData",
 				data : data,
 				type : "GET",
 			
@@ -110,7 +110,7 @@ $(document).ready(function() {
 
 </script>
 </head>
-<form:form action="/BaseDataManagerWebApp/generate"    modelAttribute="tableVoList" method="post" >
+<form:form action="/generate"    modelAttribute="tableVoList" method="post" >
 <body class="row" style="background: #2196F3;">
 	<div class="col-md-offset-1 col-md-11" id="mainDiv"> 
 		<div class="col-md-6 borderMod" id="leftDiv"> 
