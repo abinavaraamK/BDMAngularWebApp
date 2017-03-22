@@ -42,7 +42,7 @@ public class HexBuildGenerator {
             .getResource("HexFrameBuild.properties").getFile());
 
     HexUtil.writeFile(content, fileName);
-    runAnt(baseLocation);
+    //runAnt(baseLocation);
 
   }
 
@@ -86,6 +86,10 @@ public class HexBuildGenerator {
           line = line.replaceAll("<OutDirectory>", outputPath);
         }
 
+        if (line.indexOf("<blueMixOutDir>") >= 0) {
+          outputPath = outputPath.replace('\\', '/');
+          line = line.replaceAll("<blueMixOutDir>", outputPath.replace("/"+warFile, ""));
+        }
         if (line.indexOf("<TableName>") >= 0) {
           line = line.replaceAll("<TableName>", warFile);
         }

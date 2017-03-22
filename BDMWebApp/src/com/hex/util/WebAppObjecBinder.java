@@ -13,7 +13,7 @@ public class WebAppObjecBinder {
 	ArrayList selectedColumnList = new ArrayList();
 	ArrayList tableCollectionList = new ArrayList();
 
-	public ArrayList generateOutput(TableVoList tableVoList) {
+	public ArrayList generateOutput(TableVoList tableVoList,String baseLocation) {
 		System.out.println("TableList*************** inside generateOutput");
 		String outDirectory = tableVoList.getDestDirectory();
 		System.out.println("OUTPUT DIRECTORY 1" + outDirectory);
@@ -22,7 +22,8 @@ public class WebAppObjecBinder {
 		if (warFile.equals("")) {
 			warFile = "test";
 		}
-		outDirectory = outDirectory + "\\" + warFile.toLowerCase() + "\\";
+		//outDirectory = outDirectory + "\\" + warFile.toLowerCase() + "\\";
+		outDirectory = baseLocation + "/" + "NewWebAppArchive"+"/"+warFile.toLowerCase()+"/";
 		System.out.println("OUTPUT DIRECTORY 2" + outDirectory);
 		String table = tableVoList.getTableName().replace(",", "");
 

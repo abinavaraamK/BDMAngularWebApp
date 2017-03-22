@@ -107,6 +107,7 @@ public class UIController {
 		
 		
 		String outDir = request.getSession().getServletContext().getRealPath("/")+ "warFiles";
+		String bluemixArchiveDir = request.getSession().getServletContext().getRealPath("/");
 		String templatesLocation = request.getSession().getServletContext().getRealPath("/")+ "templates";
 		String baseLocation = request.getSession().getServletContext().getRealPath("/");
 		tableVoList.setDestDirectory(outDir);
@@ -122,10 +123,10 @@ public class UIController {
 		WebAppObjecBinder appObjecBinder = new WebAppObjecBinder();
 		ArrayList list = new ArrayList<>();
 
-		list = appObjecBinder.generateOutput(tableVoList);
+		list = appObjecBinder.generateOutput(tableVoList,baseLocation);
 		CodeGenerator codeGenerator = new com.hex.util.CodeGenerator();
 		try {
-			codeGenerator.generateOutput(list,templatesLocation,baseLocation);
+			codeGenerator.generateOutput(list,templatesLocation,baseLocation,bluemixArchiveDir);
 		} catch (Exception exp) {
 			throw exp;
 		}

@@ -8,7 +8,7 @@ public class CodeGenerator {
     public CodeGenerator() {
     }
 
-    public void generateOutput(ArrayList list, String templatesLocation, String baseLocation) throws Exception {
+    public void generateOutput(ArrayList list, String templatesLocation, String baseLocation,String bluemixArchiveDir) throws Exception {
         
        
             HashMap tableValues = (HashMap) list.get(0);
