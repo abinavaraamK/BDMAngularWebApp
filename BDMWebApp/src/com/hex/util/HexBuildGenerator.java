@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.ProjectHelper;
 import com.hex.UIController;
 
 /**
