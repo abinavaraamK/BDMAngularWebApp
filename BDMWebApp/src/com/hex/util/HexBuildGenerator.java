@@ -42,7 +42,7 @@ public class HexBuildGenerator {
             .getResource("HexFrameBuild.properties").getFile());
 
     HexUtil.writeFile(content, fileName);
-    //runAnt(baseLocation);
+    runAnt(baseLocation);
 
   }
 
@@ -155,6 +155,7 @@ public class HexBuildGenerator {
 
     System.out.println("Inside runAnt ");
     System.out.println("HexBuildGenerator.class.getClassLoader().getResource " + HexBuildGenerator.class.getClassLoader().getResource(""));
+    File hexBuildfile = new File(HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.xml").getFile());
     System.out.println("baseLocation "+baseLocation);
     String runAntPath = (baseLocation +"WEB-INF/classes/com/hex/util/runant.sh");
     System.out.println("runAntPath " + runAntPath);
@@ -164,23 +165,15 @@ public class HexBuildGenerator {
     System.out.println("cmd for running runant " + cmd1);
     String cmd2 = "chmod +x " + hexBuildfile;
     System.out.println("cmd for running runant " + cmd2);
-    Runtime run = Runtime.getRuntime();
-    Process pr = null;
-    try {
-      pr = run.exec(cmd1);
-      pr.waitFor();
-      pr = run.exec(cmd2);
-      pr.waitFor();
-      pr = run.exec(runAntPath + " all " + hexBuildfile);
-      InputStream errorStream = pr.getErrorStream();
-      InputStream inputStream = pr.getInputStream();
-      readOutput(inputStream);
-      readOutput(errorStream);
-    } catch (InterruptedException ex) {
-      ex.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    
+    File buildFile = new File(baseLocation+"WEB-INF/classes/HexFrameBuild.xml");
+    Project project = new Project();
+    project.setUserProperty("ant.file",buildFile.getAbsolutePath());
+    project.init();
+    ProjectHelper helper = ProjectHelper.getProjectHelper();
+    project.addReference("ant.projectHelper",helper);
+    helper.parse(project, buildFile);
+    project.executeTarget(project.getDefaultTarget());  
   }
 
 

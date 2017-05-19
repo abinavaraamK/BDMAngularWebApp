@@ -1,0 +1,9 @@
+applications:
+- path: BaseDataManagerWebApp.war
+  memory: 1024M
+  instances: 1
+  domain: mybluemix.net
+  name: BDMAngularWebApp
+  host: BDMAngularWebApp
+  disk_quota: 1024M
+  buildpack: java_buildpack
