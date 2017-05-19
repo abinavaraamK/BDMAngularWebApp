@@ -42,6 +42,7 @@
 		<echo message="Starting the Compilation$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"/>
 		<echo message="$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"/>
 			<echo message="${PROJECT.LIB}"/>
+			<mkdir dir="{PROJECT.BUILD"/>
 		<javac destdir="${PROJECT.BUILD}">
 			<src path="${DEVELOP.SRC.JAVA.DIR}"/>
 			<classpath refid="project.class.path"/>
@@ -97,6 +98,7 @@
 	
 	<target name="clean">
 		<delete file="${PROJECT.BASE.DIR}/${PROJECT.WAR}.war" failonerror="false" />
+		
 		<!-- <delete file="${DEPLOY.DIR}/${PROJECT.WAR}.war" failonerror="false" />
 		<delete includeEmptyDirs="true" failonerror="false">
 		    <fileset dir="${DEPLOY.DIR}/${PROJECT.WAR}"/>
@@ -112,7 +114,7 @@
 	</target>
 
 	
-<target name="all" depends="class-compile, clean, war">
+<target name="all" depends="class-compile ,clean, war">
 	</target>
 
 	<target name="copy_war">
