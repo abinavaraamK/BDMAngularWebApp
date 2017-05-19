@@ -42,7 +42,7 @@
 		<echo message="Starting the Compilation$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"/>
 		<echo message="$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"/>
 			<echo message="${PROJECT.LIB}"/>
-			<mkdir dir="${PROJECT.BUILD"/>
+			<mkdir dir="${PROJECT.BUILD}"/>
 		<javac destdir="${PROJECT.BUILD}">
 			<src path="${DEVELOP.SRC.JAVA.DIR}"/>
 			<classpath refid="project.class.path"/>
