@@ -155,18 +155,18 @@ public class HexBuildGenerator {
 
     System.out.println("Inside runAnt ");
     System.out.println("HexBuildGenerator.class.getClassLoader().getResource " + HexBuildGenerator.class.getClassLoader().getResource(""));
-    File hexBuildfile = new File(HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.xml").getFile());
+    //File hexBuildfile = new File(HexBuildGenerator.class.getClassLoader().getResource("HexFrameBuild.xml").getFile());
     System.out.println("baseLocation "+baseLocation);
     String runAntPath = (baseLocation +"WEB-INF/classes/com/hex/util/runant.sh");
     System.out.println("runAntPath " + runAntPath);
     String hexBuildfile = (baseLocation+"WEB-INF/classes/HexFrameBuild.xml");
     System.out.println("hexBuildfile " + hexBuildfile);
-    String cmd1 = "chmod +x " + runAntPath;
+    /*String cmd1 = "chmod +x " + runAntPath;
     System.out.println("cmd for running runant " + cmd1);
     String cmd2 = "chmod +x " + hexBuildfile;
-    System.out.println("cmd for running runant " + cmd2);
+    System.out.println("cmd for running runant " + cmd2);*/
     
-    File buildFile = new File(baseLocation+"WEB-INF/classes/HexFrameBuild.xml");
+    File buildFile = new File(hexBuildfile);
     Project project = new Project();
     project.setUserProperty("ant.file",buildFile.getAbsolutePath());
     project.init();
