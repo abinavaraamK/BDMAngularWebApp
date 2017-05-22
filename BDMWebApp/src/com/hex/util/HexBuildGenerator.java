@@ -44,10 +44,43 @@ public class HexBuildGenerator {
             .getResource("HexFrameBuild.properties").getFile());
 
     HexUtil.writeFile(content, fileName);
+    readPropertyFile(fileName,baseLocation);
     runAnt(baseLocation);
 
   }
 
+  private void readPropertyFile(String fileName,String baseLocation) {
+    Properties prop = new Properties();
+    InputStream input = null;
+
+    try {
+
+      input = new FileInputStream(baseLocation+"WEB-INF/classes/"+fileName);
+
+      // load a properties file
+      prop.load(input);
+
+            // get the property value and print it out
+      System.out.println(prop.getProperty("PROJECT.BASE.DIR"));
+      System.out.println(prop.getProperty("PROJECT.BLUWMIX.WAR"));
+      System.out.println(prop.getProperty("PROJECT.WAR"));
+      System.out.println(prop.getProperty("PROJECT.LIB"));
+      System.out.println(prop.getProperty("PROJECT.LIB.DEST"));
+      System.out.println(prop.getProperty("DEVELOP.SRC.JAVA.DIR"));
+      System.out.println(prop.getProperty("PROJECT.BUILD"));
+
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    } finally {
+      if (input != null) {
+        try {
+          input.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+  }
   private String getBuildProperties(String outputPath, String psPresentation,
       String lsBusiness, String lsPersistence, String warFile,
       String templatesLocation) {

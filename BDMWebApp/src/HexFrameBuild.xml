@@ -47,8 +47,6 @@
 		<javac destdir="${PROJECT.BUILD}">
 			<src path="${DEVELOP.SRC.JAVA.DIR}"/>
 			<classpath refid="project.class.path"/>
-			
-			
 		</javac>
 
 	</target> 
