@@ -53,6 +53,8 @@ public class HexBuildGenerator {
       String templatesLocation) {
 
     System.out.println("Inside generateBuildProperties " + outputPath);
+    System.out.println("Inside generateBuildProperties " + outputPath.replace('\\', '/'));
+    System.out.println("Inside generateBuildProperties " + outputPath.replace("//", "/"));
     System.out.println("Inside generateBuildProperties " + psPresentation);
     System.out.println("Inside generateBuildProperties " + lsBusiness);
     System.out.println("Inside generateBuildProperties " + lsPersistence);
@@ -85,6 +87,7 @@ public class HexBuildGenerator {
 
         if (line.indexOf("<OutDirectory>") >= 0) {
           outputPath = outputPath.replace('\\', '/');
+          outputPath = outputPath.replace("//", "/");
           line = line.replaceAll("<OutDirectory>", outputPath);
         }
 
