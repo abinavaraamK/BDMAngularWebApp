@@ -55,6 +55,7 @@ public class HexBuildGenerator {
     System.out.println("Inside generateBuildProperties " + outputPath);
     System.out.println("Inside generateBuildProperties " + outputPath.replace('\\', '/'));
     System.out.println("Inside generateBuildProperties " + outputPath.replace("//", "/"));
+    System.out.println("checking for location");
     System.out.println("Inside generateBuildProperties " + psPresentation);
     System.out.println("Inside generateBuildProperties " + lsBusiness);
     System.out.println("Inside generateBuildProperties " + lsPersistence);
