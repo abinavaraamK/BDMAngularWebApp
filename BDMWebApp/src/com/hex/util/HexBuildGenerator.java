@@ -43,18 +43,18 @@ public class HexBuildGenerator {
             .getResource("HexFrameBuild.properties").getFile());
 
     HexUtil.writeFile(content, fileName);
-    readPropertyFile(fileName,baseLocation);
+    readPropertyFile(baseLocation);
     runAnt(baseLocation);
 
   }
 
-  private void readPropertyFile(String fileName,String baseLocation) {
+  private void readPropertyFile(String baseLocation) {
     Properties prop = new Properties();
     InputStream input = null;
 
     try {
 
-      input = new FileInputStream(baseLocation+"WEB-INF/classes/"+fileName);
+      input = new FileInputStream(baseLocation+"WEB-INF/classes/HexFrameBuild.properties");
 
       // load a properties file
       prop.load(input);
