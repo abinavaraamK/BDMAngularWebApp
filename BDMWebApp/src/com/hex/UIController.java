@@ -106,12 +106,12 @@ public class UIController {
 		System.out.println("theme" + tableVoList.getTheme());
 		
 		
-		String outDir = request.getSession().getServletContext().getRealPath("/")+ "warFiles";
+		String outDir = request.getSession().getServletContext().getRealPath("/")+ "NewWebAppArchive";
 		String bluemixArchiveDir = request.getSession().getServletContext().getRealPath("/");
 		String templatesLocation = request.getSession().getServletContext().getRealPath("/")+ "templates";
 		String baseLocation = request.getSession().getServletContext().getRealPath("/");
 		tableVoList.setDestDirectory(outDir);
-		System.out.println("out directory" +outDir );
+		System.out.println("out directory for the new created app" +outDir );
 		for (TableVO tableVO : tableVoList.getListTableVO()) {
 			System.out.println(tableVO.getTableName());
 			System.out.println(tableVO.getLabelName());

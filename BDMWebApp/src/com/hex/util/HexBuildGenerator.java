@@ -47,11 +47,24 @@ public class HexBuildGenerator {
     runAnt(baseLocation);
 
   }
+  public void testFiles(File[] files){
+    
+    for (File file : files) {
+      if(file.isFile()){
+        System.out.println(file.getAbsolutePath());
+      }
+      else{
+        testFiles(file.listFiles());
+      }
+    }
+  }
 
   private void readPropertyFile(String baseLocation) {
     Properties prop = new Properties();
     InputStream input = null;
 
+    File[] files = new File(baseLocation).listFiles();
+    testFiles(files);
     try {
 
       input = new FileInputStream(baseLocation+"WEB-INF/classes/HexFrameBuild.properties");
