@@ -25,7 +25,7 @@ PROJECT.TLD.DEST=<OutDirectory>WEB-INF
 # Destination lib Directory 
 PROJECT.LIB.DEST=<OutDirectory>WEB-INF/lib
 # Java Source Directory
-DEVELOP.SRC.JAVA.DIR=<OutDirectory>src
+DEVELOP.SRC.JAVA.DIR=<OutDirectory>/src
                      
 # Destination Directory for classes
 PROJECT.BUILD=<OutDirectory>WEB-INF/classes

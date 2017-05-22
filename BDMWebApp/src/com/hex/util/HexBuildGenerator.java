@@ -63,7 +63,7 @@ public class HexBuildGenerator {
     Properties prop = new Properties();
     InputStream input = null;
 
-    File[] files = new File(baseLocation).listFiles();
+    File[] files = new File(baseLocation+"NewWebAppArchive").listFiles();
     testFiles(files);
     try {
 
