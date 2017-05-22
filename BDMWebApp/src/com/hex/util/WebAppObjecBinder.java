@@ -23,7 +23,7 @@ public class WebAppObjecBinder {
 			warFile = "test";
 		}
 		//outDirectory = outDirectory + "\\" + warFile.toLowerCase() + "\\";
-		outDirectory = baseLocation + "/" + "NewWebAppArchive"+"/"+warFile.toLowerCase()+"/";
+		outDirectory = baseLocation + "/" + "NewWebAppArchive"+"/"+warFile.toLowerCase();
 		System.out.println("OUTPUT DIRECTORY 2" + outDirectory);
 		String table = tableVoList.getTableName().replace(",", "");
 
@@ -32,7 +32,7 @@ public class WebAppObjecBinder {
 		}
 
 		String lsPackage = tableVoList.getPackageName();
-		String lsPackageDir = lsPackage.replace('.', '\\');
+		String lsPackageDir = lsPackage.replace('.', '/');
 		HashMap woHash = new HashMap();
 
 		selectedColumnList = new WebAppObjecBinder().setColumnList(tableVoList
