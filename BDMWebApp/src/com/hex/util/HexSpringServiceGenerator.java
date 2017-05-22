@@ -65,9 +65,9 @@ public class HexSpringServiceGenerator {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\util";
+        outDirectory = outDirectory + "/src/" + lsPackageDir + "/util";
         HexUtil.makeDirectory(outDirectory);
-        String outputFile = outDirectory + "\\" + "BootStrapper.java";
+        String outputFile = outDirectory + "/" + "BootStrapper.java";
         HexUtil.writeFile(buffer.toString(), outputFile);
     }
 
@@ -404,9 +404,9 @@ public class HexSpringServiceGenerator {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\util";
+        outDirectory = outDirectory + "/src/" + lsPackageDir + "/util";
         HexUtil.makeDirectory(outDirectory);
-        String outputFile = outDirectory + "\\" + "HexApplicationException.java";
+        String outputFile = outDirectory + "/" + "HexApplicationException.java";
         HexUtil.writeFile(buffer.toString(), outputFile);
     }
 

@@ -99,9 +99,9 @@ public class HexAngularJs1Generator {
 			ex.printStackTrace();
 		}
 
-		String outD = outDirectory + "\\WEB-INF\\";
+		String outD = outDirectory + "/WEB-INF/";
 		HexUtil.makeDirectory(outD);
-		HexUtil.writeFile(buffer.toString(), outD + "\\web.xml");
+		HexUtil.writeFile(buffer.toString(), outD + "/web.xml");
 
 	}
 }

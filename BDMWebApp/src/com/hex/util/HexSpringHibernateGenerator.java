@@ -58,15 +58,15 @@ public class HexSpringHibernateGenerator {
         String daoContent = getDataAccessObject(tableName, tableName,
                 lsSelectColumnsMethods,templatesLocation);
 
-        outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\dao";
+        outDirectory = outDirectory + "/src/" + lsPackageDir + "/dao";
         System.out.println("outDirectory in dao spring"+outDirectory);
         HexUtil.makeDirectory(outDirectory);
-        String outputFile = outDirectory + "\\" + tableName + "DaoImpl.java";
+        String outputFile = outDirectory + "/" + tableName + "DaoImpl.java";
         HexUtil.writeFile(daoContent, outputFile);
 
         lsSelectColumnsMethods = getSelectColumnsDAOInterfaceMethod(tableList);
         daoContent = getDataAccessInterfaceObject(tableName, tableName, lsSelectColumnsMethods,templatesLocation);
-        outputFile = outDirectory + "\\" + tableName + "Dao.java";
+        outputFile = outDirectory + "/" + tableName + "Dao.java";
         HexUtil.writeFile(daoContent, outputFile);
     }
 
@@ -248,9 +248,9 @@ public class HexSpringHibernateGenerator {
         //String xmlContent = getAppContextXML(className, dbVO);
         String xmlContent = getAppContextXML(tableList, dbVO,warFile,templatesLocation);
 
-        outDirectory = outDirectory + "\\WEB-INF\\classes\\";
+        outDirectory = outDirectory + "/WEB-INF/classes/";
         HexUtil.makeDirectory(outDirectory);
-        String outputFile = outDirectory + "\\" +
+        String outputFile = outDirectory + "/" +
                 "applicationContext.xml";
         HexUtil.writeFile(xmlContent, outputFile);
     }
@@ -369,9 +369,9 @@ public class HexSpringHibernateGenerator {
 
         String xmlContent = getMappingXML(dbVO, tableList,templatesLocation);
 
-        outDirectory = outDirectory + "\\WEB-INF\\classes\\";
+        outDirectory = outDirectory + "/WEB-INF/classes/";
         HexUtil.makeDirectory(outDirectory);
-        String outputFile = outDirectory + "\\" + warFile +  ".hbm.xml";       
+        String outputFile = outDirectory + "/" + warFile +  ".hbm.xml";       
         HexUtil.writeFile(xmlContent, outputFile);
     }
 

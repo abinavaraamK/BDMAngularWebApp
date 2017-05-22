@@ -65,10 +65,10 @@ public class AngularJs1ScriptFileGenerator {
 	            ex.printStackTrace();
 	        }
 
-	        String outD = outDirectory + "\\js\\";
+	        String outD = outDirectory + "/js/";
 	        HexUtil.makeDirectory(outD);
 	        HexUtil.writeFile(buffer.toString(),
-	                outD + "\\script.js");
+	                outD + "/script.js");
 	        
 	        new AngularJs1ScriptFileGenerator().angularScripts(outD,templatesLocation);
 		

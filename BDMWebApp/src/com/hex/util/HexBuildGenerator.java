@@ -134,6 +134,7 @@ public class HexBuildGenerator {
         if (line.indexOf("<OutDirectory>") >= 0) {
           outputPath = outputPath.replace('\\', '/');
           outputPath = outputPath.replace("//", "/");
+          outputPath = outputPath.replace("\", "/");
           line = line.replaceAll("<OutDirectory>", outputPath);
         }
 
