@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import com.hex.util.HexBuildGenerator;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -282,11 +282,24 @@ public class UIController {
 		File f1 = ResourceUtils.getFile(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
-		System.out.println("file.exists() "+f1.exists());
-		System.out.println("file.getAbsoluteFile().exists() "+f1.getAbsoluteFile().exists());
-		System.out.println("getAbsolutePath :" + f1.getAbsolutePath());
+		System.out.println("f1.exists() "+f1.exists());
+		System.out.println("f1.getAbsoluteFile().exists() "+f1.getAbsoluteFile().exists());
+		System.out.println("f1.getAbsolutePath :" + f1.getAbsolutePath());
 		String OS =System.getProperty("os.name"); 
+
+		File f2 = ResourceUtils.getURL(request.getSession().getServletContext()
+				.getRealPath("/")
+				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
+		System.out.println("f2.exists() "+f2.exists());
+		System.out.println("f2.getAbsoluteFile().exists() "+f2.getAbsoluteFile().exists());
+		System.out.println("f2 :" + f2.getAbsolutePath());
+		File[] files = new File(request.getSession().getServletContext()
+				.getRealPath("/")
+				+ "NewWebAppArchive/"+fileName).listFiles();
+		
+   		new HexBuildGenerator().testFiles(files);
 		System.out.println("System.getProperty: "+OS);
+		
 		if (!file.exists()) {
 			String errorMessage = "Sorry. The file you are looking for does not exist";
 			System.out.println(errorMessage);
