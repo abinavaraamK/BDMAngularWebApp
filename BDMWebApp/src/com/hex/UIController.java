@@ -288,12 +288,6 @@ public class UIController {
 		System.out.println("f1.getAbsolutePath :" + f1.getAbsolutePath());
 		String OS =System.getProperty("os.name"); 
 
-		File f2 = ResourceUtils.getURL(request.getSession().getServletContext()
-				.getRealPath("/")
-				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
-		System.out.println("f2.exists() "+f2.exists());
-		System.out.println("f2.getAbsoluteFile().exists() "+f2.getAbsoluteFile().exists());
-		System.out.println("f2 :" + f2.getAbsolutePath());
 		File[] files = new File(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "NewWebAppArchive/"+fileName).listFiles();
