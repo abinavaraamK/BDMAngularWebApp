@@ -16,6 +16,7 @@ import com.hex.util.HexBuildGenerator;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.util.ResourceUtils;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
@@ -296,7 +297,7 @@ public class UIController {
 		File[] files = new File(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "NewWebAppArchive/"+fileName).listFiles();
-		
+
    		new HexBuildGenerator().testFiles(files);
 		System.out.println("System.getProperty: "+OS);
 		
