@@ -23,7 +23,7 @@ PROJECT.LIB.PACKAGEforPersistence=./<packagelibdirectoryPersistence>
 PROJECT.TLD.DEST=<OutDirectory>WEB-INF
 
 # Destination lib Directory 
-PROJECT.LIB.DEST=<OutDirectory>WEB-INF/lib
+PROJECT.LIB.DEST=<OutDirectory/WEB-INF/lib
 # Java Source Directory
 DEVELOP.SRC.JAVA.DIR=<OutDirectory>/src
                      
