@@ -131,7 +131,7 @@ public class UIController {
 			throw exp;
 		}
 		ModelAndView modelAndView = new ModelAndView("Download");
-		String finalWar= (request.getSession().getServletContext().getRealPath("/")+"warFiles"+"/"+tableVoList.getFileName()+"/"+tableVoList.getFileName()+".war").replace("\\", "/");
+		String finalWar= (request.getSession().getServletContext().getRealPath("/")+"NewWebAppArchive"+"/"+tableVoList.getFileName()+"/"+tableVoList.getFileName()+".war").replace("\\", "/");
 		modelAndView.addObject("fileName", finalWar); 
 		
 		return modelAndView;
@@ -268,11 +268,11 @@ public class UIController {
 			RequestMethod.POST })
 	public void downloadFile(HttpServletResponse response,
 			HttpServletRequest request) throws IOException {
-
+/*
 		File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "NewWebAppArchive/"+yogesh+".war");
-
+*/
 		if (!file.exists()) {
 			String errorMessage = "Sorry. The file you are looking for does not exist";
 			System.out.println(errorMessage);
