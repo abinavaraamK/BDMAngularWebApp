@@ -279,7 +279,14 @@ public class UIController {
 		System.out.println("file.exists() "+file.exists());
 		System.out.println("file.getAbsoluteFile().exists() "+file.getAbsoluteFile().exists());
 		System.out.println("getAbsolutePath :" + file.getAbsolutePath());
-
+		File f1 = ResourceUtils.getFile(request.getSession().getServletContext()
+				.getRealPath("/")
+				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
+		System.out.println("file.exists() "+f1.exists());
+		System.out.println("file.getAbsoluteFile().exists() "+f1.getAbsoluteFile().exists());
+		System.out.println("getAbsolutePath :" + f1.getAbsolutePath());
+		String OS =System.getProperty("os.name"); 
+		System.out.println("System.getProperty: "+OS);
 		if (!file.exists()) {
 			String errorMessage = "Sorry. The file you are looking for does not exist";
 			System.out.println(errorMessage);
