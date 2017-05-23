@@ -275,6 +275,10 @@ public class UIController {
 				.getRealPath("/")
 				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
 
+		System.out.println("fileName "+fileName);
+		System.out.println("file.exists() "+file.exists());
+		System.out.println("getAbsolutePath :" + file.getAbsolutePath());
+
 		if (!file.exists()) {
 			String errorMessage = "Sorry. The file you are looking for does not exist";
 			System.out.println(errorMessage);
@@ -286,7 +290,7 @@ public class UIController {
 
 		String mimeType = URLConnection
 				.guessContentTypeFromName(file.getName());
-		System.out.println("getAbsolutePath :" + file.getAbsolutePath());
+		
 		if (mimeType == null) {
 			System.out.println("mimetype is not detectable, will take default");
 			mimeType = "application/octet-stream";
