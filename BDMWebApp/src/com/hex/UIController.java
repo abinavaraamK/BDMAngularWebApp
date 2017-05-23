@@ -277,6 +277,7 @@ public class UIController {
 
 		System.out.println("fileName "+fileName);
 		System.out.println("file.exists() "+file.exists());
+		System.out.println("file.getAbsoluteFile().exists() "+file.getAbsoluteFile().exists());
 		System.out.println("getAbsolutePath :" + file.getAbsolutePath());
 
 		if (!file.exists()) {
