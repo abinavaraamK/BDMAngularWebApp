@@ -27,7 +27,7 @@
 		<span class="col-md-offset-4 col-md-3" style="color: aliceblue;">BUILD STATUS</span>
 		<span class="col-md-5" style="color: aliceblue;">BUILD STATUS</span>
 		<span class="col-md-offset-2 col-md-5" style="color: aliceblue;padding-left: 20%;">Download Generated War File</span>
-		 <a class="col-md-5" href="${contextPath}/>">Download This File (located outside project, on file system)</a>
+		 <a class="col-md-5" href="${contextPath}">Download This File (located outside project, on file system)</a>
 	</div>
 </body>
 </form:form>
