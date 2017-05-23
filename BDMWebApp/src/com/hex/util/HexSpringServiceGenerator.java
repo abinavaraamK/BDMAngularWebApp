@@ -82,10 +82,10 @@ public class HexSpringServiceGenerator {
 	        
 	        String poContent = getServiceContent(className, className, lsSelectColumnsMethods,templatesLocation);
 	        
-	        outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\rest";
+	        outDirectory = outDirectory + "/src/" + lsPackageDir + "/rest";
 	        HexUtil.makeDirectory(outDirectory);
 	        
-	        String outputFile = outDirectory + "\\" + "RestService.java";
+	        String outputFile = outDirectory + "/" + "RestService.java";
 	        HexUtil.writeFile(poContent, outputFile);
 		}
 	
@@ -100,16 +100,16 @@ public class HexSpringServiceGenerator {
         
         String poContent = getServiceContent(className, className, lsSelectColumnsMethods,templatesLocation);
         
-        outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\service";
+        outDirectory = outDirectory + "/src/" + lsPackageDir + "/service";
         HexUtil.makeDirectory(outDirectory);
   
         poContent = getServiceImplContent(className, className, lsSelectColumnsMethods,templatesLocation);
-        String outputFile = outDirectory + "\\"+className+"Impl" + ".java";
+        String outputFile = outDirectory + "/"+className+"Impl" + ".java";
         HexUtil.writeFile(poContent, outputFile);
         
         lsSelectColumnsMethods = getSelectColumnsInterfaceMethod(tableList, className);
         poContent = getInterfaceContent(className, className, lsSelectColumnsMethods,templatesLocation);
-        outputFile = outDirectory + "\\I" + className + ".java"; 
+        outputFile = outDirectory + "/I" + className + ".java"; 
         HexUtil.writeFile(poContent, outputFile);
     }
 
@@ -270,11 +270,11 @@ public class HexSpringServiceGenerator {
         className = HexUtil.initCap(tableVO.getTableName());
         String valueObject = getValueObject(lsVariables, lsMethods,
                 className,templatesLocation);
-        outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\vo";
+        outDirectory = outDirectory + "/src/" + lsPackageDir + "/vo";
 
         HexUtil.makeDirectory(outDirectory);
 
-        String outputFile = outDirectory + "\\" + className + ".java";
+        String outputFile = outDirectory + "/" + className + ".java";
         HexUtil.writeFile(valueObject, outputFile);
     }
 

@@ -66,9 +66,9 @@ public class HexSpringGenerator {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\util";
+        outDirectory = outDirectory + "/src/" + lsPackageDir + "/util";
         HexUtil.makeDirectory(outDirectory);
-        String outputFile = outDirectory + "\\" + "BootStrapper.java";
+        String outputFile = outDirectory + "/" + "BootStrapper.java";
         HexUtil.writeFile(buffer.toString(), outputFile);
     }
 
@@ -81,14 +81,14 @@ public class HexSpringGenerator {
         String lsSelectColumnsMethods = getSelectColumnsPOMethod(tableList, className);
         String poContent = getServiceImplContent(className, className, lsSelectColumnsMethods);
 
-        outDirectory = outDirectory+ "\\src\\" + lsPackageDir + "\\service";
+        outDirectory = outDirectory+ "/src/" + lsPackageDir + "/service";
         HexUtil.makeDirectory(outDirectory);
-        String outputFile = outDirectory + "\\" + className + "Impl.java";
+        String outputFile = outDirectory + "/" + className + "Impl.java";
         HexUtil.writeFile(poContent, outputFile);
 
         lsSelectColumnsMethods = getSelectColumnsInterfaceMethod(tableList, className);
         poContent = getInterfaceContent(className, className, lsSelectColumnsMethods);
-        outputFile = outDirectory + "\\I" + className + ".java";
+        outputFile = outDirectory + "/I" + className + ".java";
         HexUtil.writeFile(poContent, outputFile);
     }
 
@@ -208,11 +208,11 @@ public class HexSpringGenerator {
         className = HexUtil.initCap(tableVO.getTableName());
         String valueObject = getValueObject(lsVariables, lsMethods,
                 className);
-        outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\vo";
+        outDirectory = outDirectory + "/src/" + lsPackageDir + "/vo";
 
         HexUtil.makeDirectory(outDirectory);
 
-        String outputFile = outDirectory + "\\" + className + ".java";
+        String outputFile = outDirectory + "/" + className + ".java";
         HexUtil.writeFile(valueObject, outputFile);
     }
 
@@ -335,9 +335,9 @@ public class HexSpringGenerator {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\util";
+        outDirectory = outDirectory + "/src/" + lsPackageDir + "/util";
         HexUtil.makeDirectory(outDirectory);
-        String outputFile = outDirectory + "\\" + "HexApplicationException.java";
+        String outputFile = outDirectory + "/" + "HexApplicationException.java";
         HexUtil.writeFile(buffer.toString(), outputFile);
     }
 
@@ -348,9 +348,9 @@ public class HexSpringGenerator {
         className = HexUtil.initCap(tableVO.getTableName());
         String lsSelectColumnsMethods = getSelectColumnsDelegateMethod(tableList, className);
         String poContent = getDelegateObject(className, className, lsSelectColumnsMethods);
-        outDirectory = outDirectory + "\\src\\" + lsPackageDir + "\\delegate";
+        outDirectory = outDirectory + "/src/" + lsPackageDir + "/delegate";
         HexUtil.makeDirectory(outDirectory);
-        String outputFile = outDirectory + "\\" + className + "BusinessDelegate.java";
+        String outputFile = outDirectory + "/" + className + "BusinessDelegate.java";
         HexUtil.writeFile(poContent, outputFile);
     }
 

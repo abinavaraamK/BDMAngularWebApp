@@ -47,11 +47,11 @@ public class HexAngularJs1Generator {
 			HexUtil.makeDirectory(jspDirectory);
 			String outputFile;
 
-			outputFile = jspDirectory + "\\" + initCap(table) + "List.html";
+			outputFile = jspDirectory + "/" + initCap(table) + "List.html";
 			HexUtil.writeFile(lsPageSource[1], outputFile);
-			outputFile = jspDirectory + "\\" + initCap(table) + "Add.html";
+			outputFile = jspDirectory + "/" + initCap(table) + "Add.html";
 			HexUtil.writeFile(lsPageSource[2], outputFile);
-			outputFile = jspDirectory + "\\" + "index.html";
+			outputFile = jspDirectory + "/" + "index.html";
 			HexUtil.writeFile(lsPageSource[3], outputFile);
 
 		}
