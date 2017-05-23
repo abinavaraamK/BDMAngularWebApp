@@ -130,8 +130,10 @@ public class UIController {
 		} catch (Exception exp) {
 			throw exp;
 		}
+
 		ModelAndView modelAndView = new ModelAndView("Download");
-		String finalWar= (request.getSession().getServletContext().getRealPath("/")+"NewWebAppArchive"+"/"+tableVoList.getFileName()+"/"+tableVoList.getFileName()+".war").replace("\\", "/");
+		//String finalWar= (request.getSession().getServletContext().getRealPath("/")+"NewWebAppArchive"+"/"+tableVoList.getFileName()+"/"+tableVoList.getFileName()+".war").replace("\\", "/");
+		String finalWar= tableVoList.getFileName();
 		modelAndView.addObject("fileName", finalWar); 
 		
 		return modelAndView;
@@ -264,14 +266,14 @@ public class UIController {
 
 	}
 
-	@RequestMapping(value = "/downloadWar", method = { RequestMethod.GET,
+	@RequestMapping(value = "/downloadWar/{fileName}", method = { RequestMethod.GET,
 			RequestMethod.POST })
-	public void downloadFile(HttpServletResponse response,
+	public void downloadFile(@PathVariable String fileName, HttpServletResponse response,
 			HttpServletRequest request) throws IOException {
 
 		File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
-				+ "NewWebAppArchive/");
+				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
 
 		if (!file.exists()) {
 			String errorMessage = "Sorry. The file you are looking for does not exist";
@@ -284,7 +286,7 @@ public class UIController {
 
 		String mimeType = URLConnection
 				.guessContentTypeFromName(file.getName());
-		System.out.println("Mimetype :" + file.getAbsolutePath());
+		System.out.println("getAbsolutePath :" + file.getAbsolutePath());
 		if (mimeType == null) {
 			System.out.println("mimetype is not detectable, will take default");
 			mimeType = "application/octet-stream";
