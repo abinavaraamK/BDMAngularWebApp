@@ -287,12 +287,19 @@ public class UIController {
 		System.out.println("f1.getAbsoluteFile().exists() "+f1.getAbsoluteFile().exists());
 		System.out.println("f1.getAbsolutePath :" + f1.getAbsolutePath());
 		String OS =System.getProperty("os.name"); 
-
+		System.out.println("printing the fileNameInside files");
 		File[] files = new File(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "NewWebAppArchive/"+fileName).listFiles();
 
    		new HexBuildGenerator().testFiles(files);
+		System.out.println("printing the NewWebAppArchive files");
+   		File[] files1 = new File(request.getSession().getServletContext()
+				.getRealPath("/")
+				+ "NewWebAppArchive/").listFiles();
+
+   		new HexBuildGenerator().testFiles(files1);
+
 		System.out.println("System.getProperty: "+OS);
 		
 		if (!file.exists()) {
