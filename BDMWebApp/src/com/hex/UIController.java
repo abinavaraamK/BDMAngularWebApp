@@ -268,11 +268,11 @@ public class UIController {
 			RequestMethod.POST })
 	public void downloadFile(HttpServletResponse response,
 			HttpServletRequest request) throws IOException {
-/*
+
 		File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
-				+ "NewWebAppArchive/"+yogesh+".war");
-*/
+				+ "NewWebAppArchive/");
+
 		if (!file.exists()) {
 			String errorMessage = "Sorry. The file you are looking for does not exist";
 			System.out.println(errorMessage);
