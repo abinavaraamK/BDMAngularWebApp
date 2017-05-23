@@ -108,8 +108,9 @@
 	</target>
 
 	<target name="war" depends="move-lib, move-tld, move-js, move-css, move-images">		
-		<jar basedir="${PROJECT.BASE.DIR}" jarfile="${PROJECT.BLUWMIX.WAR}\${PROJECT.WAR}.war">			
+		<jar basedir="${PROJECT.BASE.DIR}" jarfile="${PROJECT.BLUWMIX.WAR}/${PROJECT.WAR}.war">			
 		</jar>
+		<echo message="${PROJECT.BLUWMIX.WAR}/${PROJECT.WAR}.war"/>
 	</target>
 
 	
