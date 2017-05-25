@@ -280,6 +280,7 @@ public class UIController {
 		System.out.println("file.exists() "+file.exists());
 		System.out.println("file.getAbsoluteFile().exists() "+file.getAbsoluteFile().exists());
 		System.out.println("getAbsolutePath :" + file.getAbsolutePath());
+
 		File f1 = ResourceUtils.getFile(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
@@ -287,6 +288,7 @@ public class UIController {
 		System.out.println("f1.getAbsoluteFile().exists() "+f1.getAbsoluteFile().exists());
 		System.out.println("f1.getAbsolutePath :" + f1.getAbsolutePath());
 		String OS =System.getProperty("os.name"); 
+
 		System.out.println("printing the fileNameInside files");
 		File[] files = new File(request.getSession().getServletContext()
 				.getRealPath("/")

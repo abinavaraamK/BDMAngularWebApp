@@ -49,13 +49,16 @@ public class HexBuildGenerator {
   }
   public void testFiles(File[] files){
     
-    for (File file : files) {
-      if(file.isFile()){
-        System.out.println(file.getAbsolutePath());
+    if (files.length > 0) {
+      for (File file : files) {
+        if (file.isFile()) {
+          System.out.println(file.getAbsolutePath());
+        } else {
+          testFiles(file.listFiles());
+        }
       }
-      else{
-        testFiles(file.listFiles());
-      }
+    } else {
+      System.out.println("no files in the folder");
     }
   }
 
