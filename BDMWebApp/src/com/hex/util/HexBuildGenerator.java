@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
+import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 /**
@@ -223,6 +224,11 @@ public class HexBuildGenerator {
     File buildFile = new File(hexBuildfile);
     Project project = new Project();
     project.setUserProperty("ant.file",buildFile.getAbsolutePath());
+    DefaultLogger consoleLogger = new DefaultLogger();
+    consoleLogger.setErrorPrintStream(System.err);
+    consoleLogger.setOutputPrintStream(System.out);
+    consoleLogger.setMessageOutputLevel(Project.MSG_INFO);
+    project.addBuildListener(consoleLogger);
     project.init();
     ProjectHelper helper = ProjectHelper.getProjectHelper();
     project.addReference("ant.projectHelper",helper);
