@@ -28,7 +28,7 @@ PROJECT.LIB.DEST=<OutDirectory>/WEB-INF/lib
 DEVELOP.SRC.JAVA.DIR=<OutDirectory>/src
                      
 # Destination Directory for classes
-PROJECT.BUILD=<OutDirectory>WEB-INF/classes
+PROJECT.BUILD=<OutDirectory>/WEB-INF/classes
 
 # Destination Directory to deploy
 DEPLOY.DIR=E://EclipseJuno//apache-tomcat-6.0.9//webapps
