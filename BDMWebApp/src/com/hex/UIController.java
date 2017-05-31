@@ -12,15 +12,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import com.hex.util.HexBuildGenerator;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.util.ResourceUtils;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,9 +32,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hex.dao.TableDAO;
 import com.hex.entity.DbDetails;
-import com.hex.util.CodeGenerator;
-import com.hex.util.HexBuildGenerator;
 import com.hex.util.WebAppObjecBinder;
+import com.hex.util.CodeGenerator;
 import com.hex.vo.DataBaseVO;
 import com.hex.vo.TableVO;
 import com.hex.vo.TableVoList;
@@ -270,44 +272,52 @@ public class UIController {
 	public void downloadFile(@PathVariable String fileName, HttpServletResponse response,
 			HttpServletRequest request) throws IOException {
 
-			String fileName = "";
 		File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
-		
+
+
 		file.setExecutable(true,false);
 		file.setReadable(true, false);
 		file.setWritable(true, false);
-		
+
 		System.out.println("fileName "+fileName);
 		System.out.println("file.exists() "+file.exists());
 		System.out.println("file.getAbsoluteFile().exists() "+file.getAbsoluteFile().exists());
 		System.out.println("getAbsolutePath :" + file.getAbsolutePath());
+
 		File f1 = ResourceUtils.getFile(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
-		
-		
+
+
 		f1.setExecutable(true,false);
 		f1.setReadable(true, false);
 		f1.setWritable(true, false);
-		
+
 		System.out.println("f1.exists() "+f1.exists());
 		System.out.println("f1.getAbsoluteFile().exists() "+f1.getAbsoluteFile().exists());
 		System.out.println("f1.getAbsolutePath :" + f1.getAbsolutePath());
 		String OS =System.getProperty("os.name"); 
 
+		System.out.println("printing the fileNameInside files");
+
 		File files = new File(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "NewWebAppArchive/"+fileName);
-		
-		
+
 		files.setExecutable(true,false);
 		files.setReadable(true, false);
 		files.setWritable(true, false);
-		
-		
+
    		new HexBuildGenerator().testFiles(files.listFiles());
+		System.out.println("printing the NewWebAppArchive files");
+   		File[] files1 = new File(request.getSession().getServletContext()
+				.getRealPath("/")
+				+ "NewWebAppArchive/").listFiles();
+
+   		new HexBuildGenerator().testFiles(files1);
+
 		System.out.println("System.getProperty: "+OS);
 		
 		if (!file.exists()) {
@@ -321,7 +331,7 @@ public class UIController {
 
 		String mimeType = URLConnection
 				.guessContentTypeFromName(file.getName());
-		System.out.println("Mimetype :" + file.getAbsolutePath());
+		
 		if (mimeType == null) {
 			System.out.println("mimetype is not detectable, will take default");
 			mimeType = "application/octet-stream";
