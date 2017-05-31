@@ -50,7 +50,6 @@ public class HexBuildGenerator {
 
   }
   public String testFiles(File[] files){
-    String finalWarLoc = "";
     if (files.length > 0) {
       for (File file : files) {
         if (file.isFile()) {
