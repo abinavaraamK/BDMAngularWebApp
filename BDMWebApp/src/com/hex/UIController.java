@@ -274,7 +274,7 @@ public class UIController {
 
 		File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
-				+ "NewWebAppArchive/"+"/"+fileName+".war");
+				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
 
 
 		file.setExecutable(true,false);
@@ -288,7 +288,7 @@ public class UIController {
 
 		File f1 = ResourceUtils.getFile(request.getSession().getServletContext()
 				.getRealPath("/")
-				+ "NewWebAppArchive/"+"/"+fileName+".war");
+				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
 
 
 		f1.setExecutable(true,false);
@@ -304,19 +304,20 @@ public class UIController {
 
 		File files = new File(request.getSession().getServletContext()
 				.getRealPath("/")
-				+ "NewWebAppArchive/"+fileName);
+				+ "NewWebAppArchive/");
 
 		files.setExecutable(true,false);
 		files.setReadable(true, false);
 		files.setWritable(true, false);
 
    		new HexBuildGenerator().testFiles(files.listFiles());
-		System.out.println("printing the NewWebAppArchive files");
+		
+		/*System.out.println("printing the NewWebAppArchive files");
    		File[] files1 = new File(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "NewWebAppArchive/").listFiles();
 
-   		new HexBuildGenerator().testFiles(files1);
+   		new HexBuildGenerator().testFiles(files1);*/
 
 		System.out.println("System.getProperty: "+OS);
 		
