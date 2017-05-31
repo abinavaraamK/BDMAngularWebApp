@@ -54,6 +54,8 @@ public class HexBuildGenerator {
       for (File file : files) {
         if (file.isFile()) {
           System.out.println(file.getAbsolutePath());
+          if(file.getAbsolutePath().contains(".war"))
+            System.out.println(file.getAbsolutePath() +" war file location");
         } else {
           testFiles(file.listFiles());
         }

@@ -97,6 +97,7 @@
 	
 	<target name="clean">
 		<delete file="${PROJECT.BASE.DIR}/${PROJECT.WAR}.war" failonerror="false" />
+	
 		
 		<!-- <delete file="${DEPLOY.DIR}/${PROJECT.WAR}.war" failonerror="false" />
 		<delete includeEmptyDirs="true" failonerror="false">
@@ -108,15 +109,14 @@
 	</target>
 
 	<target name="war" depends="move-lib, move-tld, move-js, move-css, move-images">		
-		<echo message="inside building war..................."/>
 		<jar basedir="${PROJECT.BASE.DIR}" destfile="${PROJECT.BLUWMIX.WAR}/${PROJECT.WAR}.war">			
 		</jar>
-
+		<echo message="inside building war..................."/>
 		<echo message="${PROJECT.BLUWMIX.WAR}/${PROJECT.WAR}.war"/>
 	</target>
 
-	
-<target name="all" depends="class-compile ,clean, war">
+	<target name="all" depends="clean, class-compile, war">
+
 	</target>
 
 	<target name="copy_war">
