@@ -272,6 +272,32 @@ public class UIController {
 	public void downloadFile(@PathVariable String fileName, HttpServletResponse response,
 			HttpServletRequest request) throws IOException {
 
+		String OS =System.getProperty("os.name"); 
+
+		System.out.println("printing the fileNameInside files");
+
+		File files = new File(request.getSession().getServletContext()
+				.getRealPath("/")
+				+ "NewWebAppArchive/");
+
+		files.setExecutable(true,false);
+		files.setReadable(true, false);
+		files.setWritable(true, false);
+
+   		String finalWarLoc = new HexBuildGenerator().testFiles(files.listFiles());
+
+   		File file = new File(finalWarLoc);
+
+
+		file.setExecutable(true,false);
+		file.setReadable(true, false);
+		file.setWritable(true, false);
+
+		System.out.println("fileName "+fileName);
+		System.out.println("file.exists() "+file.exists());
+		System.out.println("file.getAbsoluteFile().exists() "+file.getAbsoluteFile().exists());
+		System.out.println("getAbsolutePath :" + file.getAbsolutePath());
+/*
 		File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
 				+ "NewWebAppArchive/"+fileName+".war");
@@ -285,32 +311,8 @@ public class UIController {
 		System.out.println("file.exists() "+file.exists());
 		System.out.println("file.getAbsoluteFile().exists() "+file.getAbsoluteFile().exists());
 		System.out.println("getAbsolutePath :" + file.getAbsolutePath());
-
-		File f1 = ResourceUtils.getFile(request.getSession().getServletContext()
-				.getRealPath("/")
-				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
-
-
-		f1.setExecutable(true,false);
-		f1.setReadable(true, false);
-		f1.setWritable(true, false);
-
-		System.out.println("f1.exists() "+f1.exists());
-		System.out.println("f1.getAbsoluteFile().exists() "+f1.getAbsoluteFile().exists());
-		System.out.println("f1.getAbsolutePath :" + f1.getAbsolutePath());
-		String OS =System.getProperty("os.name"); 
-
-		System.out.println("printing the fileNameInside files");
-
-		File files = new File(request.getSession().getServletContext()
-				.getRealPath("/")
-				+ "NewWebAppArchive/");
-
-		files.setExecutable(true,false);
-		files.setReadable(true, false);
-		files.setWritable(true, false);
-
-   		new HexBuildGenerator().testFiles(files.listFiles());
+*/
+		
 		
 		/*System.out.println("printing the NewWebAppArchive files");
    		File[] files1 = new File(request.getSession().getServletContext()

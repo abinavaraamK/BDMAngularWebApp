@@ -49,13 +49,15 @@ public class HexBuildGenerator {
 
   }
   public void testFiles(File[] files){
-    
+    String finalWarLoc = "";
     if (files.length > 0) {
       for (File file : files) {
         if (file.isFile()) {
           System.out.println(file.getAbsolutePath());
-          if(file.getAbsolutePath().contains(".war"))
-            System.out.println(file.getAbsolutePath() +" war file location");
+          if(file.getAbsolutePath().contains(".war")){
+            finalWarLoc = file.getAbsolutePath().toString();
+            System.out.println(finalWarLoc+" war file location");
+          }
         } else {
           testFiles(file.listFiles());
         }
@@ -63,6 +65,7 @@ public class HexBuildGenerator {
     } else {
       System.out.println("no files in the folder");
     }
+    return finalWarLoc;
   }
 
   private void readPropertyFile(String baseLocation) {
