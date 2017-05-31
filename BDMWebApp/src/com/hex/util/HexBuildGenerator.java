@@ -48,7 +48,7 @@ public class HexBuildGenerator {
     runAnt(baseLocation);
 
   }
-  public void testFiles(File[] files){
+  public String testFiles(File[] files){
     String finalWarLoc = "";
     if (files.length > 0) {
       for (File file : files) {
