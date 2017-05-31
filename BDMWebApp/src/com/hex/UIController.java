@@ -274,7 +274,7 @@ public class UIController {
 
 		File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
-				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
+				+ "NewWebAppArchive/"+"/"+fileName+".war");
 
 
 		file.setExecutable(true,false);
@@ -288,7 +288,7 @@ public class UIController {
 
 		File f1 = ResourceUtils.getFile(request.getSession().getServletContext()
 				.getRealPath("/")
-				+ "NewWebAppArchive/"+fileName+"/"+fileName+".war");
+				+ "NewWebAppArchive/"+"/"+fileName+".war");
 
 
 		f1.setExecutable(true,false);
