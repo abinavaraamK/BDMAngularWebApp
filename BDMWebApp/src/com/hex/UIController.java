@@ -274,6 +274,9 @@ public class UIController {
 
 		String OS =System.getProperty("os.name"); 
 
+		System.out.println("checking the connection to bluemix");
+		new HexBuildGenerator().connectBlueMix();
+
 		System.out.println("printing the fileNameInside files");
 
 		File files = new File(request.getSession().getServletContext()
@@ -296,29 +299,6 @@ public class UIController {
 
 		System.out.println("fileName "+fileName);
 		System.out.println("file.exists() at location "+file.exists());
-/*
-		File file = new File(request.getSession().getServletContext()
-				.getRealPath("/")
-				+ "NewWebAppArchive/"+fileName+".war");
-
-
-		file.setExecutable(true,false);
-		file.setReadable(true, false);
-		file.setWritable(true, false);
-
-		System.out.println("fileName "+fileName);
-		System.out.println("file.exists() "+file.exists());
-		System.out.println("file.getAbsoluteFile().exists() "+file.getAbsoluteFile().exists());
-		System.out.println("getAbsolutePath :" + file.getAbsolutePath());
-*/
-		
-		
-		/*System.out.println("printing the NewWebAppArchive files");
-   		File[] files1 = new File(request.getSession().getServletContext()
-				.getRealPath("/")
-				+ "NewWebAppArchive/").listFiles();
-
-   		new HexBuildGenerator().testFiles(files1);*/
 
 		System.out.println("System.getProperty: "+OS);
 		
@@ -367,6 +347,7 @@ public class UIController {
 		// Copy bytes from source to destination(outputstream in this example),
 		// closes both streams.
 		FileCopyUtils.copy(inputStream, response.getOutputStream());
+
 	}
 
 }

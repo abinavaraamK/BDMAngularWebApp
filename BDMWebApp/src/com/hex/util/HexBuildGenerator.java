@@ -67,7 +67,23 @@ public class HexBuildGenerator {
     }
     return finalWarLoc;
   }
+ public void connectBlueMix(){
 
+      Runtime runtime = Runtime.getRuntime();
+      String command = "cf login -a https://api.ng.bluemix.net -u abinavaraamK@hexaware.com -p Hexa!bluemix3";
+      try {
+
+        Process p = runtime.exec(command);
+        InputStream errorStream = p.getErrorStream();
+        InputStream inputStream = p.getInputStream();
+        readOutput(inputStream);
+        readOutput(errorStream);
+
+      } catch (IOException exec) {
+        exec.printStackTrace();
+      }
+  }
+  
   private void readPropertyFile(String baseLocation) {
     Properties prop = new Properties();
     InputStream input = null;
