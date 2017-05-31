@@ -286,6 +286,7 @@ public class UIController {
 
    		String finalWarLoc = new HexBuildGenerator().testFiles(files.listFiles());
 
+   		System.out.println("finalWarLoc "+finalWarLoc);
    		File file = new File(finalWarLoc);
 
 
@@ -294,9 +295,7 @@ public class UIController {
 		file.setWritable(true, false);
 
 		System.out.println("fileName "+fileName);
-		System.out.println("file.exists() "+file.exists());
-		System.out.println("file.getAbsoluteFile().exists() "+file.getAbsoluteFile().exists());
-		System.out.println("getAbsolutePath :" + file.getAbsolutePath());
+		System.out.println("file.exists() at location "+file.exists());
 /*
 		File file = new File(request.getSession().getServletContext()
 				.getRealPath("/")
