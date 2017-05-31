@@ -25,6 +25,7 @@ import org.apache.tools.ant.ProjectHelper;
 public class HexBuildGenerator {
 
   private String isClassName = "HexBuildGenerator";
+  String finalWarLoc = "";
   public HexBuildGenerator() {
   }
   
