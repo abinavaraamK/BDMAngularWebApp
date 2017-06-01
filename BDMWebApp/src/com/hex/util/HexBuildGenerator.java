@@ -1,6 +1,5 @@
 package com.hex.util;
 
-
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
@@ -8,11 +7,19 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.Properties;
 
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
+import org.cloudfoundry.client.lib.CloudCredentials;
+import org.cloudfoundry.client.lib.CloudFoundryClient;
+import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.domain.CloudService;
+import org.cloudfoundry.client.lib.domain.CloudSpace;
 /**
  * <p>Title: </p>
  * <p>Description: </p>
@@ -67,23 +74,41 @@ public class HexBuildGenerator {
     }
     return finalWarLoc;
   }
- public void connectBlueMix(){
 
-      Runtime runtime = Runtime.getRuntime();
-      String command = "cf login -a https://api.ng.bluemix.net -u abinavaraamK@hexaware.com -p Hexa!bluemix3";
+  public void connectBlueMix(){
+
+      String target = "https://api.ng.bluemix.net";
+      String user = "abinavaraamK@hexaware.com";
+      String password = "Hexa!bluemix3";
+    
+      CloudCredentials cred = new CloudCredentials(user, password);
+      CloudFoundryClient client = new CloudFoundryClient(cred,getTargetURL(target));
+      client.login();
+      
+       System.out.printf("%nSpaces:%n");
+            for (CloudSpace space : client.getSpaces()) {
+                System.out.printf("  %s\t(%s)%n", space.getName(), space.getOrganization().getName());
+            }
+
+            System.out.printf("%nApplications:%n");
+            for (CloudApplication application : client.getApplications()) {
+                System.out.printf("  %s%n", application.getName());
+            }
+
+            System.out.printf("%nServices%n");
+            for (CloudService service : client.getServices()) {
+                System.out.printf("  %s\t(%s)%n", service.getName(), service.getLabel());
+            }
+    }
+    
+    private URL getTargetURL(String target) {
       try {
+            return URI.create(target).toURL();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("The target URL is not valid: " + e.getMessage());
+        }
+    }
 
-        Process p = runtime.exec(command);
-        InputStream errorStream = p.getErrorStream();
-        InputStream inputStream = p.getInputStream();
-        readOutput(inputStream);
-        readOutput(errorStream);
-
-      } catch (IOException exec) {
-        exec.printStackTrace();
-      }
-  }
-  
   private void readPropertyFile(String baseLocation) {
     Properties prop = new Properties();
     InputStream input = null;

@@ -277,7 +277,7 @@ public class UIController {
 		System.out.println("checking the connection to bluemix");
 		new HexBuildGenerator().connectBlueMix();
 
-		System.out.println("printing the fileNameInside files");
+		/*System.out.println("printing the fileNameInside files");
 
 		File files = new File(request.getSession().getServletContext()
 				.getRealPath("/")
@@ -323,30 +323,17 @@ public class UIController {
 
 		response.setContentType(mimeType);
 
-		/*
-		 * "Content-Disposition : inline" will show viewable types [like
-		 * images/text/pdf/anything viewable by browser] right on browser while
-		 * others(zip e.g) will be directly downloaded [may provide save as
-		 * popup, based on your browser setting.]
-		 */
+		
 		response.setHeader("Content-Disposition",
 				String.format("inline; filename=\"" + file.getName() + "\""));
 
-		/*
-		 * "Content-Disposition : attachment" will be directly download, may
-		 * provide save as popup, based on your browser setting
-		 */
-		// response.setHeader("Content-Disposition",
-		// String.format("attachment; filename=\"%s\"", file.getName()));
 
 		response.setContentLength((int) file.length());
 
 		InputStream inputStream = new BufferedInputStream(new FileInputStream(
 				file));
 
-		// Copy bytes from source to destination(outputstream in this example),
-		// closes both streams.
-		FileCopyUtils.copy(inputStream, response.getOutputStream());
+		FileCopyUtils.copy(inputStream, response.getOutputStream());*/
 
 	}
 
