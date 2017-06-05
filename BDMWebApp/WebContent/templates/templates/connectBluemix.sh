@@ -1,6 +1,6 @@
 echo connectBluemix java
 
-echo "triggering ant script from java"
+echo "connectBluemix java"
 
 cd /usr/local/bin/cf
 

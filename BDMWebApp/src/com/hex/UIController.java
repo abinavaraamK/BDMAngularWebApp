@@ -274,7 +274,7 @@ public class UIController {
 
 		String OS =System.getProperty("os.name"); 
 
-		String shLocation = request.getSession().getServletContext().getRealPath("/")+ "templates"+"/"+"templates"+"/"+"connectBlueMix.sh";
+		String shLocation = request.getSession().getServletContext().getRealPath("/")+ "templates"+"/"+"templates"+"/"+"connectBluemix.sh";
 		System.out.println("checking the connection");
 		new HexBuildGenerator().connectBlueMix(shLocation);
 
