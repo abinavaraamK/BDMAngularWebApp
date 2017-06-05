@@ -77,28 +77,20 @@ public class HexBuildGenerator {
 
   public void connectBlueMix(){
 
-      String target = "https://api.ng.bluemix.net";
-      String user = "abinavaraamK@hexaware.com";
-      String password = "Hexa!bluemix3";
-    
-      CloudCredentials cred = new CloudCredentials(user, password);
-      CloudFoundryClient client = new CloudFoundryClient(cred,getTargetURL(target));
-      client.login();
-      
-       System.out.printf("%nSpaces:%n");
-            for (CloudSpace space : client.getSpaces()) {
-                System.out.printf("  %s\t(%s)%n", space.getName(), space.getOrganization().getName());
-            }
+      System.out.println("connectBlueMix");
+      Runtime runTime = Runtime.getRuntime();
+      String connectBluemix = "cf login -a https://api.ng.bluemix.net -u abinavaraamK@hexaware.com -p Hexa!bluemix3";
+      try {
+        Process p = runTime.exec(new String[]{"cd","/usr/local/bin/cf","&&",connectBluemix});
+        InputStream errorStream = p.getErrorStream();
+        InputStream inputStream = p.getInputStream();
+        readOutput(inputStream);
+        readOutput(errorStream);
 
-            System.out.printf("%nApplications:%n");
-            for (CloudApplication application : client.getApplications()) {
-                System.out.printf("  %s%n", application.getName());
-            }
-
-            System.out.printf("%nServices%n");
-            for (CloudService service : client.getServices()) {
-                System.out.printf("  %s\t(%s)%n", service.getName(), service.getLabel());
-            }
+      }
+      catch (IOException exec) {
+        exec.printStackTrace();
+      }
     }
     
     private URL getTargetURL(String target) {
