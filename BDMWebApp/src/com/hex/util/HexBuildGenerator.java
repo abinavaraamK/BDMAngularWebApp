@@ -84,6 +84,7 @@ public class HexBuildGenerator {
         Process p1 = runTime.exec("sudo chmod 777 "+location);
         try {
          int waitFor = p1.waitFor();
+         System.out.println("waitFor return value "+waitFor);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
