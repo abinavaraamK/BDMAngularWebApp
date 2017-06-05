@@ -81,7 +81,7 @@ public class HexBuildGenerator {
       System.out.println("location of sh file "+location);
       Runtime runTime = Runtime.getRuntime();
       try {
-        Porcess p1 = runTime.exec("sudo chmod 777 "+location);
+        Process p1 = runTime.exec("sudo chmod 777 "+location);
         try {
          int waitFor = p1.waitFor();
         } catch (InterruptedException e) {
