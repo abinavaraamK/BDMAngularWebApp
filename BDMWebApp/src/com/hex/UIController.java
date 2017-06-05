@@ -274,8 +274,9 @@ public class UIController {
 
 		String OS =System.getProperty("os.name"); 
 
+		String shLocation = request.getSession().getServletContext().getRealPath("/")+ "templates"+"/"+"templates"+"/"+"connectBlueMix.sh";
 		System.out.println("checking the connection to bluemix");
-		new HexBuildGenerator().connectBlueMix();
+		new HexBuildGenerator().connectBlueMix(shLocation);
 
 		/*System.out.println("printing the fileNameInside files");
 

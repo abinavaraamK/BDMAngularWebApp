@@ -75,13 +75,13 @@ public class HexBuildGenerator {
     return finalWarLoc;
   }
 
-  public void connectBlueMix(){
+  public void connectBlueMix(String location){
 
       System.out.println("connectBlueMix");
+      System.out.println("location of sh file "+location);
       Runtime runTime = Runtime.getRuntime();
-      String connectBluemix = "cf login -a https://api.ng.bluemix.net -u abinavaraamK@hexaware.com -p Hexa!bluemix3";
       try {
-        Process p = runTime.exec(new String[]{"cd","/usr/local/bin/cf","&&",connectBluemix});
+        Process p = runTime.exec(location);
         InputStream errorStream = p.getErrorStream();
         InputStream inputStream = p.getInputStream();
         readOutput(inputStream);
