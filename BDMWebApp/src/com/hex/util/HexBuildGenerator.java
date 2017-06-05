@@ -88,6 +88,12 @@ public class HexBuildGenerator {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        File files = new File(location);
+        files.setExecutable(true,false);
+        files.setReadable(true, false);
+        files.setWritable(true, false);
+        
         Process p = runTime.exec(location);
         InputStream errorStream = p.getErrorStream();
         InputStream inputStream = p.getInputStream();
