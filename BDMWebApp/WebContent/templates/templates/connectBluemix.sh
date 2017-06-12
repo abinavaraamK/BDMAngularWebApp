@@ -4,6 +4,4 @@ echo "connectBluemix java"
 
 ls -d */
 
-cf target
-
-cf apps
+which cf
