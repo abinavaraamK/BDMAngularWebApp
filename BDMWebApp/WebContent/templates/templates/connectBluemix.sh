@@ -2,4 +2,4 @@ echo connectBluemix java
 
 echo "connectBluemix java"
 
-which cf
+dpkg -l | grep cf
