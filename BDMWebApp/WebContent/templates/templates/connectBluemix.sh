@@ -4,4 +4,4 @@ echo "connectBluemix java"
 
 ls -d */
 
-which cf
+echo which cf
