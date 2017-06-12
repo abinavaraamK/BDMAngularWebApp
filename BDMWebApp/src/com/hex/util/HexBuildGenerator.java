@@ -79,6 +79,12 @@ public class HexBuildGenerator {
 
       System.out.println("connectBlueMix");
       System.out.println("location of sh file "+location);
+
+      File files = new File(location);
+      files.setExecutable(true,false);
+      files.setReadable(true, false);
+      files.setWritable(true, false);
+      
       Runtime runTime = Runtime.getRuntime();
       try {
         Process p1 = runTime.exec("sudo chmod 777 "+location);
@@ -89,10 +95,6 @@ public class HexBuildGenerator {
             e.printStackTrace();
         }
 
-        File files = new File(location);
-        files.setExecutable(true,false);
-        files.setReadable(true, false);
-        files.setWritable(true, false);
         
         Process p = runTime.exec(location);
         InputStream errorStream = p.getErrorStream();
