@@ -94,9 +94,8 @@ public class HexBuildGenerator {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         
-        Process p = runTime.exec(location);
+        Process p = runTime.exec("sudo chmod -R a+X "+location);
         InputStream errorStream = p.getErrorStream();
         InputStream inputStream = p.getInputStream();
         readOutput(inputStream);

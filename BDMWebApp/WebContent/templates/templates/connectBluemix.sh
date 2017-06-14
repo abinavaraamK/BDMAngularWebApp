@@ -3,8 +3,6 @@ echo connectBluemix java
 
 # ...or Linux 64-bit binary
 curl -L "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" | tar -zx
-#permission for moving file
-chmod -R 777 /usr/local/bin
 # ...move it to /usr/local/bin or a location you know is in your $PATH
 mv cf /usr/local/bin
 # ...copy tab completion file on Ubuntu (takes affect after re-opening your shell)
